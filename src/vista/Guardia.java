@@ -5,7 +5,10 @@
  */
 package vista;
 
+import entidades.Guardian;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import service.GuardianService;
 
 /**
  *
@@ -19,6 +22,7 @@ public class Guardia extends javax.swing.JInternalFrame {
     public Guardia() {
         initComponents();
         setFecha();
+        this.setLocation(230, 75);
     }
 
     /**
@@ -48,6 +52,7 @@ public class Guardia extends javax.swing.JInternalFrame {
         jComboBox5 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Guardia");
@@ -88,6 +93,11 @@ public class Guardia extends javax.swing.JInternalFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -107,7 +117,7 @@ public class Guardia extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(306, 306, 306)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +191,7 @@ public class Guardia extends javax.swing.JInternalFrame {
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,6 +207,10 @@ public class Guardia extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,4 +237,17 @@ public class Guardia extends javax.swing.JInternalFrame {
         lblFecha.setText(LocalDate.now().toString());
         
     }
+    /*
+     public void llenarComboBoxGuardian() {
+         GuardianService g = new GuardianService();
+        
+         // falta hacere los metodos para listar los guardianes
+        try {
+            for (Guardian o : g.//) {
+                comboAlumno.addItem(o);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No pudimos tener acceso al listado de alumnos");
+        }
+    }*/
 }

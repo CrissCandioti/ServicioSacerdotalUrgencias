@@ -32,6 +32,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Guardianes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuGuardianesActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
@@ -42,6 +45,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Sacerdotes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuSacerdotesActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

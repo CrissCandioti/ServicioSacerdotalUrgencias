@@ -77,12 +77,22 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.setText("Registros");
 
         jMenuGuardianes.setText("Guardianes");
+        jMenuGuardianes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuGuardianesActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuGuardianes);
 
         jMenuItem1.setText("Enfermos");
         jMenu1.add(jMenuItem1);
 
         jMenuSacerdotes.setText("Sacerdotes");
+        jMenuSacerdotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSacerdotesActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuSacerdotes);
 
         jMenuAdmin.add(jMenu1);
@@ -122,40 +132,22 @@ public class Principal extends javax.swing.JFrame {
                     
     }//GEN-LAST:event_jMenuGuardiaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jMenuGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardianesActionPerformed
+        // TODO add your handling code here:
+        RegistroGuardianes r = new RegistroGuardianes();
+        escritorio.add(r);
+        r.show();
+    }//GEN-LAST:event_jMenuGuardianesActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
-    }
+    private void jMenuSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSacerdotesActionPerformed
+       
+        RegistroSacerdotes s = new RegistroSacerdotes();
+        escritorio.add(s);
+        s.show();
+        s.setLocation(230, 75);
+    }//GEN-LAST:event_jMenuSacerdotesActionPerformed
+
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;

@@ -21,6 +21,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
      */
     public RegistroGuardianes() {
         initComponents();
+        this.setLocation(230, 75);
     }
 
     /**
@@ -50,6 +51,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         DateChooser = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
 
+        setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Registro Guardianes");
@@ -144,7 +146,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                             .addComponent(cbxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbxRol, 0, 242, Short.MAX_VALUE)
                             .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addContainerGap(389, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +192,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                     .addComponent(rbActivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,7 +216,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         String rol = cbxRol.getSelectedItem().toString();
         boolean estado = rbActivo.isSelected();
         
-        gs.crearGuardian(apellido, nombre, direccion, telefono, LocalDate.MIN, estadoCivil, rol, estado);
+        gs.crearGuardian(apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
         JOptionPane.showMessageDialog(this, "guardian Creado!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
