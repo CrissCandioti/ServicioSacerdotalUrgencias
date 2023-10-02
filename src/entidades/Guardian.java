@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serviciosacerdotalurgencias.Entidades;
+package entidades;
 
 import java.time.LocalDate;
 
@@ -39,6 +39,18 @@ public class Guardian {
         this.rol = rol;
         this.estado = estado;
     }
+
+    public Guardian(String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.estadoCivil = estadoCivil;
+        this.rol = rol;
+        this.estado = estado;
+    }
+    
 
     public int getIdGuardian() {
         return idGuardian;
