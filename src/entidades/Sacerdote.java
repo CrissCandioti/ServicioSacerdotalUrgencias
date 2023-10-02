@@ -34,6 +34,15 @@ public class Sacerdote {
         this.estado = estado;
     }
 
+    public Sacerdote(String dni, String apellido, String nombre, String telefono, LocalDate fechaNacimiento, boolean estado) {
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.estado = estado;
+    }
+
     public int getIdSacerdote() {
         return idSacerdote;
     }
