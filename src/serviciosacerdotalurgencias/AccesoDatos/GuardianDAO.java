@@ -28,7 +28,7 @@ public final class GuardianDAO extends DAO {
      */
     public void guardarGuardian(Guardian aux, int index) {
         try {
-            String sql = "INSERT INTO `guardian`(`apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado`) VALUES ('" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getDireccion() + "','" + aux.getTelefono() + "','" + aux.getFechaNacimiento() + "','" + aux.getEstadoCivil() + "','" + aux.getRol() + "', " + index + ")";
+            String sql = "INSERT INTO `guardian`(`dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado`) VALUES ('" + aux.getDni() + "','" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getDireccion() + "','" + aux.getTelefono() + "','" + aux.getFechaNacimiento() + "','" + aux.getEstadoCivil() + "','" + aux.getRol() + "'," + index + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar el Guardian en la base de datos");
@@ -50,7 +50,7 @@ public final class GuardianDAO extends DAO {
 
     public Guardian buscarGuardianPorID(int id) {
         try {
-            String sql = "SELECT `idGuardian`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` WHERE idGuardian = " + id;
+            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` WHERE idGuardian = " + id;
             consultarBaseDatos(sql);
             Guardian aux = null;
             boolean estado = false;
@@ -62,16 +62,41 @@ public final class GuardianDAO extends DAO {
                  * entre 1 y 0. La entidad Guardian la variable estado es de
                  * tipo boolean que varia entre true y false.
                  */
-                if (resultado.getInt(9) == 0) {
+                if (resultado.getInt(10) == 0) {
                     estado = false;
-                } else if (resultado.getInt(9) == 1) {
+                } else if (resultado.getInt(10) == 1) {
                     estado = true;
                 }
                 // Crear un objeto Date SQL
-                java.sql.Date fechaSQL = resultado.getDate(6);
+                java.sql.Date fechaSQL = resultado.getDate(7);
                 // Se crea localDate con los valores
                 LocalDate localDate = fechaSQL.toLocalDate();
-                aux = new Guardian(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), localDate, resultado.getString(7), resultado.getString(8), estado);
+                aux = new Guardian(id, resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6), localDate, resultado.getString(8), resultado.getString(9), estado);
+            }
+            return aux;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el Guardian en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
+
+    public Guardian buscarGuardianPorDNI(String dni) {
+        try {
+            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` WHERE dni = " + dni;
+            consultarBaseDatos(sql);
+            Guardian aux = null;
+            boolean estado = false;
+            while (resultado.next()) {
+                if (resultado.getInt(10) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(10) == 1) {
+                    estado = true;
+                }
+                java.sql.Date fechaSQL = resultado.getDate(7);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                aux = new Guardian(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6), localDate, resultado.getString(8), resultado.getString(9), estado);
             }
             return aux;
         } catch (Exception e) {
@@ -84,20 +109,20 @@ public final class GuardianDAO extends DAO {
 
     public ArrayList<Guardian> listaGuardianes() {
         try {
-            String sql = "SELECT `idGuardian`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian`";
+            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` ";
             consultarBaseDatos(sql);
             ArrayList<Guardian> listaARetornar = new ArrayList<>();
             Guardian aux = null;
             boolean estado = false;
             while (resultado.next()) {
-                if (resultado.getInt(9) == 0) {
+                if (resultado.getInt(10) == 0) {
                     estado = false;
-                } else if (resultado.getInt(9) == 1) {
+                } else if (resultado.getInt(10) == 1) {
                     estado = true;
                 }
-                java.sql.Date fechaSQL = resultado.getDate(6);
+                java.sql.Date fechaSQL = resultado.getDate(7);
                 LocalDate localDate = fechaSQL.toLocalDate();
-                aux = new Guardian(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), localDate, resultado.getString(7), resultado.getString(8), estado);
+                aux = new Guardian(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6), localDate, resultado.getString(8), resultado.getString(9), estado);
                 listaARetornar.add(aux);
             }
             return listaARetornar;
@@ -111,7 +136,7 @@ public final class GuardianDAO extends DAO {
 
     public void modificarGuardian(Guardian aux, int index) {
         try {
-            String sql = "UPDATE `guardian` SET `apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`direccion`='" + aux.getDireccion() + "',`telefono`='" + aux.getTelefono() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "',`estadoCivil`='" + aux.getEstadoCivil() + "',`rol`='" + aux.getRol() + "',`estado`= " + index + " WHERE idGuardian = " + aux.getIdGuardian();
+            String sql = "UPDATE `guardian` SET `dni`='" + aux.getDni() + "',`apellido`='" + aux.getApellido() + "',`nombre`='" + aux.getNombre() + "',`direccion`='" + aux.getDireccion() + "',`telefono`='" + aux.getTelefono() + "',`fechaNacimiento`='" + aux.getFechaNacimiento() + "',`estadoCivil`='" + aux.getEstadoCivil() + "',`rol`='" + aux.getRol() + "',`estado`=" + index + " WHERE idGuardian = " + aux.getIdGuardian();
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al intentar modificar el guardian en la base de datos");

@@ -26,12 +26,61 @@ public class GuardianService {
      * El metodo "crearGuardian" recibe toda la informacion establecida en la
      * vistas para completar el registro del guardian
      */
-    public void crearGuardian(String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public void crearGuardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
         /**
          * Dentro de un bloque try-catch el metodo procede a analizar estos
          * datos con las restricciones
          */
         try {
+            /**
+             * Las siguientes restricciones fueron creadas para que los datos
+             * ingresados no esten vacios y cumplan con las condiciones para la
+             * creacion del guardian
+             */
+            if (dni.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
+                return;
+            }
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (direccion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (estadoCivil.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+                return;
+            }
+            if (rol.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
+                return;
+            }
+            if (buscarGuardianPorDNI(dni) != null) {
+                JOptionPane.showMessageDialog(null, "Tenemos asociado un Guardian a ese documento");
+                return;
+            }
+            /**
+             * Esta restriccion esta hecha para que el documento que ingrese el
+             * usuario solamente admita caracteres numericos. Si contiene
+             * letras,espacios o algun caracteres diferenete se presentara un
+             * mensaje de error evitando seguir con la creacion del Sacerdote
+             */
+            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
+                System.out.println("La cadena cumple con los requisitos.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
+                return;
+            }
             /**
              * Esta restriccion es la encarga de analizar la cantidad minima de
              * caracter que aceptan los datos del nombre y apellido
@@ -97,6 +146,7 @@ public class GuardianService {
              */
             GuardianDAO dao = new GuardianDAO();
             Guardian aux = new Guardian();
+            aux.setDni(dni);
             aux.setApellido(apellido);
             aux.setNombre(nombre);
             aux.setDireccion(direccion);
@@ -175,6 +225,19 @@ public class GuardianService {
     }
 
     /*
+     * Este metodo fue creado para buscar el Guardian por DNI.
+     */
+    public Guardian buscarGuardianPorDNI(String dni) {
+        try {
+            GuardianDAO dao = new GuardianDAO();
+            return dao.buscarGuardianPorDNI(dni);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar al Guardian");
+        }
+        return null;
+    }
+
+    /*
      * Este metodo fue creado para que me retorne una lista con todos los
      * guardianes.
      */
@@ -194,11 +257,45 @@ public class GuardianService {
      * metodo buscarGuardianPorID, la cual no servira para verificar si se
      * encuentra ese alumno a modificar.
      */
-    public void modificarGuardian(int id, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public void modificarGuardian(int id, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
         try {
             GuardianDAO dao = new GuardianDAO();
             if (dao.buscarGuardianPorID(id) == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro el guardian para su modificacion");
+                return;
+            }
+            if (dni.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
+                return;
+            }
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (direccion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (estadoCivil.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+                return;
+            }
+            if (rol.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
+                return;
+            }
+            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
+                System.out.println("La cadena cumple con los requisitos.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
                 return;
             }
             if (nombre.length() < 3 || apellido.length() < 3) {
@@ -239,7 +336,7 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
-            Guardian aux = new Guardian(id, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
+            Guardian aux = new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
             int index = 0;
             if (estado == true) {
                 index = 1;
