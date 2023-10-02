@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serviciosacerdotalurgencias.AccesoDatos;
+package service;
 
 /**
  *
  * @author criss
  */
-public class PedidoDAO {
+public class PedidoService {
     
 }
