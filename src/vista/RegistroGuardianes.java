@@ -216,7 +216,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         String rol = cbxRol.getSelectedItem().toString();
         boolean estado = rbActivo.isSelected();
         
-        gs.crearGuardian(apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+        
         JOptionPane.showMessageDialog(this, "guardian Creado!");
     }//GEN-LAST:event_jButton1ActionPerformed
 

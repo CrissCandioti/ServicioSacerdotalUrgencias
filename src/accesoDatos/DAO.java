@@ -12,10 +12,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
- * @author criss
+ * La calse abstracta DAO es la encargada de establecer la comuniacion con
+ * nuestro programa y la base de datos creada con anterioridad. Esta clase va a
+ * contener los metodos de conectarBaseDatos, desconectarBaseDatos,
+ * insertarModificarEliminarBaseDatos y consultarBaseDatos.Esta misma clase va a
+ * heredar a las otras clases DAO de las entidades creadas. El patrón DAO (Data
+ * Access Object) es un patrón de diseño de software que se utiliza en la
+ * programación orientada a objetos para separar la lógica de acceso a datos de
+ * una aplicación.
  */
-public class DAO {
+public abstract class DAO {
+
+    /**
+     * Estas variables son las que van a ir tomando distintos valores de nuestra
+     * base de datos. La cual ingresaremos informacion,consultaremos
+     * informacion,modificaremos informacion y eliminaremos informacion de la
+     * base de datos creada con anterioridad.
+     */
     protected Connection coneccion = null;//La variable coneccion es la mas importante, porque es la encargada en la comunicacion con la base de datos.
     protected Statement sentencia = null;//La variable resultado es la que extrae la informacion de la base de datos para mostrarla, no realiza ninguna modificacion.
     protected ResultSet resultado = null;//La variable sentencia es la que almacena la infromacion de los comandos para insertar,modifica,eliminar de la base.
@@ -66,12 +79,25 @@ public class DAO {
     /*
      * Metodo creado para encargarse de las operaciones con la base de datos,
      * estas son las de insertar,modificar,eliminar. El metodo recibe por
-     * parametro la consulta
+     * parametro la consulta. Cabe mencionar que el método
+     * insertarModificarEliminarBaseDatos no está sobrecargado de tareas, ya que
+     * esta diseñado para realizar una tarea específica: ejecutar una consulta
+     * SQL en la base de datos. Su función principal es ejecutar consultas SQL
+     * en la base de datos, y puede ser utilizado para realizar operaciones de
+     * inserción, modificación o eliminación de datos, dependiendo de la
+     * consulta SQL que se le pase como argumento.
      */
     protected void insertarModificarEliminarBaseDatos(String sql) throws SQLException, ClassNotFoundException, Exception {
         try {
             coneccionBaseDatos();//Realizamos una coneccion a la base de datos
-            sentencia = coneccion.createStatement();//Debemos volcar lo que es la potencial creacion de una sentencia. Por tal motivo preparamos la variable sentencia para recibir una consulta.
+            sentencia = coneccion.createStatement();
+            /**
+             * El createStatement se utiliza para ejecutar una consulta SQL
+             * directamente tal como se proporciona. Esto significa que la
+             * consulta SQL se pasa como una cadena directamente en el método
+             * executeQuery o executeUpdate y se ejecuta tal cual. No se
+             * realizan preparaciones previas de la consulta.
+             */
             sentencia.executeUpdate(sql);//Preparada la variable sentencia, recibe la consulta y la ejecuta 
         } catch (SQLException | ClassNotFoundException e) {
             throw e;
@@ -94,4 +120,8 @@ public class DAO {
             throw e;
         }
     }
+    /**
+     * La desconeccion de la base de datos con el metodo consultar la haremos
+     * dentro de los metodos de las clases hijas de DAO.
+     */
 }
