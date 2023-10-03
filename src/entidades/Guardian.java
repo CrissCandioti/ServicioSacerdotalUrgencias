@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class Guardian {
 
     private int idGuardian;
+    private String dni;
     private String apellido;
     private String nombre;
     private String direccion;
@@ -26,8 +27,9 @@ public class Guardian {
     public Guardian() {
     }
 
-    public Guardian(int idGuardian, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public Guardian(int idGuardian, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
         this.idGuardian = idGuardian;
+        this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -56,6 +58,14 @@ public class Guardian {
 
     public void setIdGuardian(int idGuardian) {
         this.idGuardian = idGuardian;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getApellido() {
@@ -124,7 +134,7 @@ public class Guardian {
 
     @Override
     public String toString() {
-        return "Guardian{" + "idGuardian=" + idGuardian + ", apellido=" + apellido + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", estadoCivil=" + estadoCivil + ", rol=" + rol + ", estado=" + estado + '}';
+        return "Guardian{" + "idGuardian=" + idGuardian + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", estadoCivil=" + estadoCivil + ", rol=" + rol + ", estado=" + estado + '}';
     }
 
 }
