@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  * El paquete Service contiene las clases entidadesServices. Estas clases estan
  * en constante comunicacion con el paquete "Vista" y con el paquete "Acceso a
@@ -33,6 +32,7 @@ public class GuardianService {
          * datos con las restricciones
          */
         try {
+            GuardianDAO dao = new GuardianDAO();
             /**
              * Las siguientes restricciones fueron creadas para que los datos
              * ingresados no esten vacios y cumplan con las condiciones para la
@@ -66,7 +66,7 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
                 return;
             }
-            if (buscarGuardianPorDNI(dni) != null) {
+            if (dao.buscarGuardianPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos asociado un Guardian a ese documento");
                 return;
             }
@@ -145,17 +145,8 @@ public class GuardianService {
              * Una vez cumplida las restricciones el metodo se encarga de
              * instanciar un guardian con esos datos obtenidos
              */
-            GuardianDAO dao = new GuardianDAO();
-            Guardian aux = new Guardian();
-            aux.setDni(dni);
-            aux.setApellido(apellido);
-            aux.setNombre(nombre);
-            aux.setDireccion(direccion);
-            aux.setTelefono(telefono);
-            aux.setFechaNacimiento(fechaNacimiento);
-            aux.setEstadoCivil(estadoCivil);
-            aux.setRol(rol);
-            aux.setEstado(estado);
+
+            Guardian aux = new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
             /**
              * Debido que nuestra base de datos la variable "estado" solo acepta
              * un numero entero; si es 0 es false y su es 1 es true Este

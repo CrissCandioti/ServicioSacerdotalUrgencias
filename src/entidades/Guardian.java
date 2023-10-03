@@ -40,7 +40,8 @@ public class Guardian {
         this.estado = estado;
     }
 
-    public Guardian(String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public Guardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+        this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -50,7 +51,6 @@ public class Guardian {
         this.rol = rol;
         this.estado = estado;
     }
-    
 
     public int getIdGuardian() {
         return idGuardian;
