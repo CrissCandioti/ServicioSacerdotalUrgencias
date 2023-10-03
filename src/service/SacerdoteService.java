@@ -19,6 +19,11 @@ public class SacerdoteService {
 
     public void crearSacerdote(String dni, String apellido, String nombre, String telefono, LocalDate fechaNacimiento, boolean estado) {
         try {
+            SacerdoteDAO dao = new SacerdoteDAO();
+            if (dao.buscarSacerdotePorDNI(dni) != null) {
+                JOptionPane.showMessageDialog(null, "Tenemos asociado un Sacerdote con ese documento");
+                return;
+            }
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
                 return;
@@ -79,7 +84,6 @@ public class SacerdoteService {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
-            SacerdoteDAO dao = new SacerdoteDAO();
             Sacerdote aux = new Sacerdote();
             aux.setDni(dni);
             aux.setApellido(apellido);

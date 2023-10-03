@@ -5,6 +5,9 @@
  */
 package serviciosacerdotalurgencias;
 
+import java.time.LocalDate;
+import service.SacerdoteService;
+
 
 /**
  *
@@ -17,6 +20,8 @@ public class ServicioSacerdotalUrgencias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        SacerdoteService s = new SacerdoteService();
+        s.crearSacerdote("3333333", "ALBERT", "MACU", "11", LocalDate.now(), true);
     }
 
 }
