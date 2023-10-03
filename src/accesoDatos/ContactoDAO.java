@@ -5,10 +5,21 @@
  */
 package accesoDatos;
 
+import entidades.Contacto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author criss
  */
-public class ContactoDAO {
-    
+public final class ContactoDAO extends DAO {
+
+    public void guardarContacto(Contacto aux) {
+        try {
+            String sql = "INSERT INTO `contacto`(`apellido`, `nombre`, `telefono`, `parentesco`) VALUES ('" + aux.getApellido() + "','" + aux.getNombre() + "','" + aux.getTelefono() + "','" + aux.getParentesco() + "')";
+            insertarModificarEliminarBaseDatos(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar el contacto en la base de datos");
+        }
+    }
 }

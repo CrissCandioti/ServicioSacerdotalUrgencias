@@ -5,6 +5,8 @@
  */
 package serviciosacerdotalurgencias;
 
+import service.ContactoService;
+
 
 
 /**
@@ -18,6 +20,8 @@ public class ServicioSacerdotalUrgencias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ContactoService s = new ContactoService();
+        
     }
 
 }

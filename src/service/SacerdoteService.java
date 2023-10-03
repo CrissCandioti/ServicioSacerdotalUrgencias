@@ -46,9 +46,7 @@ public class SacerdoteService {
              * letras,espacios o algun caracteres diferenete se presentara un
              * mensaje de error evitando seguir con la creacion del Sacerdote
              */
-            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
-                System.out.println("La cadena cumple con los requisitos.");
-            } else {
+            if (!dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
                 JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
                 return;
             }
@@ -78,9 +76,7 @@ public class SacerdoteService {
                     return;
                 }
             }
-            if (telefono.matches("\\d+")) {
-                System.out.println("El telefono contiene solo digitos numericos");
-            } else {
+            if (!telefono.matches("\\d+")) {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
@@ -175,9 +171,7 @@ public class SacerdoteService {
                 JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
                 return;
             }
-            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
-                System.out.println("La cadena cumple con los requisitos.");
-            } else {
+            if (!dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
                 JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
                 return;
             }
@@ -207,9 +201,7 @@ public class SacerdoteService {
                     return;
                 }
             }
-            if (telefono.matches("\\d+")) {
-                System.out.println("El telefono contiene solo digitos numericos");
-            } else {
+            if (!telefono.matches("\\d+")) {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
