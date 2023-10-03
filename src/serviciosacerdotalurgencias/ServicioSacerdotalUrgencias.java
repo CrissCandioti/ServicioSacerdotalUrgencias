@@ -5,8 +5,6 @@
  */
 package serviciosacerdotalurgencias;
 
-import java.time.LocalDate;
-import serviciosacerdotalurgencias.Service.GuardianService;
 import serviciosacerdotalurgencias.Service.SacerdoteService;
 
 /**
@@ -21,8 +19,7 @@ public class ServicioSacerdotalUrgencias {
     public static void main(String[] args) {
         // TODO code application logic here
         SacerdoteService s = new SacerdoteService();
-        GuardianService g = new GuardianService();
-        g.modificarGuardian(7, "1234566", "SHOBERTO", "CARLITOX", "LAS HERAS", "3312", LocalDate.now(), "CASADO", "CONDUCTOR", true);
+        System.out.println(s.buscarSacerdotePorDNI("1"));
     }
 
 }

@@ -99,5 +99,23 @@ public class SacerdoteService {
         }
     }
 
+    public Sacerdote buscarSacerdotePorID(int id) {
+        try {
+            SacerdoteDAO dao = new SacerdoteDAO();
+            return dao.buscarSacerdotePorID(id);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar al Sacerdote por ID");
+        }
+        return null;
+    }
 
+    public Sacerdote buscarSacerdotePorDNI(String dni) {
+        try {
+            SacerdoteDAO dao = new SacerdoteDAO();
+            return dao.buscarSacerdotePorDNI(dni);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar al Sacerdote por DNI");
+        }
+        return null;
+    }
 }
