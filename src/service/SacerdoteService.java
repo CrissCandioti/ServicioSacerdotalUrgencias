@@ -80,14 +80,13 @@ public class SacerdoteService {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
-            Sacerdote aux = new Sacerdote(dni, apellido, nombre, telefono, fechaNacimiento, estado);
             int index = 0;
             if (estado == true) {
                 index = 1;
             } else if (estado == false) {
                 index = 0;
             }
-            dao.guardarSacerdote(aux, index);
+            dao.guardarSacerdote(new Sacerdote(dni, apellido, nombre, telefono, fechaNacimiento, estado), index);
             JOptionPane.showMessageDialog(null, "Se registro correctamente el Sacerdote");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo registrar correctamente el Sacerdote");
@@ -205,14 +204,13 @@ public class SacerdoteService {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
-            Sacerdote aux = new Sacerdote(ID, dni, apellido, nombre, telefono, fechaNacimiento, estado);
             int index = 0;
             if (estado == true) {
                 index = 1;
             } else if (estado == false) {
                 index = 0;
             }
-            dao.modificarSacerdote(aux, index);
+            dao.modificarSacerdote(new Sacerdote(ID, dni, apellido, nombre, telefono, fechaNacimiento, estado), index);
             JOptionPane.showMessageDialog(null, "Se modifico correctamente el Sacerdote");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo modificar correctamente al Sacerdote");

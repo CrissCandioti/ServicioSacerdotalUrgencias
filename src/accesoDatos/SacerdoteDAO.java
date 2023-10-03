@@ -77,7 +77,7 @@ public final class SacerdoteDAO extends DAO {
 
     public ArrayList<Sacerdote> listaSacerdotes() {
         try {
-            String sql = "SELECT `idSacerdote`, `dni`, `apellido`, `nombre`, `telefono`, `fechaNacimiento`, `estado` FROM `sacerdote`";
+            String sql = "SELECT `idSacerdote`, `dni`, `apellido`, `nombre`, `telefono`, `fechaNacimiento`, `estado` FROM `sacerdote` ORDER BY apellido ASC";
             consultarBaseDatos(sql);
             ArrayList<Sacerdote> listaARetornar = new ArrayList<>();
             Sacerdote aux = null;

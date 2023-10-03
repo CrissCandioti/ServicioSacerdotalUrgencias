@@ -138,12 +138,6 @@ public class GuardianService {
                 return;
             }
             /**
-             * Una vez cumplida las restricciones el metodo se encarga de
-             * instanciar un guardian con esos datos obtenidos
-             */
-
-            Guardian aux = new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
-            /**
              * Debido que nuestra base de datos la variable "estado" solo acepta
              * un numero entero; si es 0 es false y su es 1 es true Este
              * condicional if se encarga de analizar el dato boolean "estado"
@@ -157,12 +151,13 @@ public class GuardianService {
                 index = 0;
             }
             /**
-             * Se establece la comunicacion con el paquete "Acceso a datos" la
-             * cual se envia por argumentos el guardian instanciado y la
-             * variable entero con el dato correcto del estado para registrar en
-             * la base de datos
+             * Una vez cumplida las restricciones el metodo se encarga de
+             * instanciar un guardian con esos datos obtenidos. Se establece la
+             * comunicacion con el paquete "Acceso a datos" la cual se envia por
+             * argumentos el guardian instanciado y la variable entero con el
+             * dato correcto del estado para registrar en la base de datos
              */
-            dao.guardarGuardian(aux, index);
+            dao.guardarGuardian(new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
             /**
              * Por ultimo se muestra un mensaje completando el registro
              */
@@ -318,14 +313,13 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
-            Guardian aux = new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
             int index = 0;
             if (estado == true) {
                 index = 1;
             } else if (estado == false) {
                 index = 0;
             }
-            dao.modificarGuardian(aux, index);
+            dao.modificarGuardian(new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
             JOptionPane.showMessageDialog(null, "Modificamos correctamente al Guardian");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar modificar el Guardian");
