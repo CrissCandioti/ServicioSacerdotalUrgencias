@@ -9,6 +9,6 @@ package accesoDatos;
  *
  * @author criss
  */
-public class GuardiaDAO {
+public final class GuardiaDAO extends DAO{
     
 }

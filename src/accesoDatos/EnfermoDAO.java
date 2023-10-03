@@ -9,6 +9,6 @@ package accesoDatos;
  *
  * @author criss
  */
-public class EnfermoDAO {
-    
+public final class EnfermoDAO extends DAO {
+
 }
