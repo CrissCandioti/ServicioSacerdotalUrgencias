@@ -128,7 +128,7 @@ public final class GuardianDAO extends DAO {
             }
             return listaARetornar;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al mostrar la lista de Guardianes de la base de datos");
+            JOptionPane.showMessageDialog(null, "Se produjo un error al mostrar la lista de Guardianes de la base de datos" +e.getMessage());
         } finally {
             desconectarBaseDatos();
         }

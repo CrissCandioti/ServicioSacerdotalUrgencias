@@ -40,8 +40,17 @@ public class Principal extends javax.swing.JFrame {
         jMenuLlamados = new javax.swing.JMenu();
         jMenuPedidos = new javax.swing.JMenuItem();
         jMenuEnfermos = new javax.swing.JMenuItem();
+        jMenuConsultas = new javax.swing.JMenu();
+        menuListadoSacerdotes = new javax.swing.JMenuItem();
+        menuListadoGuardianes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        escritorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                escritorioMouseClicked(evt);
+            }
+        });
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -109,6 +118,26 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuLlamados);
 
+        jMenuConsultas.setText("Consultas");
+
+        menuListadoSacerdotes.setText("Listado total de Sacerdotes");
+        menuListadoSacerdotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListadoSacerdotesActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(menuListadoSacerdotes);
+
+        menuListadoGuardianes.setText("Listado total de Guardianes");
+        menuListadoGuardianes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListadoGuardianesActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(menuListadoGuardianes);
+
+        jMenuBar1.add(jMenuConsultas);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,6 +176,23 @@ public class Principal extends javax.swing.JFrame {
         s.setLocation(230, 75);
     }//GEN-LAST:event_jMenuSacerdotesActionPerformed
 
+    private void menuListadoSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoSacerdotesActionPerformed
+        ConsultaSacerdotes consulta = new ConsultaSacerdotes();
+        escritorio.add(consulta);
+        consulta.show();
+        consulta.setLocation(250, 75);
+    }//GEN-LAST:event_menuListadoSacerdotesActionPerformed
+
+    private void escritorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_escritorioMouseClicked
+        
+    }//GEN-LAST:event_escritorioMouseClicked
+
+    private void menuListadoGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoGuardianesActionPerformed
+        ConsultaGuardianes cg= new ConsultaGuardianes();
+        escritorio.add(cg);
+        cg.show();
+    }//GEN-LAST:event_menuListadoGuardianesActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -154,6 +200,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuEnfermos;
     private javax.swing.JMenuItem jMenuGuardia;
     private javax.swing.JMenuItem jMenuGuardianes;
@@ -163,5 +210,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSacerdotes;
     private javax.swing.JPopupMenu jPopupMenu;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JMenuItem menuListadoGuardianes;
+    private javax.swing.JMenuItem menuListadoSacerdotes;
     // End of variables declaration//GEN-END:variables
 }

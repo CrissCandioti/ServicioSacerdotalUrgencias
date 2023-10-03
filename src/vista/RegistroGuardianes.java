@@ -5,7 +5,10 @@
  */
 package vista;
 
+import com.toedter.calendar.JTextFieldDateEditor;
+import entidades.Guardian;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.GuardianService;
@@ -22,6 +25,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     public RegistroGuardianes() {
         initComponents();
         this.setLocation(230, 75);
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) DateChooser.getDateEditor();
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnInhabilitar.setEnabled(false);
+        txtId.setVisible(false);
     }
 
     /**
@@ -41,7 +49,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtApelldo = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
@@ -49,40 +57,64 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         cbxEstadoCivil = new javax.swing.JComboBox<>();
         cbxRol = new javax.swing.JComboBox<>();
         DateChooser = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtApelldo = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnInhabilitar = new javax.swing.JButton();
 
         setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Registro Guardianes");
+        setPreferredSize(new java.awt.Dimension(950, 601));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel1.setText("Apellido :");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 118, 103, 37));
 
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel2.setText("Nombre :");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 162, 103, 37));
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel3.setText("Telefono :");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 259, 103, 37));
 
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel4.setText("Dirección :");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 207, 103, 37));
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel5.setText("Rol :");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 402, 103, 37));
 
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel6.setText("Estado civil :");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 359, 103, 37));
 
         jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel7.setText("Fecha Nac.:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 301, 103, 37));
 
         jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel8.setText("Estado :");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 445, 103, 37));
 
-        txtApelldo.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtDni.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 71, 242, 40));
 
         txtNombre.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 161, 242, 40));
 
         txtTelefono.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -90,110 +122,78 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 txtTelefonoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 258, 242, 40));
 
         txtDireccion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 206, 242, 40));
 
         rbActivo.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
         rbActivo.setSelected(true);
         rbActivo.setText("ACTIVO");
+        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 455, -1, -1));
 
         cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "casado", "soltero", "viudo", "separado" }));
+        getContentPane().add(cbxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 363, 242, 32));
 
         cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Vocal", "Telefonista", "Chofer", "Acompañante" }));
+        getContentPane().add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 406, 242, 32));
 
         DateChooser.setDateFormatString("yyyy-MM-dd");
+        getContentPane().add(DateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 310, 242, -1));
 
-        jButton1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setOpaque(true);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 99, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApelldo, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rbActivo)
-                            .addComponent(cbxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbxRol, 0, 242, Short.MAX_VALUE)
-                            .addComponent(DateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(389, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(txtApelldo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbActivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel9.setText("Dni :");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 72, 103, 37));
+
+        txtApelldo.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        getContentPane().add(txtApelldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 117, 242, 40));
+
+        btnBuscar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 110, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 50, -1));
+
+        btnModificar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 100, -1));
+
+        btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 530, 100, -1));
+
+        btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnInhabilitar.setText("Inhabilitar");
+        btnInhabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInhabilitarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -202,11 +202,14 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            
+       
         GuardianService gs= new GuardianService();
         
+        String dni = txtDni.getText();
         String apellido = txtApelldo.getText();
         String nombre = txtNombre.getText();
         String direccion = txtDireccion.getText();
@@ -216,16 +219,114 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         String rol = cbxRol.getSelectedItem().toString();
         boolean estado = rbActivo.isSelected();
         
+        gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+        limpiarCampos();
+         } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            btnEliminar.setEnabled(true);
+            btnModificar.setEnabled(true);
+            btnInhabilitar.setEnabled(true);
+            btnGuardar.setEnabled(false);
+             GuardianService gs = new GuardianService();
+            String dni = txtDni.getText();
+            gs.buscarGuardianPorDNI(dni);
+            Guardian aux = new Guardian();
+            //Guardamos en un alumno los valores obtenidos por el método
+            aux = gs.buscarGuardianPorDNI(dni);
+            // utilizamos la informacioon del alumno para setear los campos
+            txtId.setText("" + aux.getIdGuardian());
+            txtApelldo.setText(aux.getApellido());
+            txtNombre.setText(aux.getNombre());
+            txtDireccion.setText(aux.getDireccion());
+            txtTelefono.setText(aux.getTelefono());
+            //Forma de setear el DateChooser
+            LocalDate localDate = aux.getFechaNacimiento();
+            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            DateChooser.setDate(utilDate);
+            //Forma de setear el radioButon
+            if (aux.isEstado() == true) {
+                rbActivo.setSelected(true);
+            } else {
+                rbActivo.setSelected(false);
+            }
+            cbxEstadoCivil.setSelectedItem(aux.getEstadoCivil());
+            cbxRol.setSelectedItem(aux.getRol());
+            
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try {
+            
+       
+        GuardianService gs= new GuardianService();
+        int id = Integer.parseInt(txtId.getText());
+        String dni = txtDni.getText();
+        String apellido = txtApelldo.getText();
+        String nombre = txtNombre.getText();
+        String direccion = txtDireccion.getText();
+        String telefono = txtTelefono.getText();
+        String fechaNac = ((JTextField) DateChooser.getDateEditor().getUiComponent()).getText();
+        String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+        String rol = cbxRol.getSelectedItem().toString();
+        boolean estado = rbActivo.isSelected();
         
-        JOptionPane.showMessageDialog(this, "guardian Creado!");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        gs.modificarGuardian(id, dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+         } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        limpiarCampos();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnInhabilitar.setEnabled(false);
+    }//GEN-LAST:event_formMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            int id = Integer.parseInt(txtId.getText());
+            GuardianService gs = new GuardianService();
+            gs.eliminarGuardian(id);
+            limpiarCampos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se encontro ningun Guardian para su eliminacion");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al analizar los datos");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInhabilitarActionPerformed
+        try {
+            int id = Integer.parseInt(txtId.getText());
+            GuardianService gs = new GuardianService();
+            gs.inhabilitarGuardian(id);
+            limpiarCampos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se encontro ningun Guardian para su eliminacion");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al analizar los datos");
+        }
+    }//GEN-LAST:event_btnInhabilitarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooser;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnInhabilitar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
     private javax.swing.JComboBox<String> cbxRol;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -234,10 +335,26 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JTextField txtApelldo;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+public void limpiarCampos(){
+    txtApelldo.setText("");
+    txtDireccion.setText("");
+    txtDni.setText("");
+    txtId.setText("");
+    txtNombre.setText("");
+    txtTelefono.setText("");
+    cbxEstadoCivil.setSelectedIndex(0);
+    cbxRol.setSelectedIndex(0);
+    DateChooser.setDate(null);
+    
+}
 }
