@@ -5,7 +5,6 @@
  */
 package serviciosacerdotalurgencias;
 
-import serviciosacerdotalurgencias.Service.SacerdoteService;
 
 /**
  *
@@ -18,8 +17,6 @@ public class ServicioSacerdotalUrgencias {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        SacerdoteService s = new SacerdoteService();
-        System.out.println(s.buscarSacerdotePorDNI("1"));
     }
 
 }
