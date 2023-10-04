@@ -5,10 +5,8 @@
  */
 package serviciosacerdotalurgencias;
 
+import service.EnfermoService;
 import vista.Principal;
-
-
-
 
 /**
  *
@@ -20,10 +18,12 @@ public class ServicioSacerdotalUrgencias {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        Principal p = new Principal();
-        p.setVisible(true);
-        p.setLocationRelativeTo(null);
+//        
+//        Principal p = new Principal();
+//        p.setVisible(true);
+//        p.setLocationRelativeTo(null);
+        EnfermoService es = new EnfermoService();
+        System.out.println(es.buscarEnfermoPorID(1));
     }
 
 }

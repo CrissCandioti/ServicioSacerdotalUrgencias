@@ -76,9 +76,7 @@ public class GuardianService {
              * letras,espacios o algun caracteres diferenete se presentara un
              * mensaje de error evitando seguir con la creacion del Sacerdote
              */
-            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
-                System.out.println("La cadena cumple con los requisitos.");
-            } else {
+            if (!dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
                 JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
                 return;
             }
@@ -133,7 +131,7 @@ public class GuardianService {
              * solamente contenga caracteres numericos, letras y espacios; no
              * admite otros tipos de caracteres
              */
-            if (!direccion.matches("[a-zA-Z0-9 ]+")) {
+            if (!direccion.matches("[a-zA-Z0-9 ñÑ]+")) {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
@@ -309,7 +307,7 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
-            if (!direccion.matches("[a-zA-Z0-9 ]+")) {
+            if (!direccion.matches("[a-zA-Z0-9 ñÑ]+")) {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
