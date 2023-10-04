@@ -23,7 +23,7 @@ public class ServicioSacerdotalUrgencias {
 //        p.setVisible(true);
 //        p.setLocationRelativeTo(null);
         EnfermoService es = new EnfermoService();
-        System.out.println(es.buscarEnfermoPorID(1));
+        es.modificarEnfermo(2, "SHAUL", "SHOBERTO", 50, "Soltero", "Inconciente", "Caferatta 9753", "Iturraspe", "Neumonia", 3);
     }
 
 }
