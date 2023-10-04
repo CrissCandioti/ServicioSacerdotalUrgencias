@@ -26,6 +26,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
      */
     public RegistroSacerdotes() {
         initComponents();
+        setLocation(230, 75);
         JTextFieldDateEditor editor = (JTextFieldDateEditor) datechooser.getDateEditor();
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);

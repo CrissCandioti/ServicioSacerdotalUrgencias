@@ -137,7 +137,7 @@ public class Guardian {
 
     @Override
     public String toString() {
-        return "Guardian{" + "idGuardian=" + idGuardian + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", estadoCivil=" + estadoCivil + ", rol=" + rol + ", estado=" + estado + '}';
+        return  apellido + ", " + nombre ;
     }
 
 }

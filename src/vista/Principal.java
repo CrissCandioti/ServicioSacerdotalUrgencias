@@ -5,6 +5,13 @@
  */
 package vista;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import serviciosacerdotalurgencias.ImagenFondo;
+
 /**
  *
  * @author Cristian
@@ -16,6 +23,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        escritorio.setBorder(new ImagenFondo());
+        this.setExtendedState(Principal.NORMAL);
     }
 
     /**
@@ -61,16 +70,16 @@ public class Principal extends javax.swing.JFrame {
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(981, Short.MAX_VALUE))
+                .addGap(177, 177, 177)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1145, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jMenuAdmin.setText("Administracion");
@@ -144,7 +153,9 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,44 +167,37 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuGuardiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardiaActionPerformed
         Guardia g = new Guardia();
-        escritorio.add(g);
-        g.show();
-                    
+        ControlaInstancia(g);
     }//GEN-LAST:event_jMenuGuardiaActionPerformed
 
     private void jMenuGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardianesActionPerformed
         // TODO add your handling code here:
         RegistroGuardianes r = new RegistroGuardianes();
-        escritorio.add(r);
-        r.show();
+        ControlaInstancia(r);
     }//GEN-LAST:event_jMenuGuardianesActionPerformed
 
     private void jMenuSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSacerdotesActionPerformed
-       
+
         RegistroSacerdotes s = new RegistroSacerdotes();
-        escritorio.add(s);
-        s.show();
-        s.setLocation(230, 75);
+        ControlaInstancia(s);
     }//GEN-LAST:event_jMenuSacerdotesActionPerformed
 
     private void menuListadoSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoSacerdotesActionPerformed
         ConsultaSacerdotes consulta = new ConsultaSacerdotes();
-        escritorio.add(consulta);
-        consulta.show();
-        consulta.setLocation(250, 75);
+        ControlaInstancia(consulta);
     }//GEN-LAST:event_menuListadoSacerdotesActionPerformed
 
-    private void escritorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_escritorioMouseClicked
-        
-    }//GEN-LAST:event_escritorioMouseClicked
-
     private void menuListadoGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoGuardianesActionPerformed
-        ConsultaGuardianes cg= new ConsultaGuardianes();
-        escritorio.add(cg);
-        cg.show();
+        ConsultaGuardianes cs = new ConsultaGuardianes();
+        ControlaInstancia(cs);
+
+
     }//GEN-LAST:event_menuListadoGuardianesActionPerformed
 
-  
+    private void escritorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_escritorioMouseClicked
+
+    }//GEN-LAST:event_escritorioMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
@@ -213,4 +217,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuListadoGuardianes;
     private javax.swing.JMenuItem menuListadoSacerdotes;
     // End of variables declaration//GEN-END:variables
+
+ // metodo para controlar que el internalFrame no se instancie dos veces y que cuando se lo precise traerlo al frente.
+ public void ControlaInstancia(JInternalFrame inter) {
+
+        for (JInternalFrame frame : escritorio.getAllFrames()) {
+            if (frame.getClass().equals(inter.getClass())) {
+                frame.toFront(); // Si está abierto, tráelo al frente
+                return;
+            }
+        }
+
+        // Si no está abierto, crea una nueva instancia 
+        
+        escritorio.add(inter);
+        inter.setVisible(true);
+    }
 }
