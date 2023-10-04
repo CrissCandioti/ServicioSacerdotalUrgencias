@@ -5,7 +5,10 @@
  */
 package serviciosacerdotalurgencias;
 
+import java.time.LocalDate;
 import service.EnfermoService;
+import service.GuardiaService;
+import service.PedidoService;
 import vista.Principal;
 
 /**
@@ -22,8 +25,10 @@ public class ServicioSacerdotalUrgencias {
 //        Principal p = new Principal();
 //        p.setVisible(true);
 //        p.setLocationRelativeTo(null);
-        EnfermoService es = new EnfermoService();
-        es.modificarEnfermo(2, "SHAUL", "SHOBERTO", 50, "Soltero", "Inconciente", "Caferatta 9753", "Iturraspe", "Neumonia", 3);
+        GuardiaService gs = new GuardiaService();
+        PedidoService ps = new PedidoService();
+        //ps.crearPedido(LocalDate.now(), 1, 0);
+        gs.crearGuardia(LocalDate.now(), 4, 4, 4, 4, 1, 0);
     }
 
 }

@@ -25,6 +25,16 @@ public class Guardia {
     public Guardia() {
     }
 
+    public Guardia(LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote, Pedido idPedido) {
+        this.fecha = fecha;
+        this.idVocal = idVocal;
+        this.idTelefonista = idTelefonista;
+        this.idChofer = idChofer;
+        this.idAcompañante = idAcompañante;
+        this.idSacerdote = idSacerdote;
+        this.idPedido = idPedido;
+    }
+
     public Guardia(int idGuardia, LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote, Pedido idPedido) {
         this.idGuardia = idGuardia;
         this.fecha = fecha;

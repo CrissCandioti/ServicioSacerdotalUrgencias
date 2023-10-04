@@ -7,6 +7,7 @@ package accesoDatos;
 
 import entidades.Guardia;
 import entidades.Guardian;
+import entidades.Pedido;
 import entidades.Sacerdote;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
@@ -67,6 +68,8 @@ public final class GuardiaDAO extends DAO {
                 aux.setIdSacerdote(idSacerdote);
                 //-----------------------------------------------------
                 Integer idPedidoIndex = resultado.getInt(8);
+                Pedido idPedido = ps.buscarPedidoPorID(idPedidoIndex);
+                aux.setIdPedido(idPedido);
             }
             return aux;
         } catch (Exception e) {
