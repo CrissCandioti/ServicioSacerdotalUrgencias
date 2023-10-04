@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  * El paquete Service contiene las clases entidadesServices. Estas clases estan
  * en constante comunicacion con el paquete "Vista" y con el paquete "Acceso a
@@ -33,6 +32,7 @@ public class GuardianService {
          * datos con las restricciones
          */
         try {
+            GuardianDAO dao = new GuardianDAO();
             /**
              * Las siguientes restricciones fueron creadas para que los datos
              * ingresados no esten vacios y cumplan con las condiciones para la
@@ -66,7 +66,7 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
                 return;
             }
-            if (buscarGuardianPorDNI(dni) != null) {
+            if (dao.buscarGuardianPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos asociado un Guardian a ese documento");
                 return;
             }
@@ -124,9 +124,7 @@ public class GuardianService {
              * Esta restriccion fue creada para que analice el dato telefonico
              * para que solo admita digitos numericos
              */
-            if (telefono.matches("\\d+")) {
-                System.out.println("El telefono contiene solo digitos numericos");
-            } else {
+            if (!telefono.matches("\\d+")) {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
@@ -135,27 +133,10 @@ public class GuardianService {
              * solamente contenga caracteres numericos, letras y espacios; no
              * admite otros tipos de caracteres
              */
-            if (direccion.matches("[a-zA-Z0-9 ]+")) {
-                System.out.println("La direccion contiene solo números y letras.");
-            } else {
+            if (!direccion.matches("[a-zA-Z0-9 ]+")) {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
-            /**
-             * Una vez cumplida las restricciones el metodo se encarga de
-             * instanciar un guardian con esos datos obtenidos
-             */
-            GuardianDAO dao = new GuardianDAO();
-            Guardian aux = new Guardian();
-            aux.setDni(dni);
-            aux.setApellido(apellido);
-            aux.setNombre(nombre);
-            aux.setDireccion(direccion);
-            aux.setTelefono(telefono);
-            aux.setFechaNacimiento(fechaNacimiento);
-            aux.setEstadoCivil(estadoCivil);
-            aux.setRol(rol);
-            aux.setEstado(estado);
             /**
              * Debido que nuestra base de datos la variable "estado" solo acepta
              * un numero entero; si es 0 es false y su es 1 es true Este
@@ -170,12 +151,13 @@ public class GuardianService {
                 index = 0;
             }
             /**
-             * Se establece la comunicacion con el paquete "Acceso a datos" la
-             * cual se envia por argumentos el guardian instanciado y la
-             * variable entero con el dato correcto del estado para registrar en
-             * la base de datos
+             * Una vez cumplida las restricciones el metodo se encarga de
+             * instanciar un guardian con esos datos obtenidos. Se establece la
+             * comunicacion con el paquete "Acceso a datos" la cual se envia por
+             * argumentos el guardian instanciado y la variable entero con el
+             * dato correcto del estado para registrar en la base de datos
              */
-            dao.guardarGuardian(aux, index);
+            dao.guardarGuardian(new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
             /**
              * Por ultimo se muestra un mensaje completando el registro
              */
@@ -293,9 +275,7 @@ public class GuardianService {
                 JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
                 return;
             }
-            if (dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
-                System.out.println("La cadena cumple con los requisitos.");
-            } else {
+            if (!dni.matches("^[^a-zA-Z*\\s]{7,9}$")) {
                 JOptionPane.showMessageDialog(null, "El documento no cumple con los requisitos, por favor verifique e intente nuevamente");
                 return;
             }
@@ -325,26 +305,21 @@ public class GuardianService {
                     return;
                 }
             }
-            if (telefono.matches("\\d+")) {
-                System.out.println("El telefono contiene solo digitos numericos");
-            } else {
+            if (!telefono.matches("\\d+")) {
                 JOptionPane.showMessageDialog(null, "El telefono solamente debe contener digitos numericos");
                 return;
             }
-            if (direccion.matches("[a-zA-Z0-9 ]+")) {
-                System.out.println("La direccion contiene solo números y letras.");
-            } else {
+            if (!direccion.matches("[a-zA-Z0-9 ]+")) {
                 JOptionPane.showMessageDialog(null, "La direccion contiene caracteres no permitidos");
                 return;
             }
-            Guardian aux = new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado);
             int index = 0;
             if (estado == true) {
                 index = 1;
             } else if (estado == false) {
                 index = 0;
             }
-            dao.modificarGuardian(aux, index);
+            dao.modificarGuardian(new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
             JOptionPane.showMessageDialog(null, "Modificamos correctamente al Guardian");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar modificar el Guardian");

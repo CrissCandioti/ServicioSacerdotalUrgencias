@@ -18,13 +18,26 @@ public class Enfermo {
     private String estadoCivil;
     private String estadoConciencia;
     private String domicilio;
+    private String sanatorio;
     private String descripcion;
     private Contacto idContacto;
 
     public Enfermo() {
     }
 
-    public Enfermo(int idEnfermo, String apellido, String nombre, int edad, String estadoCivil, String estadoConciencia, String domicilio, String descripcion, Contacto idContacto) {
+    public Enfermo(String apellido, String nombre, int edad, String estadoCivil, String estadoConciencia, String domicilio, String sanatorio, String descripcion, Contacto idContacto) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.estadoCivil = estadoCivil;
+        this.estadoConciencia = estadoConciencia;
+        this.domicilio = domicilio;
+        this.sanatorio = sanatorio;
+        this.descripcion = descripcion;
+        this.idContacto = idContacto;
+    }
+
+    public Enfermo(int idEnfermo, String apellido, String nombre, int edad, String estadoCivil, String estadoConciencia, String domicilio, String sanatorio, String descripcion, Contacto idContacto) {
         this.idEnfermo = idEnfermo;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -32,6 +45,7 @@ public class Enfermo {
         this.estadoCivil = estadoCivil;
         this.estadoConciencia = estadoConciencia;
         this.domicilio = domicilio;
+        this.sanatorio = sanatorio;
         this.descripcion = descripcion;
         this.idContacto = idContacto;
     }
@@ -90,6 +104,14 @@ public class Enfermo {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public String getSanatorio() {
+        return sanatorio;
+    }
+
+    public void setSanatorio(String sanatorio) {
+        this.sanatorio = sanatorio;
     }
 
     public String getDescripcion() {

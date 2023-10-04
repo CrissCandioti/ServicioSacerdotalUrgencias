@@ -20,6 +20,13 @@ public class Contacto {
     public Contacto() {
     }
 
+    public Contacto(String apellido, String nombre, String telefono, String parentesco) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.parentesco = parentesco;
+    }
+
     public Contacto(int idContacto, String apellido, String nombre, String telefono, String parentesco) {
         this.idContacto = idContacto;
         this.apellido = apellido;
