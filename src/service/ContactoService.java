@@ -79,7 +79,7 @@ public class ContactoService {
     public void eliminarContacto(int id) {
         try {
             ContactoDAO dao = new ContactoDAO();
-            dao.eliminarContaco(id);
+            dao.eliminarContacto(id);
             JOptionPane.showMessageDialog(null, "Se elimino correctamente el contacto del enfermo");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar el contacto seleccionado");

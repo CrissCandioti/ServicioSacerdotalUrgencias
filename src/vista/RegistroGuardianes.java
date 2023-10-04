@@ -65,10 +65,9 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnInhabilitar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setBorder(null);
-        setClosable(true);
-        setIconifiable(true);
         setTitle("Registro Guardianes");
         setPreferredSize(new java.awt.Dimension(950, 601));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,11 +116,6 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 161, 242, 40));
 
         txtTelefono.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 258, 242, 40));
 
         txtDireccion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
@@ -195,12 +189,17 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 100, -1));
 
+        btnSalir.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
@@ -221,23 +220,29 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         
         gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
         limpiarCampos();
+            
          } catch (Exception e) {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
+             if (txtDni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese un documento a buscar");
+            }else{
+            
             btnEliminar.setEnabled(true);
             btnModificar.setEnabled(true);
             btnInhabilitar.setEnabled(true);
             btnGuardar.setEnabled(false);
-             GuardianService gs = new GuardianService();
             String dni = txtDni.getText();
-            gs.buscarGuardianPorDNI(dni);
+            
+            GuardianService gs = new GuardianService();
             Guardian aux = new Guardian();
-            //Guardamos en un alumno los valores obtenidos por el método
+            
+            //Guardamos en un Guardian los valores obtenidos por el método
             aux = gs.buscarGuardianPorDNI(dni);
-            // utilizamos la informacioon del alumno para setear los campos
+            // utilizamos la informacioon del Guardian para setear los campos
             txtId.setText("" + aux.getIdGuardian());
             txtApelldo.setText(aux.getApellido());
             txtNombre.setText(aux.getNombre());
@@ -256,7 +261,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
             cbxEstadoCivil.setSelectedItem(aux.getEstadoCivil());
             cbxRol.setSelectedItem(aux.getRol());
             
-            
+             }
             
         } catch (Exception e) {
         }
@@ -293,10 +298,12 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
+            if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR GUARDIAN?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
             int id = Integer.parseInt(txtId.getText());
             GuardianService gs = new GuardianService();
             gs.eliminarGuardian(id);
             limpiarCampos();
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "No se encontro ningun Guardian para su eliminacion");
         } catch (Exception ex) {
@@ -306,6 +313,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
 
     private void btnInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInhabilitarActionPerformed
         try {
+            
             int id = Integer.parseInt(txtId.getText());
             GuardianService gs = new GuardianService();
             gs.inhabilitarGuardian(id);
@@ -317,6 +325,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnInhabilitarActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+       
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooser;
@@ -325,6 +338,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInhabilitar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
     private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JLabel jLabel1;

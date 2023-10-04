@@ -150,10 +150,10 @@ public class SacerdoteService {
     public void modificarSacerdote(int ID, String dni, String apellido, String nombre, String telefono, LocalDate fechaNacimiento, boolean estado) {
         try {
             SacerdoteDAO dao = new SacerdoteDAO();
-            if (dao.buscarSacerdotePorDNI(dni) != null) {
-                JOptionPane.showMessageDialog(null, "No se encontro ningun Sacerdote para su modificacion");
-                return;
-            }
+//            if (dao.buscarSacerdotePorDNI(dni) != null) {
+//                JOptionPane.showMessageDialog(null, "No se encontro ningun Sacerdote para su modificacion");
+//                return;
+//            }
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
                 return;

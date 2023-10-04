@@ -5,9 +5,14 @@
  */
 package vista;
 
+import com.toedter.calendar.JTextFieldDateEditor;
+import entidades.Guardian;
+import entidades.Sacerdote;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import service.GuardianService;
 import service.SacerdoteService;
 
 /**
@@ -21,6 +26,11 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
      */
     public RegistroSacerdotes() {
         initComponents();
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) datechooser.getDateEditor();
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnInhabilitar.setEnabled(false);
+        txtId.setVisible(false);
     }
 
     /**
@@ -45,11 +55,21 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         datechooser = new com.toedter.calendar.JDateChooser();
         rbActivo = new javax.swing.JRadioButton();
         btnGuardar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        btnModificar = new javax.swing.JButton();
+        btnInhabilitar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBorder(null);
-        setClosable(true);
-        setIconifiable(true);
         setTitle("Registro Sacerdotes");
+        setPreferredSize(new java.awt.Dimension(950, 600));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel1.setText("Dni :");
@@ -91,41 +111,102 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
             }
         });
 
+        btnBuscar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnInhabilitar.setText("INHABILITAR");
+        btnInhabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInhabilitarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbActivo)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnGuardar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbActivo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtApellido)
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                        .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                        .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                        .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(278, 278, 278)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtApellido)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(365, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnInhabilitar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
+                .addGap(63, 63, 63)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -145,9 +226,21 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(rbActivo))
-                .addGap(32, 32, 32)
-                .addComponent(btnGuardar)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar)
+                            .addComponent(btnModificar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnInhabilitar)
+                            .addComponent(btnEliminar))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(160, 160, 160))))
         );
 
         pack();
@@ -168,10 +261,118 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Sacerdote Guardado!");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try{
+         if (txtDni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese un documento a buscar");
+            }else{
+            
+            btnEliminar.setEnabled(true);
+            btnModificar.setEnabled(true);
+            btnInhabilitar.setEnabled(true);
+            btnGuardar.setEnabled(false);
+            String dni = txtDni.getText();
+            
+            SacerdoteService ss = new SacerdoteService();
+            Sacerdote aux = new Sacerdote();
+            //Guardamos en un Sacerdote los valores obtenidos por el método
+            aux =ss.buscarSacerdotePorDNI(dni);
+            // utilizamos la informacioon del Sacerdote para setear los campos
+            txtId.setText("" + aux.getIdSacerdote());
+            txtApellido.setText(aux.getApellido());
+            txtNombre.setText(aux.getNombre());           
+            txtTelefono.setText(aux.getTelefono());
+            //Forma de setear el DateChooser
+            LocalDate localDate = aux.getFechaNacimiento();
+            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            datechooser.setDate(utilDate);
+            //Forma de setear el radioButon
+            if (aux.isEstado() == true) {
+                rbActivo.setSelected(true);
+            } else {
+                rbActivo.setSelected(false);
+            }
+           
+             }
+        }catch(NullPointerException e){
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "No hay Sacerdotes con ese dni en la base de datos");
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try {
+            int id = Integer.parseInt(txtId.getText());
+            
+            String dni = txtDni.getText();
+            String apellido = txtApellido.getText();
+            String nombre = txtNombre.getText();
+            String telefono = txtTelefono.getText();
+            String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
+            boolean estado = rbActivo.isSelected();
+            
+            SacerdoteService ss = new SacerdoteService();
+            ss.modificarSacerdote(id, dni, apellido, nombre, telefono, LocalDate.parse(fechaNac), estado);
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInhabilitarActionPerformed
+        
+        try {
+            int id = Integer.parseInt(txtId.getText());
+            SacerdoteService ss = new SacerdoteService();
+            ss.inhabilitarSacerdote(id);
+            limpiarCampos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "No se encontro ningun Sacerdote para su Inhabilitacion");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al analizar los datos");
+        }
+                                                
+    }//GEN-LAST:event_btnInhabilitarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        try {
+            if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR SACERDOTE?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+            int id = Integer.parseInt(txtId.getText());
+            
+            SacerdoteService ss = new SacerdoteService();
+            ss.eliminarSacerdote(id);
+            limpiarCampos();
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        
+        limpiarCampos();
+        btnGuardar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnInhabilitar.setEnabled(false);
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnInhabilitar;
+    private javax.swing.JButton btnModificar;
     private com.toedter.calendar.JDateChooser datechooser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -181,7 +382,17 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbActivo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+        txtApellido.setText("");
+        txtDni.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        datechooser.setDate(null);
+        rbActivo.setSelected(false);
+    }
 }

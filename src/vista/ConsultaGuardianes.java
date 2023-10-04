@@ -22,7 +22,7 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
      */
     public ConsultaGuardianes() {
         initComponents();
-        this.setLocation(275, 60);
+        this.setLocation(230, 75);
         llenarTabla();
     }
 

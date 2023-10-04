@@ -24,7 +24,7 @@ public final class ContactoDAO extends DAO {
         }
     }
 
-    public void eliminarContaco(int id) {
+    public void eliminarContacto(int id) {
         try {
             String sql = "DELETE FROM `contacto` WHERE idContacto = " + id;
             insertarModificarEliminarBaseDatos(sql);

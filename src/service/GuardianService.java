@@ -189,7 +189,7 @@ public class GuardianService {
             dao.inhabilitarGuardian(id);
             JOptionPane.showMessageDialog(null, "Guardian inhabilitado con exito");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al intentar inhabilitar el Guardian");
+            JOptionPane.showMessageDialog(null, "Error al intentar inhabilitar el Guardian" +e);
         }
     }
 
