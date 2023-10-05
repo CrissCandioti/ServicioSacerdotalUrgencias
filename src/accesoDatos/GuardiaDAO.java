@@ -22,7 +22,7 @@ public final class GuardiaDAO extends DAO {
 
     public void guardarGuardia(Guardia aux) {
         try {
-            String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`, `idPedido`) "
+            String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`) "
                     + "VALUES ('" + aux.getFecha() + "'," + aux.getIdVocal().getIdGuardian() + "," + aux.getIdTelefonista().getIdGuardian() + "," + aux.getIdChofer().getIdGuardian() + "," + aux.getIdAcompañante().getIdGuardian() + "," + aux.getIdSacerdote().getIdSacerdote() + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {

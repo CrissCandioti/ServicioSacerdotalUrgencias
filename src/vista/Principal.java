@@ -120,6 +120,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuLlamados.setText("Llamados");
 
         jMenuPedidos.setText("Pedidos");
+        jMenuPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPedidosActionPerformed(evt);
+            }
+        });
         jMenuLlamados.add(jMenuPedidos);
 
         jMenuEnfermos.setText("Enfermos");
@@ -197,6 +202,11 @@ public class Principal extends javax.swing.JFrame {
     private void escritorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_escritorioMouseClicked
 
     }//GEN-LAST:event_escritorioMouseClicked
+
+    private void jMenuPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPedidosActionPerformed
+        RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
+        ControlaInstancia(registro);
+    }//GEN-LAST:event_jMenuPedidosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

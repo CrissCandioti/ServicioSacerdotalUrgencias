@@ -22,7 +22,7 @@ public class ConsultaSacerdotes extends javax.swing.JInternalFrame {
      */
     public ConsultaSacerdotes() {
         initComponents();
-        setLocation(230, 75);
+        setLocation(190,40);
         
         
         
