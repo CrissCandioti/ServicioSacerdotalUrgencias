@@ -5,11 +5,7 @@
  */
 package serviciosacerdotalurgencias;
 
-import java.time.LocalDate;
-import service.EnfermoService;
 import service.GuardiaService;
-import service.PedidoService;
-import vista.Principal;
 
 /**
  *
@@ -26,9 +22,6 @@ public class ServicioSacerdotalUrgencias {
 //        p.setVisible(true);
 //        p.setLocationRelativeTo(null);
         GuardiaService gs = new GuardiaService();
-        PedidoService ps = new PedidoService();
-        //ps.crearPedido(LocalDate.now(), 1, 0);
-        gs.crearGuardia(LocalDate.now(), 4, 4, 4, 4, 1, 0);
+        
     }
-
 }

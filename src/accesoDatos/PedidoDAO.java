@@ -19,7 +19,7 @@ public final class PedidoDAO extends DAO {
 
     public void guardarPedido(Pedido aux) {
         try {
-            String sql = "INSERT INTO `pedido`(`fechaPedido`, `idGuardia`, `idEnfermo`) VALUES ('" + aux.getFechaPedido() + "'," + aux.getIdGuardia().getIdGuardia() + "," + aux.getIdEnfermo().getIdEnfermo() + ")";
+            String sql = "INSERT INTO `pedido`( `fechaPedido`, `idGuardia`, `idEnfermo`) VALUES ('" + aux.getFechaPedido() + "'," + aux.getIdGuardia().getIdGuardia() + "," + aux.getIdEnfermo().getIdEnfermo() + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al intentar guardar el pedido en la base de datos");
