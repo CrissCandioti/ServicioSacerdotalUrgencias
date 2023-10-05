@@ -86,6 +86,10 @@ public class EnfermoService {
                 JOptionPane.showMessageDialog(null, "El sanatorio contiene caracteres no permitidos");
                 return;
             }
+            if (descripcion.length() == 150) {
+                System.out.println("En la descripcion solamente puede contener exactamente 150 caracteres");
+                return;
+            } 
             ed.guardarEnfermo(new Enfermo(apellido, nombre, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, cs.buscarContactoPorID(idContacto)));
             JOptionPane.showMessageDialog(null, "Se agrego correctamente el enfermo");
         } catch (Exception e) {
@@ -193,6 +197,10 @@ public class EnfermoService {
                 JOptionPane.showMessageDialog(null, "El sanatorio contiene caracteres no permitidos");
                 return;
             }
+            if (descripcion.length() == 150) {
+                System.out.println("En la descripcion solamente puede contener exactamente 150 caracteres");
+                return;
+            } 
             ed.modificarEnfermo(new Enfermo(id, apellido, nombre, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, cs.buscarContactoPorID(idContacto)));
             JOptionPane.showMessageDialog(null, "Se modifico correctamente el enfermo");
         } catch (Exception e) {
