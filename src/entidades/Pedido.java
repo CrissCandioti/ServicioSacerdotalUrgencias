@@ -21,6 +21,12 @@ public class Pedido {
     public Pedido() {
     }
 
+    public Pedido(LocalDate fechaPedido, Guardia idGuardia, Enfermo idEnfermo) {
+        this.fechaPedido = fechaPedido;
+        this.idGuardia = idGuardia;
+        this.idEnfermo = idEnfermo;
+    }
+
     public Pedido(int idPedido, LocalDate fechaPedido, Guardia idGuardia, Enfermo idEnfermo) {
         this.idPedido = idPedido;
         this.fechaPedido = fechaPedido;

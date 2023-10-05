@@ -20,20 +20,8 @@ public class Guardia {
     private Guardian idChofer;
     private Guardian idAcompañante;
     private Sacerdote idSacerdote;
-   
 
     public Guardia() {
-    }
-
-    public Guardia(int idGuardia, LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote) {
-        this.idGuardia = idGuardia;
-        this.fecha = fecha;
-        this.idVocal = idVocal;
-        this.idTelefonista = idTelefonista;
-        this.idChofer = idChofer;
-        this.idAcompañante = idAcompañante;
-        this.idSacerdote = idSacerdote;
-        
     }
 
     public Guardia(LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote) {
@@ -44,7 +32,16 @@ public class Guardia {
         this.idAcompañante = idAcompañante;
         this.idSacerdote = idSacerdote;
     }
-    
+
+    public Guardia(int idGuardia, LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote) {
+        this.idGuardia = idGuardia;
+        this.fecha = fecha;
+        this.idVocal = idVocal;
+        this.idTelefonista = idTelefonista;
+        this.idChofer = idChofer;
+        this.idAcompañante = idAcompañante;
+        this.idSacerdote = idSacerdote;
+    }
 
     public int getIdGuardia() {
         return idGuardia;
@@ -107,6 +104,4 @@ public class Guardia {
         return "Guardia{" + "idGuardia=" + idGuardia + ", fecha=" + fecha + ", idVocal=" + idVocal + ", idTelefonista=" + idTelefonista + ", idChofer=" + idChofer + ", idAcompa\u00f1ante=" + idAcompañante + ", idSacerdote=" + idSacerdote + '}';
     }
 
-   
-   
 }
