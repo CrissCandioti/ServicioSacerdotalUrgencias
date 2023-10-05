@@ -264,6 +264,7 @@ public class Guardia extends javax.swing.JInternalFrame {
         int idSacerdote = cmbSacerdote.getItemAt(cmbSacerdote.getSelectedIndex()).getIdSacerdote();
         
         //gs.crearGuardia(LocalDate.parse(fecha), idVocal, idTelefonista, idChofer, idAcompañante, idSacerdote, idChofer);
+        gs.crearGuardia(LocalDate.parse(fecha), idVocal, idTelefonista, idChofer, idAcompañante, idSacerdote);
         JOptionPane.showMessageDialog(this, "Guardia Creada!!");
         
         

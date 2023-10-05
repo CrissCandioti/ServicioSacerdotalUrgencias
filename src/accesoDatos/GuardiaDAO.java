@@ -18,7 +18,7 @@ import service.SacerdoteService;
  * @author criss
  */
 public final class GuardiaDAO extends DAO {
-    
+
     public void guardarGuardia(Guardia aux) {
         try {
             String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`) VALUES ('" + aux.getFecha() + "'," + aux.getIdVocal().getIdGuardian() + "," + aux.getIdTelefonista().getIdGuardian() + "," + aux.getIdChofer().getIdGuardian() + "," + aux.getIdAcompañante().getIdGuardian() + "," + aux.getIdSacerdote().getIdSacerdote() + ")";
@@ -27,7 +27,7 @@ public final class GuardiaDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Se produjo un error al guardar la guardia en la base de datos");
         }
     }
-    
+
     public Guardia buscarGuardiaPorID(int id) {
         try {
             String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote` FROM `guardia` WHERE idGuardia = " + id;
@@ -53,7 +53,7 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-    
+
     public ArrayList<Guardia> listaGuardias() {
         try {
             String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote` FROM `guardia` ";
@@ -81,7 +81,7 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-    
+
     public void modificarGuardia(Guardia aux) {
         try {
             String sql = "UPDATE `guardia` SET `fecha`='" + aux.getFecha() + "',`idVocal`=" + aux.getIdVocal() + ",`idTelefonista`=" + aux.getIdTelefonista() + ",`idChofer`=" + aux.getIdChofer() + ",`idAcompañante`=" + aux.getIdAcompañante() + ",`idSacerdote`= " + aux.getIdSacerdote() + " WHERE idGuardia = " + aux.getIdGuardia();
@@ -90,7 +90,7 @@ public final class GuardiaDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Se produjo un error al modificar la guardia en la base de datos");
         }
     }
-    
+
     public ArrayList<Guardia> listaDeGuardiaSacerdote(int IDSacerdote) {
         try {
             String sql = "SELECT guardia.idGuardia FROM `guardia` INNER JOIN sacerdote ON guardia.idGuardia = sacerdote.idSacerdote WHERE sacerdote.idSacerdote = " + IDSacerdote;
@@ -109,14 +109,14 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-    
+
     public ArrayList<Guardia> listaDeGuardiaDeGuardianes(int IDGuardian) {
         try {
             String sql = "SELECT idGuardia FROM Guardia WHERE idVocal = " + IDGuardian + " OR idTelefonista = " + IDGuardian + " OR idChofer = " + IDGuardian + "   OR idAcompañante = " + IDGuardian + "   OR idSacerdote = " + IDGuardian + "";
             consultarBaseDatos(sql);
             ArrayList<Guardia> listaRetornar = new ArrayList<>();
             GuardiaService gs = new GuardiaService();
-            while (resultado.next()) {                
+            while (resultado.next()) {
                 Integer IDGuardia = resultado.getInt(1);
                 listaRetornar.add(gs.buscarGuardiaPorID(IDGuardia));
             }
@@ -128,11 +128,23 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-    
+
+    public Guardia guardiaParaPedido(LocalDate fecha) {
+        try {
+            String sql = "SELECT `idGuardia` FROM `guardia` WHERE fecha = ' " + fecha + " '";
+            consultarBaseDatos(sql);
+            GuardiaService gs = new GuardiaService();
+            while (resultado.next()) {                
+                Integer IDGuardia = resultado.getInt(1);
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al encontrar la Guardia para el Pedido en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 }
 
-/**
- * Tambien crear un inner join para traer las guardias que estuvieron los
- * guardianes Se puede crear un metodo que te retorne la guardia del dia para
- * guardar el pedido.
- */
+
