@@ -9,6 +9,7 @@ import entidades.Guardia;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import service.GuardiaService;
 import service.GuardianService;
 import service.SacerdoteService;
 
@@ -17,7 +18,7 @@ import service.SacerdoteService;
  * @author criss
  */
 public final class GuardiaDAO extends DAO {
-
+    
     public void guardarGuardia(Guardia aux) {
         try {
             String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`) VALUES ('" + aux.getFecha() + "'," + aux.getIdVocal().getIdGuardian() + "," + aux.getIdTelefonista().getIdGuardian() + "," + aux.getIdChofer().getIdGuardian() + "," + aux.getIdAcompañante().getIdGuardian() + "," + aux.getIdSacerdote().getIdSacerdote() + ")";
@@ -26,7 +27,7 @@ public final class GuardiaDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Se produjo un error al guardar la guardia en la base de datos");
         }
     }
-
+    
     public Guardia buscarGuardiaPorID(int id) {
         try {
             String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote` FROM `guardia` WHERE idGuardia = " + id;
@@ -52,7 +53,7 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-
+    
     public ArrayList<Guardia> listaGuardias() {
         try {
             String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote` FROM `guardia` ";
@@ -80,7 +81,7 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-
+    
     public void modificarGuardia(Guardia aux) {
         try {
             String sql = "UPDATE `guardia` SET `fecha`='" + aux.getFecha() + "',`idVocal`=" + aux.getIdVocal() + ",`idTelefonista`=" + aux.getIdTelefonista() + ",`idChofer`=" + aux.getIdChofer() + ",`idAcompañante`=" + aux.getIdAcompañante() + ",`idSacerdote`= " + aux.getIdSacerdote() + " WHERE idGuardia = " + aux.getIdGuardia();
@@ -89,24 +90,16 @@ public final class GuardiaDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Se produjo un error al modificar la guardia en la base de datos");
         }
     }
-
+    
     public ArrayList<Guardia> listaDeGuardiaSacerdote(int IDSacerdote) {
         try {
-            String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante` FROM `guardia` WHERE idSacerdote = " + IDSacerdote;
+            String sql = "SELECT guardia.idGuardia FROM `guardia` INNER JOIN sacerdote ON guardia.idGuardia = sacerdote.idSacerdote WHERE sacerdote.idSacerdote = " + IDSacerdote;
             consultarBaseDatos(sql);
-            GuardianService gs = new GuardianService();
-            SacerdoteService ss = new SacerdoteService();
+            GuardiaService gs = new GuardiaService();
             ArrayList<Guardia> listaRetornar = new ArrayList<>();
-            Guardia aux = null;
             while (resultado.next()) {
-                java.sql.Date fechaSQL = resultado.getDate(2);
-                LocalDate localDate = fechaSQL.toLocalDate();
-                Integer idVocalIndex = resultado.getInt(3);
-                Integer idTelefonistaIndex = resultado.getInt(4);
-                Integer idChoferIndex = resultado.getInt(5);
-                Integer idAcompañanteIndex = resultado.getInt(6);
-                aux = new Guardia(resultado.getInt(1), localDate, gs.buscarGuardianPorID(idVocalIndex), gs.buscarGuardianPorID(idTelefonistaIndex), gs.buscarGuardianPorID(idChoferIndex), gs.buscarGuardianPorID(idAcompañanteIndex), ss.buscarSacerdotePorID(IDSacerdote));
-                listaRetornar.add(aux);
+                Integer IDGuardia = resultado.getInt(1);
+                listaRetornar.add(gs.buscarGuardiaPorID(IDGuardia));
             }
             return listaRetornar;
         } catch (Exception e) {
@@ -116,11 +109,29 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
-
+    
+    public ArrayList<Guardia> listaDeGuardiaDeGuardianes(int IDGuardian) {
+        try {
+            String sql = "SELECT idGuardia FROM Guardia WHERE idVocal = " + IDGuardian + " OR idTelefonista = " + IDGuardian + " OR idChofer = " + IDGuardian + "   OR idAcompañante = " + IDGuardian + "   OR idSacerdote = " + IDGuardian + "";
+            consultarBaseDatos(sql);
+            ArrayList<Guardia> listaRetornar = new ArrayList<>();
+            GuardiaService gs = new GuardiaService();
+            while (resultado.next()) {                
+                Integer IDGuardia = resultado.getInt(1);
+                listaRetornar.add(gs.buscarGuardiaPorID(IDGuardia));
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al listar las Guardias que estuvo el Guardian en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
+    
 }
 
 /**
- * Crear un inner join para traer todas las guardias la cual estuvo el sacerdote
  * Tambien crear un inner join para traer las guardias que estuvieron los
  * guardianes Se puede crear un metodo que te retorne la guardia del dia para
  * guardar el pedido.

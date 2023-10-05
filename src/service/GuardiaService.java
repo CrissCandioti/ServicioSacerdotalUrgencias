@@ -68,7 +68,17 @@ public class GuardiaService {
             GuardiaDAO dao = new GuardiaDAO();
             return dao.listaDeGuardiaSacerdote(IDSacerdote);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se creo modifico correctamente la guardia");
+            JOptionPane.showMessageDialog(null, "No se pudo retornar correctamente la lista de las guardias de los Sacerdotes");
+        }
+        return null;
+    }
+
+    public ArrayList<Guardia> listaDeGuardiaDeGuardianes(int IDGuardian) {
+        try {
+            GuardiaDAO dao = new GuardiaDAO();
+            return dao.listaDeGuardiaDeGuardianes(IDGuardian);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo retornar correctamente la lista de las guardias de los Guardianes");
         }
         return null;
     }
