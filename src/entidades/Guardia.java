@@ -20,12 +20,12 @@ public class Guardia {
     private Guardian idChofer;
     private Guardian idAcompañante;
     private Sacerdote idSacerdote;
-    private Pedido idPedido;
+   
 
     public Guardia() {
     }
 
-    public Guardia(int idGuardia, LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote, Pedido idPedido) {
+    public Guardia(int idGuardia, LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote) {
         this.idGuardia = idGuardia;
         this.fecha = fecha;
         this.idVocal = idVocal;
@@ -33,8 +33,18 @@ public class Guardia {
         this.idChofer = idChofer;
         this.idAcompañante = idAcompañante;
         this.idSacerdote = idSacerdote;
-        this.idPedido = idPedido;
+        
     }
+
+    public Guardia(LocalDate fecha, Guardian idVocal, Guardian idTelefonista, Guardian idChofer, Guardian idAcompañante, Sacerdote idSacerdote) {
+        this.fecha = fecha;
+        this.idVocal = idVocal;
+        this.idTelefonista = idTelefonista;
+        this.idChofer = idChofer;
+        this.idAcompañante = idAcompañante;
+        this.idSacerdote = idSacerdote;
+    }
+    
 
     public int getIdGuardia() {
         return idGuardia;
@@ -92,17 +102,11 @@ public class Guardia {
         this.idSacerdote = idSacerdote;
     }
 
-    public Pedido getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(Pedido idPedido) {
-        this.idPedido = idPedido;
-    }
-
     @Override
     public String toString() {
-        return "Guardia{" + "idGuardia=" + idGuardia + ", fecha=" + fecha + ", idVocal=" + idVocal + ", idTelefonista=" + idTelefonista + ", idChofer=" + idChofer + ", idAcompa\u00f1ante=" + idAcompañante + ", idSacerdote=" + idSacerdote + ", idPedido=" + idPedido + '}';
+        return "Guardia{" + "idGuardia=" + idGuardia + ", fecha=" + fecha + ", idVocal=" + idVocal + ", idTelefonista=" + idTelefonista + ", idChofer=" + idChofer + ", idAcompa\u00f1ante=" + idAcompañante + ", idSacerdote=" + idSacerdote + '}';
     }
 
+   
+   
 }

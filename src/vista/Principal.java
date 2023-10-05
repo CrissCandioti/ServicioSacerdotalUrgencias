@@ -24,7 +24,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         escritorio.setBorder(new ImagenFondo());
-        this.setExtendedState(Principal.NORMAL);
+        this.setExtendedState(Principal.MAXIMIZED_BOTH);
     }
 
     /**

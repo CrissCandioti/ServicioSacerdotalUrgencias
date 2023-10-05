@@ -22,7 +22,8 @@ public final class GuardiaDAO extends DAO {
 
     public void guardarGuardia(Guardia aux) {
         try {
-            String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`, `idPedido`) VALUES ('" + aux.getFecha() + "'," + aux.getIdVocal().getIdGuardian() + "," + aux.getIdTelefonista().getIdGuardian() + "," + aux.getIdChofer().getIdGuardian() + "," + aux.getIdAcompañante().getIdGuardian() + "," + aux.getIdSacerdote().getIdSacerdote() + "," + aux.getIdPedido().getIdPedido() + ")";
+            String sql = "INSERT INTO `guardia`(`fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`, `idPedido`) "
+                    + "VALUES ('" + aux.getFecha() + "'," + aux.getIdVocal().getIdGuardian() + "," + aux.getIdTelefonista().getIdGuardian() + "," + aux.getIdChofer().getIdGuardian() + "," + aux.getIdAcompañante().getIdGuardian() + "," + aux.getIdSacerdote().getIdSacerdote() + ")";
             insertarModificarEliminarBaseDatos(sql);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al guardar la guardia en la base de datos");

@@ -17,7 +17,13 @@ import javax.swing.JOptionPane;
 public class GuardiaService {
 
     public void crearGuardia(LocalDate fecha, int idVocal, int idTelefonista, int idChofer, int idAcompañante, int idSacerdote, int idPedido) {
+
         try {
+            GuardiaDAO dao = new GuardiaDAO();
+            GuardianService gs = new GuardianService();
+            SacerdoteService ss = new SacerdoteService();
+           
+            dao.guardarGuardia(new Guardia(fecha, gs.buscarGuardianPorID(idVocal), gs.buscarGuardianPorID(idTelefonista), gs.buscarGuardianPorID(idChofer), gs.buscarGuardianPorID(idAcompañante), ss.buscarSacerdotePorID(idSacerdote)));
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo registrar correctamente la guardia");
