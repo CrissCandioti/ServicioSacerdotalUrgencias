@@ -90,11 +90,38 @@ public final class GuardiaDAO extends DAO {
         }
     }
 
+    public ArrayList<Guardia> listaDeGuardiaSacerdote(int IDSacerdote) {
+        try {
+            String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante` FROM `guardia` WHERE idSacerdote = " + IDSacerdote;
+            consultarBaseDatos(sql);
+            GuardianService gs = new GuardianService();
+            SacerdoteService ss = new SacerdoteService();
+            ArrayList<Guardia> listaRetornar = new ArrayList<>();
+            Guardia aux = null;
+            while (resultado.next()) {
+                java.sql.Date fechaSQL = resultado.getDate(2);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                Integer idVocalIndex = resultado.getInt(3);
+                Integer idTelefonistaIndex = resultado.getInt(4);
+                Integer idChoferIndex = resultado.getInt(5);
+                Integer idAcompañanteIndex = resultado.getInt(6);
+                aux = new Guardia(resultado.getInt(1), localDate, gs.buscarGuardianPorID(idVocalIndex), gs.buscarGuardianPorID(idTelefonistaIndex), gs.buscarGuardianPorID(idChoferIndex), gs.buscarGuardianPorID(idAcompañanteIndex), ss.buscarSacerdotePorID(IDSacerdote));
+                listaRetornar.add(aux);
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al listar las Guardias que estuvo el Sacerdote en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
+
 }
 
 /**
  * Crear un inner join para traer todas las guardias la cual estuvo el sacerdote
  * Tambien crear un inner join para traer las guardias que estuvieron los
- * guardianes
- * Se puede crear un metodo que te retorne la guardia del dia para guardar el pedido.
+ * guardianes Se puede crear un metodo que te retorne la guardia del dia para
+ * guardar el pedido.
  */

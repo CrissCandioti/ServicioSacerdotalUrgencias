@@ -49,8 +49,8 @@ public class GuardiaService {
         }
         return null;
     }
-    
-        public void modificarGuardia(int id,LocalDate fecha, int idVocal, int idTelefonista, int idChofer, int idAcompañante, int idSacerdote) {
+
+    public void modificarGuardia(int id, LocalDate fecha, int idVocal, int idTelefonista, int idChofer, int idAcompañante, int idSacerdote) {
         try {
             GuardiaDAO dao = new GuardiaDAO();
             GuardianService gs = new GuardianService();
@@ -62,6 +62,14 @@ public class GuardiaService {
             JOptionPane.showMessageDialog(null, "No se pudo registrar correctamente la guardia");
         }
     }
-        
-        
+
+    public ArrayList<Guardia> listaDeGuardiaSacerdote(int IDSacerdote) {
+        try {
+            GuardiaDAO dao = new GuardiaDAO();
+            return dao.listaDeGuardiaSacerdote(IDSacerdote);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se creo modifico correctamente la guardia");
+        }
+        return null;
+    }
 }
