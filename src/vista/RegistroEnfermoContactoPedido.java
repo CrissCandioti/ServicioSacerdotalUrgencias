@@ -7,6 +7,11 @@ package vista;
 
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
+import javax.swing.JOptionPane;
+import service.ContactoService;
+import service.EnfermoService;
+import service.GuardiaService;
+import service.PedidoService;
 
 /**
  *
@@ -64,6 +69,9 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         txtParentesco = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1200, 900));
 
@@ -194,10 +202,10 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                     .addComponent(txtEdadE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbEstadoCivil)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(cmbEstadoCivil))
+                        .addComponent(jLabel4))
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,29 +312,64 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
 
         lblFecha.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
 
+        jLabel14.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabel14.setText("PEDIDO : ");
+
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jButton1.setText("SALIR");
+
+        jButton2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jButton2.setText("GUARDAR PEDIDO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jButton2)
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton1)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 194, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
+                        .addGap(111, 111, 111))))
         );
 
         pack();
@@ -336,16 +379,61 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEconcienciaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        EnfermoService es = new EnfermoService();
+        ContactoService cs = new ContactoService();
+        PedidoService ps = new PedidoService();
+        GuardiaService gs= new GuardiaService();
+        
+        //vamos a crear un contacto primero.
+        String apellido = txtApellidoC.getText();
+        String nombre = txtNombreC.getText();
+        String telefono = txtTelefono.getText();
+        String parentesco = txtParentesco.getText();
+        cs.crearContacto(apellido, nombre, telefono, parentesco);
+        JOptionPane.showMessageDialog(this, "Contacto Guardado");
+        
+        //vamos a crear un enfermo.
+        String apellidoe = txtApellidoE.getText();
+        String nombree = txtNombreE.getText();
+        int edad = Integer.parseInt(txtEdadE.getText());
+        String estadoCivil =cmbEstadoCivil.getSelectedItem().toString();
+        String estadoConciencia = cmbEconciencia.getSelectedItem().toString();
+        String domicilio = txtDomicilio.getText();
+        String sanatorio = txtSanatorio.getText();
+        String descripcion = txtDescripcion.getText();
+        int idContacto = cs.buscarContactoPorNombreYapellido(apellido, nombre).getIdContacto();
+        
+        es.crearEnfermo(apellidoe, nombree, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, idContacto);
+        try{
+        //por ultimo creamos el pedido
+        LocalDate fecha = LocalDate.parse(lblFecha.getText());
+        int idGuardia = gs.buscarGuardiaPorfecha(fecha).getIdGuardia();
+        int idEnfermo = es.buscarEnfermoPorNombreApellido(apellidoe, nombree).getIdEnfermo();
+        
+        ps.crearPedido(fecha, idGuardia, idEnfermo);
+        
+        JOptionPane.showMessageDialog(this, "Pedido Guardado!!");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+            
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelContacto;
     private javax.swing.JComboBox<String> cmbEconciencia;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

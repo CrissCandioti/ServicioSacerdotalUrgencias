@@ -52,6 +52,31 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
+    public Guardia buscarGuardiaPorfecha(LocalDate fecha) {
+        try {
+            String sql = "SELECT `idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote` FROM `guardia` WHERE fecha = '" + fecha +"'";
+            consultarBaseDatos(sql);
+            GuardianService gs = new GuardianService();
+            SacerdoteService ss = new SacerdoteService();
+            Guardia aux = null;
+            while (resultado.next()) {
+                java.sql.Date fechaSQL = resultado.getDate(2);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                Integer idVocalIndex = resultado.getInt(3);
+                Integer idTelefonistaIndex = resultado.getInt(4);
+                Integer idChoferIndex = resultado.getInt(5);
+                Integer idAcompañanteIndex = resultado.getInt(6);
+                Integer idSacerdoteIndex = resultado.getInt(7);
+                aux = new Guardia(resultado.getInt(1), fecha, gs.buscarGuardianPorID(idVocalIndex), gs.buscarGuardianPorID(idTelefonistaIndex), gs.buscarGuardianPorID(idChoferIndex), gs.buscarGuardianPorID(idAcompañanteIndex), ss.buscarSacerdotePorID(idSacerdoteIndex));
+            }
+            return aux;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar la guardia en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
     public ArrayList<Guardia> listaGuardias() {
         try {

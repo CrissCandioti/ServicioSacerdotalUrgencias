@@ -43,6 +43,24 @@ public final class EnfermoDAO extends DAO {
         }
         return null;
     }
+    public Enfermo buscarEnfermoPorNombreApellido(String apellidoe, String nombree) {
+        try {
+            String sql = "SELECT * FROM `enfermo` WHERE apellido= '" + apellidoe +"' AND nombre = '"+ nombree+"'";
+            consultarBaseDatos(sql);
+            ContactoService cs = new ContactoService();
+            Enfermo aux = null;
+            while (resultado.next()) {
+                Integer idContacto = resultado.getInt(10);
+                aux = new Enfermo(resultado.getInt(1), apellidoe, nombree, resultado.getInt(4), resultado.getString(5), resultado.getString(6), resultado.getString(7), resultado.getString(8), resultado.getString(9), cs.buscarContactoPorID(idContacto));
+            }
+            return aux;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el enfermo en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
     public ArrayList<Enfermo> listaEnfermos() {
         try {

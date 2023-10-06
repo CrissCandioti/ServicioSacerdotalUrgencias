@@ -39,6 +39,15 @@ public class GuardiaService {
         }
         return null;
     }
+    public Guardia buscarGuardiaPorfecha(LocalDate fecha) {
+        try {
+            GuardiaDAO dao = new GuardiaDAO();
+            return dao.buscarGuardiaPorfecha(fecha);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo encontrar la Guardia solicitada");
+        }
+        return null;
+    }
 
     public ArrayList<Guardia> listarGuardia() {
         try {
