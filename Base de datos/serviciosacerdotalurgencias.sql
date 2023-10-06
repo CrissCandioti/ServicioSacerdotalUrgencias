@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2023 a las 22:02:14
+-- Tiempo de generación: 06-10-2023 a las 23:22:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `serviciosacerdotalurgencias`
 --
+CREATE DATABASE IF NOT EXISTS `serviciosacerdotalurgencias` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `serviciosacerdotalurgencias`;
 
 -- --------------------------------------------------------
 
@@ -34,6 +36,14 @@ CREATE TABLE `contacto` (
   `telefono` varchar(150) DEFAULT NULL,
   `parentesco` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`idContacto`, `apellido`, `nombre`, `telefono`, `parentesco`) VALUES
+(2, 'SHOBERTO', 'CARLITOX', '0342', 'CONYUGE'),
+(3, 'GISELA', 'LAMBET', '321', 'HIJA');
 
 -- --------------------------------------------------------
 
@@ -54,6 +64,13 @@ CREATE TABLE `enfermo` (
   `idContacto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `enfermo`
+--
+
+INSERT INTO `enfermo` (`idEnfermo`, `apellido`, `nombre`, `edad`, `estadoCivil`, `estadoConciencia`, `domicilio`, `sanatorio`, `descripcion`, `idContacto`) VALUES
+(2, 'SHAUL', 'SHOBERTO', 50, 'Soltero', 'Inconciente', 'Caferatta 9753', 'Iturraspe', 'Neumonia', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -67,9 +84,16 @@ CREATE TABLE `guardia` (
   `idTelefonista` int(11) DEFAULT NULL,
   `idChofer` int(11) DEFAULT NULL,
   `idAcompañante` int(11) DEFAULT NULL,
-  `idSacerdote` int(11) DEFAULT NULL,
-  `idPedido` int(11) DEFAULT NULL
+  `idSacerdote` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `guardia`
+--
+
+INSERT INTO `guardia` (`idGuardia`, `fecha`, `idVocal`, `idTelefonista`, `idChofer`, `idAcompañante`, `idSacerdote`) VALUES
+(1, '2023-10-04', 4, 4, 4, 4, 1),
+(2, '2023-10-05', 4, 8, 4, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -79,6 +103,7 @@ CREATE TABLE `guardia` (
 
 CREATE TABLE `guardian` (
   `idGuardian` int(11) NOT NULL,
+  `dni` varchar(150) NOT NULL,
   `apellido` varchar(150) DEFAULT NULL,
   `nombre` varchar(150) DEFAULT NULL,
   `direccion` varchar(150) DEFAULT NULL,
@@ -88,6 +113,15 @@ CREATE TABLE `guardian` (
   `rol` varchar(150) DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `guardian`
+--
+
+INSERT INTO `guardian` (`idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado`) VALUES
+(4, '3315', 'Paola', 'GUER', 'JR 9753', '3312', '2023-10-02', 'Soltero', 'Conductor', 0),
+(7, '1234566', 'SHOBERTO', 'CARLITOX', 'LAS HERAS', '3312', '2023-10-02', 'CASADO', 'CONDUCTOR', 1),
+(8, '2222222', 'CAND', 'CAND', 'CASDS', '1', '2023-10-03', 'casado', 'Telefonista', 1);
 
 -- --------------------------------------------------------
 
@@ -101,6 +135,13 @@ CREATE TABLE `pedido` (
   `idGuardia` int(11) DEFAULT NULL,
   `idEnfermo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo`) VALUES
+(2, '2023-10-04', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -117,6 +158,15 @@ CREATE TABLE `sacerdote` (
   `fechaNacimiento` date DEFAULT NULL,
   `estado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sacerdote`
+--
+
+INSERT INTO `sacerdote` (`idSacerdote`, `dni`, `apellido`, `nombre`, `telefono`, `fechaNacimiento`, `estado`) VALUES
+(1, '1234567', 'Merlo', 'paco', '2', '2023-10-02', 0),
+(5, '1234543', 'GWEN', 'STACY', '0342', '2023-10-03', 0),
+(7, '1111111', 'RAUL', 'PEREZ', '1', '2023-10-03', 1);
 
 --
 -- Índices para tablas volcadas
@@ -144,14 +194,14 @@ ALTER TABLE `guardia`
   ADD KEY `idTelefonista` (`idTelefonista`),
   ADD KEY `idChofer` (`idChofer`),
   ADD KEY `idAcompañante` (`idAcompañante`),
-  ADD KEY `idSacerdote` (`idSacerdote`),
-  ADD KEY `idPedido` (`idPedido`);
+  ADD KEY `idSacerdote` (`idSacerdote`);
 
 --
 -- Indices de la tabla `guardian`
 --
 ALTER TABLE `guardian`
-  ADD PRIMARY KEY (`idGuardian`);
+  ADD PRIMARY KEY (`idGuardian`),
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `pedido`
@@ -176,37 +226,37 @@ ALTER TABLE `sacerdote`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `idContacto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idContacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `enfermo`
 --
 ALTER TABLE `enfermo`
-  MODIFY `idEnfermo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEnfermo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `guardia`
 --
 ALTER TABLE `guardia`
-  MODIFY `idGuardia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGuardia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `guardian`
 --
 ALTER TABLE `guardian`
-  MODIFY `idGuardian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idGuardian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `sacerdote`
 --
 ALTER TABLE `sacerdote`
-  MODIFY `idSacerdote` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSacerdote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -226,8 +276,7 @@ ALTER TABLE `guardia`
   ADD CONSTRAINT `guardia_ibfk_2` FOREIGN KEY (`idTelefonista`) REFERENCES `guardian` (`idGuardian`),
   ADD CONSTRAINT `guardia_ibfk_3` FOREIGN KEY (`idChofer`) REFERENCES `guardian` (`idGuardian`),
   ADD CONSTRAINT `guardia_ibfk_4` FOREIGN KEY (`idAcompañante`) REFERENCES `guardian` (`idGuardian`),
-  ADD CONSTRAINT `guardia_ibfk_5` FOREIGN KEY (`idSacerdote`) REFERENCES `sacerdote` (`idSacerdote`),
-  ADD CONSTRAINT `guardia_ibfk_6` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`);
+  ADD CONSTRAINT `guardia_ibfk_5` FOREIGN KEY (`idSacerdote`) REFERENCES `sacerdote` (`idSacerdote`);
 
 --
 -- Filtros para la tabla `pedido`
