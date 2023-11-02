@@ -5,8 +5,10 @@
  */
 package accesoDatos;
 
+import entidades.Enfermo;
 import entidades.Pedido;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import service.EnfermoService;
 import service.GuardiaService;
@@ -47,4 +49,70 @@ public final class PedidoDAO extends DAO {
         return null;
     }
 
+    public ArrayList<Pedido> obtenerPedidos() {
+        try {
+            String sql = "SELECT `idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo` FROM `pedido`";
+            consultarBaseDatos(sql);
+            GuardiaService gs = new GuardiaService();
+            EnfermoService es = new EnfermoService();
+            ArrayList<Pedido> listaPedidoRetornar = new ArrayList<>();
+            while (resultado.next()) {
+                java.sql.Date fechaSQL = resultado.getDate(2);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                listaPedidoRetornar.add(new Pedido(resultado.getInt(1), localDate, gs.buscarGuardiaPorID(resultado.getInt(3)), es.buscarEnfermoPorID(resultado.getInt(4))));
+            }
+            return listaPedidoRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al traer los pedidos de la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
+
+    public ArrayList<Pedido> obtenerPedidosPorFecha(LocalDate fecha) {
+        try {
+            String sql = "SELECT `idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo` FROM `pedido` WHERE fechaPedido = " + fecha;
+            consultarBaseDatos(sql);
+            ArrayList<Pedido> listaRetornar = new ArrayList<>();
+            GuardiaService gs = new GuardiaService();
+            EnfermoService es = new EnfermoService();
+            while (resultado.next()) {
+                listaRetornar.add(new Pedido(resultado.getInt(1), fecha, gs.buscarGuardiaPorID(resultado.getInt(3)), es.buscarEnfermoPorID(resultado.getInt(4))));
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar retornar la lista de pedidos por filtro de la fecha en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
+
+    public void modificarPedido(Pedido aux) {
+        try {
+            String sql = "UPDATE `pedido` SET `fechaPedido`='" + aux.getFechaPedido() + "',`idGuardia`=" + aux.getIdGuardia().getIdGuardia() + ",`idEnfermo`=" + aux.getIdEnfermo().getIdEnfermo() + " WHERE idPedido = " + aux.getIdPedido();
+            insertarModificarEliminarBaseDatos(sql);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar modificar el pedido solicitado en la base de datos");
+        }
+    }
+
+    public ArrayList<Enfermo> obtenerEnfermosPorFecha(LocalDate fecha) {
+        try {
+            String sql = "SELECT `idEnfermo` FROM `pedido` WHERE fechaPedido = " + fecha;
+            consultarBaseDatos(sql);
+            ArrayList<Enfermo> listRetornar = new ArrayList<>();
+            EnfermoService es = new EnfermoService();
+            while (resultado.next()) {
+                listRetornar.add(es.buscarEnfermoPorID(resultado.getInt(1)));
+            }
+            return listRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar modificar el pedido solicitado en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 }
