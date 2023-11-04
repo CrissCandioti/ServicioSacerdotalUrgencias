@@ -95,6 +95,15 @@ public class ContactoService {
         }
         return null;
     }
+    public Contacto buscarContactoPorNombreYapellido(String apellido, String nombre) {
+        try {
+            ContactoDAO dao = new ContactoDAO();
+            return dao.buscarContactoPorNombreYapellido(apellido, nombre);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar el contacto del enfermo");
+        }
+        return null;
+    }
 
     public void modificarContacto(int ID, String apellido, String nombre, String telefono, String parentesco) {
         try {

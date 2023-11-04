@@ -7,6 +7,11 @@ package vista;
 
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
+import javax.swing.JOptionPane;
+import service.ContactoService;
+import service.EnfermoService;
+import service.GuardiaService;
+import service.PedidoService;
 
 /**
  *
@@ -21,6 +26,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         initComponents();
        lblFecha.setText(LocalDate.now().toString() );
         setLocation(190, 40);
+        
     }
 
     /**
@@ -40,14 +46,12 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtApellidoE = new javax.swing.JTextField();
         txtEdadE = new javax.swing.JTextField();
         txtNombreE = new javax.swing.JTextField();
         txtDomicilio = new javax.swing.JTextField();
         txtSanatorio = new javax.swing.JTextField();
-        txtIdContacto = new javax.swing.JTextField();
         cmbEstadoCivil = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
@@ -64,7 +68,11 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         txtParentesco = new javax.swing.JTextField();
         jTextField12 = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
+        setBorder(null);
         setPreferredSize(new java.awt.Dimension(1200, 900));
 
         panelEnfermo.setBorder(javax.swing.BorderFactory.createTitledBorder("Enfermo"));
@@ -90,9 +98,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel7.setText("Sanatorio:");
 
-        jLabel8.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jLabel8.setText("Contacto:");
-
         jLabel9.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel9.setText("Descripcion:");
 
@@ -105,8 +110,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         txtDomicilio.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         txtSanatorio.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-
-        txtIdContacto.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
         cmbEstadoCivil.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         cmbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Soltero", "Casado", "Viudo", "Separado" }));
@@ -146,13 +149,11 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelEnfermoLayout.createSequentialGroup()
-                                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(panelEnfermoLayout.createSequentialGroup()
+                                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEnfermoLayout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel8))
+                                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEnfermoLayout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -160,9 +161,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                                         .addGap(12, 12, 12)
                                         .addComponent(jLabel4)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIdContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelEnfermoLayout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -194,19 +193,15 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                     .addComponent(txtEdadE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbEstadoCivil)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(cmbEstadoCivil))
+                        .addComponent(jLabel4))
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
-                    .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)))
+                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -304,29 +299,67 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
 
         lblFecha.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
 
+        jLabel14.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabel14.setText("PEDIDO : ");
+
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jButton2.setText("GUARDAR PEDIDO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jButton2)
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton1)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(111, 111, 111))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
                 .addComponent(panelEnfermo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(PanelContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGap(87, 201, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,23 +369,71 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEconcienciaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+        EnfermoService es = new EnfermoService();
+        ContactoService cs = new ContactoService();
+        PedidoService ps = new PedidoService();
+        GuardiaService gs= new GuardiaService();
+        
+        //vamos a crear un contacto primero.
+        String apellido = txtApellidoC.getText();
+        String nombre = txtNombreC.getText();
+        String telefono = txtTelefono.getText();
+        String parentesco = txtParentesco.getText();
+        cs.crearContacto(apellido, nombre, telefono, parentesco);
+        JOptionPane.showMessageDialog(this, "Contacto Guardado");
+        
+        //vamos a crear un enfermo.
+        String apellidoe = txtApellidoE.getText();
+        String nombree = txtNombreE.getText();
+        int edad = Integer.parseInt(txtEdadE.getText());
+        String estadoCivil =cmbEstadoCivil.getSelectedItem().toString();
+        String estadoConciencia = cmbEconciencia.getSelectedItem().toString();
+        String domicilio = txtDomicilio.getText();
+        String sanatorio = txtSanatorio.getText();
+        String descripcion = txtDescripcion.getText();
+        int idContacto = cs.buscarContactoPorNombreYapellido(apellido, nombre).getIdContacto();
+        
+        es.crearEnfermo(apellidoe, nombree, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, idContacto);
+        try{
+        //por ultimo creamos el pedido
+        LocalDate fecha = LocalDate.parse(lblFecha.getText());
+        int idGuardia = gs.buscarGuardiaPorfecha(fecha).getIdGuardia();
+        int idEnfermo = es.buscarEnfermoPorNombreApellido(apellidoe, nombree).getIdEnfermo();
+        
+        ps.crearPedido(fecha, idGuardia, idEnfermo);
+        
+        JOptionPane.showMessageDialog(this, "Pedido Guardado!!");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+            
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelContacto;
     private javax.swing.JComboBox<String> cmbEconciencia;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField12;
@@ -364,7 +445,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtEdadE;
-    private javax.swing.JTextField txtIdContacto;
     private javax.swing.JTextField txtNombreC;
     private javax.swing.JTextField txtNombreE;
     private javax.swing.JTextField txtParentesco;
