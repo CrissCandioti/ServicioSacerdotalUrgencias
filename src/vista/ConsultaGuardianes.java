@@ -139,11 +139,7 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
 
  public void llenarTabla() {
 
-        try {
-           
-            
-
-            
+        try {           
             GuardianService gs = new GuardianService();
 
             ArrayList guardian = gs.listaGuardianes();
