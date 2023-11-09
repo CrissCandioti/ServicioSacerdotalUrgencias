@@ -5,6 +5,7 @@
  */
 package vista;
 
+import accesoDatos.GuardiaDAO;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,17 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         escritorio.setBorder(new ImagenFondo());
-        this.setExtendedState(Principal.MAXIMIZED_BOTH);
+        this.setExtendedState(Principal.NORMAL);
+
+        GuardiaDAO gd = new GuardiaDAO();
+        if (gd.mostrarEstado().getEstado().equals("cerrado")) {
+            Guardia g = new Guardia();
+            ControlaInstancia(g);
+        } else {    
+            JOptionPane.showMessageDialog(jMenu1, "la Guardia ya esta Abierta!");
+
+        }
+
     }
 
     /**
@@ -37,6 +48,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu = new javax.swing.JPopupMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jSeparator2 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -52,9 +64,16 @@ public class Principal extends javax.swing.JFrame {
         jMenuConsultas = new javax.swing.JMenu();
         menuListadoSacerdotes = new javax.swing.JMenuItem();
         menuListadoGuardianes = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1344, 700));
+        setSize(1200,700);
 
+        escritorio.setPreferredSize(new java.awt.Dimension(1300, 700));
         escritorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 escritorioMouseClicked(evt);
@@ -72,14 +91,14 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1145, Short.MAX_VALUE))
+                .addContainerGap(1101, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuAdmin.setText("Administracion");
@@ -152,6 +171,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuConsultas);
 
+        jMenu2.setText("Salir");
+
+        jMenuItem3.setText("Salir");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,12 +190,12 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -172,6 +203,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuGuardiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardiaActionPerformed
         Guardia g = new Guardia();
+
         ControlaInstancia(g);
     }//GEN-LAST:event_jMenuGuardiaActionPerformed
 
@@ -208,10 +240,20 @@ public class Principal extends javax.swing.JFrame {
         ControlaInstancia(registro);
     }//GEN-LAST:event_jMenuPedidosActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        GuardiaDAO gd = new GuardiaDAO();
+   
+        int id = gd.mostrarEstado().getIdGuardia();
+        gd.modificarEstado(id);
+        JOptionPane.showMessageDialog(jMenu1, "Guardia cerrada");
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConsultas;
@@ -219,6 +261,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuGuardia;
     private javax.swing.JMenuItem jMenuGuardianes;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu jMenuLlamados;
     private javax.swing.JMenuItem jMenuPedidos;
     private javax.swing.JMenuItem jMenuSacerdotes;
@@ -228,8 +272,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuListadoSacerdotes;
     // End of variables declaration//GEN-END:variables
 
- // metodo para controlar que el internalFrame no se instancie dos veces y que cuando se lo precise traerlo al frente.
- public void ControlaInstancia(JInternalFrame inter) {
+    // metodo para controlar que el internalFrame no se instancie dos veces y que cuando se lo precise traerlo al frente.
+    public void ControlaInstancia(JInternalFrame inter) {
 
         for (JInternalFrame frame : escritorio.getAllFrames()) {
             if (frame.getClass().equals(inter.getClass())) {
@@ -239,7 +283,6 @@ public class Principal extends javax.swing.JFrame {
         }
 
         // Si no está abierto, crea una nueva instancia 
-        
         escritorio.add(inter);
         inter.setVisible(true);
     }

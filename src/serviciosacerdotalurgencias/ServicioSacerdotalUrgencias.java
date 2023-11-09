@@ -22,7 +22,7 @@ public class ServicioSacerdotalUrgencias {
         Principal p = new Principal();
         p.setVisible(true);
         p.setLocationRelativeTo(null);
-        GuardiaService gs = new GuardiaService();
+//        GuardiaService gs = new GuardiaService();
         
     }
 }

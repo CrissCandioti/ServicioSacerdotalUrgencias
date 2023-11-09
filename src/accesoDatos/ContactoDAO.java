@@ -49,6 +49,22 @@ public final class ContactoDAO extends DAO {
         }
         return null;
     }
+    public Contacto buscarContactoPorNombreYapellido(String apellido, String nombre) {
+        try {
+            String sql = "SELECT * FROM contacto WHERE apellido = '" + apellido + "' AND `nombre` = '"+ nombre+"'";
+            consultarBaseDatos(sql);
+            Contacto aux = null;
+            while (resultado.next()) {
+                aux = new Contacto(resultado.getInt(1), apellido, nombre, resultado.getString(4), resultado.getString(5));
+            }
+            return aux;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar buscar el Contacto de la base de datos"+e.getMessage());
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
     public void modificarContacto(Contacto aux) {
         try {

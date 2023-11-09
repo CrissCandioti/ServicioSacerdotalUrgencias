@@ -102,6 +102,15 @@ public class EnfermoService {
         }
         return null;
     }
+    public Enfermo buscarEnfermoPorNombreApellido(String apellidoe, String nombree) {
+        try {
+            EnfermoDAO dao = new EnfermoDAO();
+            return dao.buscarEnfermoPorNombreApellido(apellidoe, nombree);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar el enfermo");
+        }
+        return null;
+    }
 
     public ArrayList<Enfermo> listaEnfermos() {
         try {
