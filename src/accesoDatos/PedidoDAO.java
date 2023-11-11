@@ -115,4 +115,25 @@ public final class PedidoDAO extends DAO {
         }
         return null;
     }
+
+    public ArrayList<Pedido> obtenerPedidoEntreDosFechas(LocalDate fecha1, LocalDate fecha2) {
+        try {
+            String sql = "SELECT `idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo` FROM `pedido` WHERE `fechaPedido` BETWEEN '" + fecha1 + "' AND '" + fecha2 + "'";
+            consultarBaseDatos(sql);
+            ArrayList<Pedido> listaRetornar = new ArrayList<>();
+            GuardiaService gs = new GuardiaService();
+            EnfermoService es = new EnfermoService();
+            while (resultado.next()) {
+                java.sql.Date fechaSQL = resultado.getDate(2);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                listaRetornar.add(new Pedido(resultado.getInt(1), localDate, gs.buscarGuardiaPorID(resultado.getInt(3)), es.buscarEnfermoPorID(resultado.getInt(4))));
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al retornar esos pedidos en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 }
