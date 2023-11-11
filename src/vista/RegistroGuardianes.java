@@ -74,7 +74,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setTitle("Registro Guardianes");
-        setPreferredSize(new java.awt.Dimension(1200, 900));
+        setPreferredSize(new java.awt.Dimension(890, 590));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -158,7 +158,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, 130, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel9.setText("Dni :");
@@ -184,7 +184,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 670, 130, 40));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 130, 40));
 
         btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -193,7 +193,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 670, 130, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 130, -1));
 
         btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnInhabilitar.setText("Inhabilitar");
@@ -202,7 +202,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnInhabilitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 610, 130, -1));
+        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 130, -1));
 
         btnSalir.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         btnSalir.setText("SALIR");
@@ -211,15 +211,15 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 690, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logito.png"))); // NOI18N
         jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 380, 320));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 380, 320));
 
         jLabel11.setFont(new java.awt.Font("sansserif", 2, 24)); // NOI18N
         jLabel11.setText("Registro de Guardianes");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 52, 790, 10));
 
         pack();

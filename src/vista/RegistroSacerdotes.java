@@ -67,7 +67,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setTitle("Registro Sacerdotes");
-        setPreferredSize(new java.awt.Dimension(1200, 900));
+        setPreferredSize(new java.awt.Dimension(815, 472));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -77,48 +77,48 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel1.setText("Dni :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel2.setText("Apellido :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel3.setText("Nombre :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel4.setText("Telefono :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel5.setText("Fecha Nacimiento : ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel6.setText("Estado : ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
 
         txtApellido.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 223, -1));
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 223, -1));
 
         txtDni.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 223, -1));
+        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 223, -1));
 
         txtTelefono.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 223, -1));
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 223, -1));
 
         txtNombre.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 223, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 223, -1));
 
         datechooser.setDateFormatString("yyyy-MM-dd");
         datechooser.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         datechooser.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        getContentPane().add(datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 220, -1));
+        getContentPane().add(datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 220, -1));
 
         rbActivo.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         rbActivo.setText("ACTIVO");
-        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
+        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnGuardar.setText("GUARDAR");
@@ -127,7 +127,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, 147, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 147, -1));
 
         btnBuscar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -136,8 +136,8 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 114, -1));
-        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 48, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 114, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 48, -1));
 
         btnModificar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnModificar.setText("MODIFICAR");
@@ -146,7 +146,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, -1, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnInhabilitar.setText("INHABILITAR");
@@ -155,7 +155,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnInhabilitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, -1));
+        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
 
         btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnEliminar.setText("ELIMINAR");
@@ -164,7 +164,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 520, 137, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 137, -1));
 
         jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton1.setText("SALIR");
@@ -177,7 +177,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logito.png"))); // NOI18N
         jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 380, 320));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 380, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

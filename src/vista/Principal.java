@@ -6,12 +6,8 @@
 package vista;
 
 import accesoDatos.GuardiaDAO;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import serviciosacerdotalurgencias.ImagenFondo;
 
 /**
  *
@@ -24,8 +20,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        escritorio.setBorder(new ImagenFondo());
-        this.setExtendedState(Principal.NORMAL);
+//        escritorio.setBorder(new ImagenFondo());
+//        this.setExtendedState(Principal.NORMAL);
 
         GuardiaDAO gd = new GuardiaDAO();
         if (gd.mostrarEstado().getEstado().equals("cerrado")) {
