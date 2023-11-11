@@ -85,6 +85,17 @@ public class PedidoService {
             PedidoDAO dao = new PedidoDAO();
             return dao.obtenerEnfermosPorFecha(fechaPedido);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener los enfermos por la fecha");
+        }
+        return null;
+    }
+
+    public ArrayList<Pedido> obtenerPedidoEntreDosFechas(LocalDate fecha1, LocalDate fecha2) {
+        try {
+            PedidoDAO dao = new PedidoDAO();
+            return dao.obtenerPedidoEntreDosFechas(fecha1, fecha2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al obtener el pedido entre dos fechas");
         }
         return null;
     }
