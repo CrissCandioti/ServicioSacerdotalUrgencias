@@ -7,6 +7,7 @@ package vista;
 
 import accesoDatos.GuardiaDAO;
 import java.beans.PropertyVetoException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -29,10 +30,13 @@ public class Principal extends javax.swing.JFrame {
 
         GuardiaDAO gd = new GuardiaDAO();
         if (gd.mostrarEstado().getEstado().equals("cerrado")) {
+            
             Guardia g = new Guardia();
             ControlaInstancia(g);
         } else {    
-            JOptionPane.showMessageDialog(jMenu1, "la Guardia ya esta Abierta!");
+            String fecha = gd.mostrarEstado().getFecha().toString();
+            
+            JOptionPane.showMessageDialog(jMenu1, "la Guardia"+ fecha +"  ya esta Abierta!");
 
         }
 
