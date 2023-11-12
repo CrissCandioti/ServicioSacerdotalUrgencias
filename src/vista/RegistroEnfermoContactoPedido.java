@@ -24,9 +24,11 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
      */
     public RegistroEnfermoContactoPedido() {
         initComponents();
-       lblFecha.setText(LocalDate.now().toString() );
+        lblFecha.setText(LocalDate.now().toString());
         setLocation(190, 40);
-        
+        txtIdCont.setVisible(false);
+        txtIdEnf.setVisible(false);
+
     }
 
     /**
@@ -56,7 +58,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         cmbEconciencia = new javax.swing.JComboBox<>();
-        jTextField7 = new javax.swing.JTextField();
+        txtIdEnf = new javax.swing.JTextField();
         PanelContacto = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtApellidoC = new javax.swing.JTextField();
@@ -66,13 +68,14 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         txtParentesco = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        txtIdCont = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setBorder(null);
+        setClosable(true);
         setPreferredSize(new java.awt.Dimension(1200, 900));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,14 +124,14 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtDescripcion);
 
         cmbEconciencia.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        cmbEconciencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Consciente", "Inaconciente" }));
+        cmbEconciencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Consciente", "Insconciente" }));
         cmbEconciencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEconcienciaActionPerformed(evt);
             }
         });
 
-        jTextField7.setText("id");
+        txtIdEnf.setText("id");
 
         javax.swing.GroupLayout panelEnfermoLayout = new javax.swing.GroupLayout(panelEnfermo);
         panelEnfermo.setLayout(panelEnfermoLayout);
@@ -138,40 +141,45 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(cmbEconciencia, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelEnfermoLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtApellidoE, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreE, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEdadE, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelEnfermoLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidoE, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(panelEnfermoLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtIdEnf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreE, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEdadE, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEnfermoLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEnfermoLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(10, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         panelEnfermoLayout.setVerticalGroup(
             panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,24 +198,25 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(cmbEstadoCivil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSanatorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7))
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel5))
                     .addComponent(cmbEconciencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(182, 182, 182))
+                .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelEnfermoLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdEnf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(290, 290, 290))
         );
 
-        getContentPane().add(panelEnfermo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 38, 1058, 300));
+        getContentPane().add(panelEnfermo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 38, 1058, 250));
 
         PanelContacto.setBorder(javax.swing.BorderFactory.createTitledBorder("Contacto"));
 
@@ -231,7 +240,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
 
         txtParentesco.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
 
-        jTextField12.setText("id");
+        txtIdCont.setText("id");
 
         javax.swing.GroupLayout PanelContactoLayout = new javax.swing.GroupLayout(PanelContacto);
         PanelContacto.setLayout(PanelContactoLayout);
@@ -250,7 +259,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PanelContactoLayout.createSequentialGroup()
                                 .addComponent(txtApellidoC, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -265,7 +274,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
             PanelContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelContactoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(PanelContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +296,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        getContentPane().add(PanelContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        getContentPane().add(PanelContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         lblFecha.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1212, 14, 235, 33));
@@ -296,15 +305,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jLabel14.setText("PEDIDO : ");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jButton1.setText("SALIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 450, -1, -1));
-
         jButton2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton2.setText("GUARDAR PEDIDO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -312,7 +312,16 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 350, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, -1, -1));
+
+        jButton3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jButton3.setText("SALIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 500, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,58 +331,105 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEconcienciaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
+
         EnfermoService es = new EnfermoService();
         ContactoService cs = new ContactoService();
         PedidoService ps = new PedidoService();
-        GuardiaService gs= new GuardiaService();
-        
-        //vamos a crear un contacto primero.
-        String apellido = txtApellidoC.getText();
-        String nombre = txtNombreC.getText();
-        String telefono = txtTelefono.getText();
-        String parentesco = txtParentesco.getText();
-        cs.crearContacto(apellido, nombre, telefono, parentesco);
-        JOptionPane.showMessageDialog(this, "Contacto Guardado");
-        
-        //vamos a crear un enfermo.
-        String apellidoe = txtApellidoE.getText();
-        String nombree = txtNombreE.getText();
-        int edad = Integer.parseInt(txtEdadE.getText());
-        String estadoCivil =cmbEstadoCivil.getSelectedItem().toString();
-        String estadoConciencia = cmbEconciencia.getSelectedItem().toString();
-        String domicilio = txtDomicilio.getText();
-        String sanatorio = txtSanatorio.getText();
-        String descripcion = txtDescripcion.getText();
-        int idContacto = cs.buscarContactoPorNombreYapellido(apellido, nombre).getIdContacto();
-        
-        es.crearEnfermo(apellidoe, nombree, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, idContacto);
-        try{
-        //por ultimo creamos el pedido
-        LocalDate fecha = LocalDate.parse(lblFecha.getText());
-        int idGuardia = gs.buscarGuardiaPorfecha(fecha).getIdGuardia();
-        int idEnfermo = es.buscarEnfermoPorNombreApellido(apellidoe, nombree).getIdEnfermo();
-        
-        ps.crearPedido(fecha, idGuardia, idEnfermo);
-        
-        JOptionPane.showMessageDialog(this, "Pedido Guardado!!");
-        }catch(Exception e){
+        GuardiaService gs = new GuardiaService();
+
+        try {
+            //vamos a crear un contacto primero.
+            String apellido = txtApellidoC.getText();
+            String nombre = txtNombreC.getText();
+            String telefono = txtTelefono.getText();
+            String parentesco = txtParentesco.getText();
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (parentesco.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del parentesco no puede estar vacia");
+                return;
+            }
+            cs.crearContacto(apellido, nombre, telefono, parentesco);
+            System.out.println("Contacto creado");
+            
+            
+            //vamos a crear un enfermo.
+            String apellidoe = txtApellidoE.getText();
+            String nombree = txtNombreE.getText();
+            int edad = Integer.parseInt(txtEdadE.getText());
+            String estadoCivil = cmbEstadoCivil.getSelectedItem().toString();
+            String estadoConciencia = cmbEconciencia.getSelectedItem().toString();
+            String domicilio = txtDomicilio.getText();
+            String sanatorio = txtSanatorio.getText();
+            String descripcion = txtDescripcion.getText();
+            int idContacto = cs.buscarContactoPorNombreYapellido(apellido, nombre).getIdContacto();
+
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (estadoCivil.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+                return;
+            }
+            if (estadoConciencia.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda sobre el estado de conciencia no puede estar vacia");
+                return;
+            }
+            if (domicilio.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del domicilio no puede estar vacia");
+                return;
+            }
+            if (sanatorio.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del sanatorio no puede estar vacia");
+                return;
+            }
+            if (descripcion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese la descripcion del enfermo");
+                return;
+            }
+            es.crearEnfermo(apellidoe, nombree, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, idContacto);
+
+            //por ultimo creamos el pedido
+            LocalDate fecha = LocalDate.parse(lblFecha.getText());
+            int idGuardia = gs.buscarGuardiaPorfecha(fecha).getIdGuardia();
+            int idEnfermo = es.buscarEnfermoPorNombreApellido(apellidoe, nombree).getIdEnfermo();
+
+            
+            ps.crearPedido(fecha, idGuardia, idEnfermo);
+
+            JOptionPane.showMessageDialog(this, "Pedido Guardado!!");
+        } catch (Exception e) {
             System.out.println(e);
         }
-            
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelContacto;
     private javax.swing.JComboBox<String> cmbEconciencia;
     private javax.swing.JComboBox<String> cmbEstadoCivil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -388,8 +444,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JPanel panelEnfermo;
     private javax.swing.JTextField txtApellidoC;
@@ -397,6 +451,8 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtEdadE;
+    private javax.swing.JTextField txtIdCont;
+    private javax.swing.JTextField txtIdEnf;
     private javax.swing.JTextField txtNombreC;
     private javax.swing.JTextField txtNombreE;
     private javax.swing.JTextField txtParentesco;

@@ -19,22 +19,22 @@ public class ContactoService {
     public void crearContacto(String apellido, String nombre, String telefono, String parentesco) {
         try {
             ContactoDAO dao = new ContactoDAO();
-            if (apellido.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
-                return;
-            }
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
-                return;
-            }
-            if (telefono.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
-                return;
-            }
-            if (parentesco.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del parentesco no puede estar vacia");
-                return;
-            }
+//            if (apellido.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+//                return;
+//            }
+//            if (nombre.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+//                return;
+//            }
+//            if (telefono.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+//                return;
+//            }
+//            if (parentesco.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del parentesco no puede estar vacia");
+//                return;
+//            }
             if (nombre.length() < 3 || apellido.length() < 3) {
                 JOptionPane.showMessageDialog(null, "El nombre u apellido no pueden tener menos de 3 caracteres");
                 return;
@@ -70,7 +70,7 @@ public class ContactoService {
                 return;
             }
             dao.guardarContacto(new Contacto(apellido, nombre, telefono, parentesco));
-            JOptionPane.showMessageDialog(null, "Se guardo correctamente el contacto del enfermo");
+            System.out.println("Se Guardo contacto del enfermo...");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar el Contacto del enfermo");
         }

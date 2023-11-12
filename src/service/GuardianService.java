@@ -10,6 +10,7 @@ import entidades.Guardian;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import vista.RegistroGuardianes;
 
 /**
  * El paquete Service contiene las clases entidadesServices. Estas clases estan
@@ -38,34 +39,34 @@ public class GuardianService {
              * ingresados no esten vacios y cumplan con las condiciones para la
              * creacion del guardian
              */
-            if (dni.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
-                return;
-            }
-            if (apellido.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
-                return;
-            }
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
-                return;
-            }
-            if (direccion.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
-                return;
-            }
-            if (telefono.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
-                return;
-            }
-            if (estadoCivil.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
-                return;
-            }
-            if (rol.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
-                return;
-            }
+//            if (dni.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
+//                return;
+//            }
+//            if (apellido.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+//                return;
+//            }
+//            if (nombre.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+//                return;
+//            }
+//            if (direccion.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
+//                return;
+//            }
+//            if (telefono.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+//                return;
+//            }
+//            if (estadoCivil.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+//                return;
+//            }
+//            if (rol.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
+//                return;
+//            }
             if (dao.buscarGuardianPorDNI(dni) != null) {
                 JOptionPane.showMessageDialog(null, "Tenemos asociado un Guardian a ese documento");
                 return;
@@ -160,6 +161,7 @@ public class GuardianService {
              * Por ultimo se muestra un mensaje completando el registro
              */
             JOptionPane.showMessageDialog(null, "Registramos correctamente al Guardian");
+            limpiarCampos();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo registrar correctamente el Guardian");
         }
@@ -340,5 +342,18 @@ public class GuardianService {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar el Guardian");
         }
+    }
+
+    private void limpiarCampos() {
+        RegistroGuardianes.txtApelldo.setText("");
+        RegistroGuardianes.txtDireccion.setText("");
+        RegistroGuardianes.txtDni.setText("");
+        RegistroGuardianes.txtId.setText("");
+        RegistroGuardianes.txtNombre.setText("");
+        RegistroGuardianes.txtTelefono.setText("");
+        RegistroGuardianes.DateChooser.setDate(null);
+        RegistroGuardianes.cbxEstadoCivil.getSelectedIndex();
+        RegistroGuardianes.cbxRol.getSelectedIndex();
+        
     }
 }

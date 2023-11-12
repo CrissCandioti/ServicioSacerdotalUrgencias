@@ -51,7 +51,9 @@ public final class PedidoDAO extends DAO {
 
     public ArrayList<Pedido> obtenerPedidos() {
         try {
-            String sql = "SELECT `idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo` FROM `pedido`";
+            GuardiaDAO gd = new GuardiaDAO();
+            int guardia = gd.mostrarEstado().getIdGuardia();
+            String sql = "SELECT `idPedido`, `fechaPedido`, `idGuardia`, `idEnfermo` FROM `pedido` WHERE idGuardia = "+guardia ;
             consultarBaseDatos(sql);
             GuardiaService gs = new GuardiaService();
             EnfermoService es = new EnfermoService();
@@ -59,7 +61,7 @@ public final class PedidoDAO extends DAO {
             while (resultado.next()) {
                 java.sql.Date fechaSQL = resultado.getDate(2);
                 LocalDate localDate = fechaSQL.toLocalDate();
-                listaPedidoRetornar.add(new Pedido(resultado.getInt(1), localDate, gs.buscarGuardiaPorID(resultado.getInt(3)), es.buscarEnfermoPorID(resultado.getInt(4))));
+                listaPedidoRetornar.add(new Pedido(resultado.getInt(1), localDate,gs.buscarGuardiaPorID(guardia), es.buscarEnfermoPorID(resultado.getInt(4))));
             }
             return listaPedidoRetornar;
         } catch (Exception e) {

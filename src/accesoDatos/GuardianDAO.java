@@ -110,7 +110,7 @@ public final class GuardianDAO extends DAO {
 
     public ArrayList<Guardian> listaGuardianes() {
         try {
-            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` ORDER BY apellido ASC ";
+            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado` FROM `guardian` ORDER BY idGuardian ASC ";
             consultarBaseDatos(sql);
             ArrayList<Guardian> listaARetornar = new ArrayList<>();
             Guardian aux = null;

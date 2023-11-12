@@ -9,6 +9,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import entidades.Guardian;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.GuardianService;
@@ -26,7 +27,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         initComponents();
         this.setLocation(190, 40);
         JTextFieldDateEditor editor = (JTextFieldDateEditor) DateChooser.getDateEditor();
-         editor.setEditable(false);
+        editor.setEditable(false);
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnInhabilitar.setEnabled(false);
@@ -74,7 +75,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setTitle("Registro Guardianes");
-        setPreferredSize(new java.awt.Dimension(890, 590));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         try {
             setSelected(true);
         } catch (java.beans.PropertyVetoException e1) {
@@ -145,6 +146,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         getContentPane().add(cbxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 242, 32));
 
         cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Vocal", "Telefonista", "Chofer", "Acompañante" }));
+        cbxRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxRolActionPerformed(evt);
+            }
+        });
         getContentPane().add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 242, 32));
 
         DateChooser.setDateFormatString("yyyy-MM-dd");
@@ -158,7 +164,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 130, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel9.setText("Dni :");
@@ -184,7 +190,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 130, 40));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 130, 40));
 
         btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -193,7 +199,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 130, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 280, 130, -1));
 
         btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnInhabilitar.setText("Inhabilitar");
@@ -202,7 +208,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnInhabilitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 130, -1));
+        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 130, -1));
 
         btnSalir.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         btnSalir.setText("SALIR");
@@ -211,11 +217,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 520, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logito.png"))); // NOI18N
         jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 380, 320));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 390, 320));
 
         jLabel11.setFont(new java.awt.Font("sansserif", 2, 24)); // NOI18N
         jLabel11.setText("Registro de Guardianes");
@@ -227,106 +233,195 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+
         try {
-            
-       
-        GuardianService gs= new GuardianService();
-        
-        String dni = txtDni.getText();
-        String apellido = txtApelldo.getText();
-        String nombre = txtNombre.getText();
-        String direccion = txtDireccion.getText();
-        String telefono = txtTelefono.getText();
-        String fechaNac = ((JTextField) DateChooser.getDateEditor().getUiComponent()).getText();
-        String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
-        String rol = cbxRol.getSelectedItem().toString();
-        boolean estado = rbActivo.isSelected();
-        
-        gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
-        limpiarCampos();
-            
-         } catch (Exception e) {
+
+            GuardianService gs = new GuardianService();
+
+            String dni = txtDni.getText();
+            String apellido = txtApelldo.getText();
+            String nombre = txtNombre.getText();
+            String direccion = txtDireccion.getText();
+            String telefono = txtTelefono.getText();
+            String fechaNac = ((JTextField) DateChooser.getDateEditor().getUiComponent()).getText();
+            String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+            String rol = cbxRol.getSelectedItem().toString();
+            boolean estado = rbActivo.isSelected();
+
+            if (dni.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
+                return;
+            }
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (direccion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (estadoCivil.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+                return;
+            }
+            if (DateChooser.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+                return;
+            }
+            if (rol.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
+                return;
+            }
+            if (cbxEstadoCivil.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Seleccione un Estado Civil");
+                return;
+            }
+            if (cbxRol.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Seleccione un Rol");
+                return;
+            }
+
+            gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NullPointerException f) {
+            JOptionPane.showMessageDialog(null, f.getMessage());
+        } catch (DateTimeParseException x) {
+            JOptionPane.showMessageDialog(null, x.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-             if (txtDni.getText().isEmpty()) {
+            if (txtDni.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ingrese un documento a buscar");
-            }else{
-            
-            btnEliminar.setEnabled(true);
-            btnModificar.setEnabled(true);
-            btnInhabilitar.setEnabled(true);
-            btnGuardar.setEnabled(false);
-            String dni = txtDni.getText();
-            
-            GuardianService gs = new GuardianService();
-            Guardian aux = new Guardian();
-            
-            //Guardamos en un Guardian los valores obtenidos por el método
-            aux = gs.buscarGuardianPorDNI(dni);
-            // utilizamos la informacioon del Guardian para setear los campos
-            txtId.setText("" + aux.getIdGuardian());
-            txtApelldo.setText(aux.getApellido());
-            txtNombre.setText(aux.getNombre());
-            txtDireccion.setText(aux.getDireccion());
-            txtTelefono.setText(aux.getTelefono());
-            //Forma de setear el DateChooser
-            LocalDate localDate = aux.getFechaNacimiento();
-            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            DateChooser.setDate(utilDate);
-            //Forma de setear el radioButon
-            if (aux.isEstado() == true) {
-                rbActivo.setSelected(true);
             } else {
-                rbActivo.setSelected(false);
+
+                btnEliminar.setEnabled(true);
+                btnModificar.setEnabled(true);
+                btnInhabilitar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+                String dni = txtDni.getText();
+
+                GuardianService gs = new GuardianService();
+                Guardian aux = new Guardian();
+
+                //Guardamos en un Guardian los valores obtenidos por el método
+                aux = gs.buscarGuardianPorDNI(dni);
+                // utilizamos la informacioon del Guardian para setear los campos
+                txtId.setText("" + aux.getIdGuardian());
+                txtApelldo.setText(aux.getApellido());
+                txtNombre.setText(aux.getNombre());
+                txtDireccion.setText(aux.getDireccion());
+                txtTelefono.setText(aux.getTelefono());
+                //Forma de setear el DateChooser
+                LocalDate localDate = aux.getFechaNacimiento();
+                java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                DateChooser.setDate(utilDate);
+                //Forma de setear el radioButon
+                if (aux.isEstado() == true) {
+                    rbActivo.setSelected(true);
+                } else {
+                    rbActivo.setSelected(false);
+                }
+                cbxEstadoCivil.setSelectedItem(aux.getEstadoCivil());
+                cbxRol.setSelectedItem(aux.getRol());
+
             }
-            cbxEstadoCivil.setSelectedItem(aux.getEstadoCivil());
-            cbxRol.setSelectedItem(aux.getRol());
-            
-             }
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
+
+            GuardianService gs = new GuardianService();
+            int id = Integer.parseInt(txtId.getText());
+            String dni = txtDni.getText();
+            String apellido = txtApelldo.getText();
+            String nombre = txtNombre.getText();
+            String direccion = txtDireccion.getText();
+            String telefono = txtTelefono.getText();
+            String fechaNac = ((JTextField) DateChooser.getDateEditor().getUiComponent()).getText();
+            String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+            String rol = cbxRol.getSelectedItem().toString();
+            boolean estado = rbActivo.isSelected();
+
+            if (dni.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
+                return;
+            }
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (direccion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda de la direccion no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (estadoCivil.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+                return;
+            }
+            if(DateChooser.getDate()==null){
+                 JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+                return;
+            }
+            if (rol.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del rol no puede estar vacia");
+                return;
+            }
+            if(cbxEstadoCivil.getSelectedIndex()==0){
+                 JOptionPane.showMessageDialog(null, "Seleccione un Estado Civil");
+                 return;
+            }
+            if(cbxRol.getSelectedIndex()==0){
+                 JOptionPane.showMessageDialog(null, "Seleccione un Rol");
+                 return;
+            }
             
-       
-        GuardianService gs= new GuardianService();
-        int id = Integer.parseInt(txtId.getText());
-        String dni = txtDni.getText();
-        String apellido = txtApelldo.getText();
-        String nombre = txtNombre.getText();
-        String direccion = txtDireccion.getText();
-        String telefono = txtTelefono.getText();
-        String fechaNac = ((JTextField) DateChooser.getDateEditor().getUiComponent()).getText();
-        String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
-        String rol = cbxRol.getSelectedItem().toString();
-        boolean estado = rbActivo.isSelected();
-        
-        gs.modificarGuardian(id, dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
-         } catch (Exception e) {
+            gs.modificarGuardian(id, dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "error");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        limpiarCampos();
-        btnGuardar.setEnabled(true);
-        btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        btnInhabilitar.setEnabled(false);
+//        limpiarCampos();
+//        btnGuardar.setEnabled(true);
+//        btnModificar.setEnabled(false);
+//        btnEliminar.setEnabled(false);
+//        btnInhabilitar.setEnabled(false);
     }//GEN-LAST:event_formMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
             if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR GUARDIAN?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-            int id = Integer.parseInt(txtId.getText());
-            GuardianService gs = new GuardianService();
-            gs.eliminarGuardian(id);
-            limpiarCampos();
+                int id = Integer.parseInt(txtId.getText());
+                GuardianService gs = new GuardianService();
+                gs.eliminarGuardian(id);
+                limpiarCampos();
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "No se encontro ningun Guardian para su eliminacion");
@@ -337,7 +432,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
 
     private void btnInhabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInhabilitarActionPerformed
         try {
-            
+
             int id = Integer.parseInt(txtId.getText());
             GuardianService gs = new GuardianService();
             gs.inhabilitarGuardian(id);
@@ -350,7 +445,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInhabilitarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       
+
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -358,17 +453,21 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbActivoActionPerformed
 
+    private void cbxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxRolActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser DateChooser;
+    public static com.toedter.calendar.JDateChooser DateChooser;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInhabilitar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cbxEstadoCivil;
-    private javax.swing.JComboBox<String> cbxRol;
+    public static javax.swing.JComboBox<String> cbxEstadoCivil;
+    public static javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -381,25 +480,25 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JRadioButton rbActivo;
-    private javax.swing.JTextField txtApelldo;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JRadioButton rbActivo;
+    public static javax.swing.JTextField txtApelldo;
+    public static javax.swing.JTextField txtDireccion;
+    public static javax.swing.JTextField txtDni;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-public void limpiarCampos(){
-    txtApelldo.setText("");
-    txtDireccion.setText("");
-    txtDni.setText("");
-    txtId.setText("");
-    txtNombre.setText("");
-    txtTelefono.setText("");
-    cbxEstadoCivil.setSelectedIndex(0);
-    cbxRol.setSelectedIndex(0);
-    DateChooser.setDate(null);
-    
-}
+    public void limpiarCampos() {
+        txtApelldo.setText("");
+        txtDireccion.setText("");
+        txtDni.setText("");
+        txtId.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        cbxEstadoCivil.setSelectedIndex(0);
+        cbxRol.setSelectedIndex(0);
+        DateChooser.setDate(null);
+
+    }
 }

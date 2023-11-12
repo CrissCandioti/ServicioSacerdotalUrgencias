@@ -26,9 +26,9 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
      */
     public RegistroSacerdotes() {
         initComponents();
-        setLocation(190,40);
+        setLocation(190, 40);
         JTextFieldDateEditor editor = (JTextFieldDateEditor) datechooser.getDateEditor();
-         editor.setEditable(false);
+        editor.setEditable(false);
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnInhabilitar.setEnabled(false);
@@ -64,10 +64,11 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         setBorder(null);
         setTitle("Registro Sacerdotes");
-        setPreferredSize(new java.awt.Dimension(815, 472));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -77,48 +78,48 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel1.setText("Dni :");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel2.setText("Apellido :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel3.setText("Nombre :");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel4.setText("Telefono :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel5.setText("Fecha Nacimiento : ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel6.setText("Estado : ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, -1, -1));
 
         txtApellido.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 223, -1));
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 223, -1));
 
         txtDni.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 223, -1));
+        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 223, -1));
 
         txtTelefono.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 223, -1));
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 223, -1));
 
         txtNombre.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 223, -1));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 223, -1));
 
         datechooser.setDateFormatString("yyyy-MM-dd");
         datechooser.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         datechooser.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        getContentPane().add(datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 220, -1));
+        getContentPane().add(datechooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 220, -1));
 
         rbActivo.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         rbActivo.setText("ACTIVO");
-        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+        getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnGuardar.setText("GUARDAR");
@@ -127,7 +128,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 147, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 147, -1));
 
         btnBuscar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -136,7 +137,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 114, -1));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 114, -1));
         getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 48, -1));
 
         btnModificar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
@@ -146,7 +147,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
         btnInhabilitar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnInhabilitar.setText("INHABILITAR");
@@ -155,7 +156,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnInhabilitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
+        getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
 
         btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         btnEliminar.setText("ELIMINAR");
@@ -164,7 +165,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 137, -1));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 137, -1));
 
         jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton1.setText("SALIR");
@@ -177,20 +178,29 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logito.png"))); // NOI18N
         jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 380, 320));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 380, 320));
+
+        btnSalir.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 490, 137, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
+        
         SacerdoteService s = new SacerdoteService();
         
-        String dni  = txtDni.getText();
+        String dni = txtDni.getText();
         String apellido = txtApellido.getText();
         String nombre = txtNombre.getText();
         String telefono = txtTelefono.getText();
-        String fechaNac= ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
+        String fechaNac = ((JTextField) datechooser.getDateEditor().getUiComponent()).getText();
         boolean estado = rbActivo.isSelected();
         
         s.crearSacerdote(dni, apellido, nombre, telefono, LocalDate.parse(fechaNac), estado);
@@ -198,39 +208,39 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try{
-         if (txtDni.getText().isEmpty()) {
+        try {
+            if (txtDni.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ingrese un documento a buscar");
-            }else{
-            
-            btnEliminar.setEnabled(true);
-            btnModificar.setEnabled(true);
-            btnInhabilitar.setEnabled(true);
-            btnGuardar.setEnabled(false);
-            String dni = txtDni.getText();
-            
-            SacerdoteService ss = new SacerdoteService();
-            Sacerdote aux = new Sacerdote();
-            //Guardamos en un Sacerdote los valores obtenidos por el método
-            aux =ss.buscarSacerdotePorDNI(dni);
-            // utilizamos la informacioon del Sacerdote para setear los campos
-            txtId.setText("" + aux.getIdSacerdote());
-            txtApellido.setText(aux.getApellido());
-            txtNombre.setText(aux.getNombre());           
-            txtTelefono.setText(aux.getTelefono());
-            //Forma de setear el DateChooser
-            LocalDate localDate = aux.getFechaNacimiento();
-            java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            datechooser.setDate(utilDate);
-            //Forma de setear el radioButon
-            if (aux.isEstado() == true) {
-                rbActivo.setSelected(true);
             } else {
-                rbActivo.setSelected(false);
+                
+                btnEliminar.setEnabled(true);
+                btnModificar.setEnabled(true);
+                btnInhabilitar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+                String dni = txtDni.getText();
+                
+                SacerdoteService ss = new SacerdoteService();
+                Sacerdote aux = new Sacerdote();
+                //Guardamos en un Sacerdote los valores obtenidos por el método
+                aux = ss.buscarSacerdotePorDNI(dni);
+                // utilizamos la informacioon del Sacerdote para setear los campos
+                txtId.setText("" + aux.getIdSacerdote());
+                txtApellido.setText(aux.getApellido());
+                txtNombre.setText(aux.getNombre());                
+                txtTelefono.setText(aux.getTelefono());
+                //Forma de setear el DateChooser
+                LocalDate localDate = aux.getFechaNacimiento();
+                java.util.Date utilDate = java.util.Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                datechooser.setDate(utilDate);
+                //Forma de setear el radioButon
+                if (aux.isEstado() == true) {
+                    rbActivo.setSelected(true);
+                } else {
+                    rbActivo.setSelected(false);
+                }
+                
             }
-           
-             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(this, "No hay Sacerdotes con ese dni en la base de datos");
         }
@@ -250,7 +260,6 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
             SacerdoteService ss = new SacerdoteService();
             ss.modificarSacerdote(id, dni, apellido, nombre, telefono, LocalDate.parse(fechaNac), estado);
             
-            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -267,28 +276,27 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al analizar los datos");
         }
-                                                
+        
     }//GEN-LAST:event_btnInhabilitarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
         try {
             if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR SACERDOTE?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-            int id = Integer.parseInt(txtId.getText());
-            
-            SacerdoteService ss = new SacerdoteService();
-            ss.eliminarSacerdote(id);
-            limpiarCampos();
+                int id = Integer.parseInt(txtId.getText());
+                
+                SacerdoteService ss = new SacerdoteService();
+                ss.eliminarSacerdote(id);
+                limpiarCampos();
             }
-            
             
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.dispose();
-       
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -300,6 +308,10 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         btnInhabilitar.setEnabled(false);
     }//GEN-LAST:event_formMouseClicked
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -307,6 +319,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInhabilitar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSalir;
     private com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

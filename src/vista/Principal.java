@@ -6,13 +6,8 @@
 package vista;
 
 import accesoDatos.GuardiaDAO;
-import java.beans.PropertyVetoException;
-import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import serviciosacerdotalurgencias.ImagenFondo;
 
 /**
  *
@@ -25,8 +20,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        escritorio.setBorder(new ImagenFondo());
-        this.setExtendedState(Principal.NORMAL);
+//        escritorio.setBorder(new ImagenFondo());
+//        this.setExtendedState(Principal.NORMAL);
 
         GuardiaDAO gd = new GuardiaDAO();
         if (gd.mostrarEstado().getEstado().equals("cerrado")) {
@@ -36,7 +31,7 @@ public class Principal extends javax.swing.JFrame {
         } else {    
             String fecha = gd.mostrarEstado().getFecha().toString();
             
-            JOptionPane.showMessageDialog(jMenu1, "la Guardia"+ fecha +"  ya esta Abierta!");
+            JOptionPane.showMessageDialog(jMenu1, "la Guardia " + fecha +"  ya esta Abierta!");
 
         }
 
@@ -57,7 +52,6 @@ public class Principal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmin = new javax.swing.JMenu();
-        jMenuGuardia = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuGuardianes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -68,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuConsultas = new javax.swing.JMenu();
         menuListadoSacerdotes = new javax.swing.JMenuItem();
         menuListadoGuardianes = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -106,14 +101,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jMenuAdmin.setText("Administracion");
-
-        jMenuGuardia.setText("Guardia");
-        jMenuGuardia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuGuardiaActionPerformed(evt);
-            }
-        });
-        jMenuAdmin.add(jMenuGuardia);
 
         jMenu1.setText("Registros");
 
@@ -173,11 +160,19 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuConsultas.add(menuListadoGuardianes);
 
+        jMenuItem4.setText("Pedidos del dia");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuItem4);
+
         jMenuBar1.add(jMenuConsultas);
 
-        jMenu2.setText("Salir");
+        jMenu2.setText("Cerrar Guardia");
 
-        jMenuItem3.setText("Salir");
+        jMenuItem3.setText("Cerrar Guardia");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -204,12 +199,6 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuGuardiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardiaActionPerformed
-        Guardia g = new Guardia();
-
-        ControlaInstancia(g);
-    }//GEN-LAST:event_jMenuGuardiaActionPerformed
 
     private void jMenuGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardianesActionPerformed
         // TODO add your handling code here:
@@ -253,6 +242,12 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        PedidosDelDia pd = new PedidosDelDia();
+        ControlaInstancia(pd);
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
@@ -262,11 +257,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuEnfermos;
-    private javax.swing.JMenuItem jMenuGuardia;
     private javax.swing.JMenuItem jMenuGuardianes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jMenuLlamados;
     private javax.swing.JMenuItem jMenuPedidos;
     private javax.swing.JMenuItem jMenuSacerdotes;
@@ -289,5 +284,6 @@ public class Principal extends javax.swing.JFrame {
         // Si no está abierto, crea una nueva instancia 
         escritorio.add(inter);
         inter.setVisible(true);
+        inter.setLocation(190, 10);
     }
 }

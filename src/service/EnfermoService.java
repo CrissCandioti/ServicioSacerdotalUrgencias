@@ -20,34 +20,34 @@ public class EnfermoService {
         try {
             EnfermoDAO ed = new EnfermoDAO();
             ContactoService cs = new ContactoService();
-            if (apellido.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
-                return;
-            }
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
-                return;
-            }
-            if (estadoCivil.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
-                return;
-            }
-            if (estadoConciencia.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda sobre el estado de conciencia no puede estar vacia");
-                return;
-            }
-            if (domicilio.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del domicilio no puede estar vacia");
-                return;
-            }
-            if (sanatorio.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "La celda del sanatorio no puede estar vacia");
-                return;
-            }
-            if (descripcion.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese la descripcion del enfermo");
-                return;
-            }
+//            if (apellido.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+//                return;
+//            }
+//            if (nombre.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+//                return;
+//            }
+//            if (estadoCivil.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+//                return;
+//            }
+//            if (estadoConciencia.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda sobre el estado de conciencia no puede estar vacia");
+//                return;
+//            }
+//            if (domicilio.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del domicilio no puede estar vacia");
+//                return;
+//            }
+//            if (sanatorio.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "La celda del sanatorio no puede estar vacia");
+//                return;
+//            }
+//            if (descripcion.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "Por favor ingrese la descripcion del enfermo");
+//                return;
+//            }
             if (cs.buscarContactoPorID(idContacto) == null) {
                 JOptionPane.showMessageDialog(null, "No se registro ningun contacto al enfermo");
                 return;
