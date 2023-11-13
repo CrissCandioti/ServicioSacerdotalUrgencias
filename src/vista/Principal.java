@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jSeparator2 = new javax.swing.JSeparator();
+        btnPedido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmin = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -81,22 +82,37 @@ public class Principal extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        btnPedido.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        btnPedido.setText("NUEVO PEDIDO");
+        btnPedido.setContentAreaFilled(false);
+        btnPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidoActionPerformed(evt);
+            }
+        });
+
         escritorio.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(btnPedido, javax.swing.JLayeredPane.PALETTE_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1101, Short.MAX_VALUE))
+                .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1108, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,8 +264,14 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
+       RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
+        ControlaInstancia(registro);
+    }//GEN-LAST:event_btnPedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPedido;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

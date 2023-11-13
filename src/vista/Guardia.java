@@ -260,6 +260,7 @@ public class Guardia extends javax.swing.JInternalFrame {
             if(cmbChofer.getSelectedIndex()==0 || cmbAcompañante.getSelectedIndex()==0 ||cmbTelefonista.getSelectedIndex()==0 
                     || cmbVocal.getSelectedIndex()==0){
                 JOptionPane.showMessageDialog(rootPane, "Seleccione un Guardian");
+                return;
             }
         String fecha = lblFecha.getText();
         int idVocal = cmbVocal.getItemAt(cmbVocal.getSelectedIndex()).getIdGuardian();
