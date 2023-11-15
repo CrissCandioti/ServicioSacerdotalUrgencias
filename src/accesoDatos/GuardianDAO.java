@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  * Las clases de entidades DAO heredan los metodos de DAO,la cual consiste en la
  * coneccion a la base de datos, la desconecion a la base de datos, y los
@@ -101,7 +100,8 @@ public final class GuardianDAO extends DAO {
             }
             return aux;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el Guardian en la base de datos");
+            System.out.println("Se produjo un error al buscar el Guardian en la base de datos");
+            //JOptionPane.showMessageDialog(null, "Se produjo un error al buscar el Guardian en la base de datos");
         } finally {
             desconectarBaseDatos();
         }
@@ -128,7 +128,7 @@ public final class GuardianDAO extends DAO {
             }
             return listaARetornar;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Se produjo un error al mostrar la lista de Guardianes de la base de datos" +e.getMessage());
+            JOptionPane.showMessageDialog(null, "Se produjo un error al mostrar la lista de Guardianes de la base de datos" + e.getMessage());
         } finally {
             desconectarBaseDatos();
         }
