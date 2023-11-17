@@ -70,7 +70,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1344, 700));
         setSize(1200,700);
 
         escritorio.setPreferredSize(new java.awt.Dimension(1300, 700));
@@ -250,11 +249,24 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuPedidosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       
+       int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estás seguro de que quieres cerrar la aplicación?",
+                "Confirmar Cierre",
+                JOptionPane.YES_NO_OPTION
+               
+        );
         GuardiaDAO gd = new GuardiaDAO();
    
         int id = gd.mostrarEstado().getIdGuardia();
         gd.modificarEstado(id);
         JOptionPane.showMessageDialog(jMenu1, "Guardia cerrada");
+
+        if (confirm == JOptionPane.YES_OPTION) {
+
+            System.exit(0);
+        }
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -272,7 +284,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPedido;
-    private javax.swing.JDesktopPane escritorio;
+    public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAdmin;

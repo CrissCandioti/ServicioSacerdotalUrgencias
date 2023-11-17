@@ -255,7 +255,8 @@ public class Guardia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbChoferActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GuardiaService gs = new GuardiaService();
+       
+         GuardiaDAO gd = new GuardiaDAO();GuardiaService gs = new GuardiaService();
         try{
             if(cmbChofer.getSelectedIndex()==0 || cmbAcompañante.getSelectedIndex()==0 ||cmbTelefonista.getSelectedIndex()==0 
                     || cmbVocal.getSelectedIndex()==0){
@@ -270,7 +271,8 @@ public class Guardia extends javax.swing.JInternalFrame {
         int idSacerdote = cmbSacerdote.getItemAt(cmbSacerdote.getSelectedIndex()).getIdSacerdote();
         String estado = "abierto";
         gs.crearGuardia(LocalDate.parse(fecha), idVocal, idTelefonista, idChofer, idAcompañante, idSacerdote, estado);
-        JOptionPane.showMessageDialog(this, "Guardia Creada!!");
+        int idGuardia = gd.mostrarEstado().getIdGuardia();
+        JOptionPane.showMessageDialog(this, "Guardia N° "+idGuardia+" Abierta!!");
         }catch(Exception e){
             JOptionPane.showMessageDialog(rootPane, "Error");
         }

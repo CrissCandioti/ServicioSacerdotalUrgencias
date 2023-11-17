@@ -4,13 +4,17 @@
  */
 package vista;
 
+import entidades.Enfermo;
 import entidades.Guardian;
 import entidades.Pedido;
 import java.util.ArrayList;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.EnfermoService;
 import service.GuardianService;
 import service.PedidoService;
+import static vista.Principal.escritorio;
 
 /**
  *
@@ -38,6 +42,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPedidos = new javax.swing.JTable();
+        btnModificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -54,7 +59,20 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaPedidos);
+
+        btnModificar.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,13 +82,19 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
@@ -102,8 +126,54 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tablaPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPedidosMouseClicked
+        btnModificar.setEnabled(true);
+        
+    }//GEN-LAST:event_tablaPedidosMouseClicked
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        
+        DefaultTableModel modelo = (DefaultTableModel) tablaPedidos.getModel();
+        int id =  (int) modelo.getValueAt(tablaPedidos.getSelectedRow(), 0);
+        
+//        EnfermoService es = new EnfermoService();
+//        Enfermo e =es.buscarEnfermoPorID(id);
+            PedidoService pe = new PedidoService();
+            Pedido e= pe.buscarPedidoPorID(id);
+        
+        RegistroEnfermoContactoPedido p = new RegistroEnfermoContactoPedido();
+        ControlaInstancia(p);
+       RegistroEnfermoContactoPedido.txtApellidoE.setText(e.getIdEnfermo().getApellido());
+       RegistroEnfermoContactoPedido.txtNombreE.setText(e.getIdEnfermo().getNombre());
+       RegistroEnfermoContactoPedido.txtEdadE.setText(""+e.getIdEnfermo().getEdad());
+       RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
+       RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
+       RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
+       RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
+       RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());
+       RegistroEnfermoContactoPedido.txtTelefono.setText(e.getIdEnfermo().getIdContacto().getTelefono());
+       RegistroEnfermoContactoPedido.cmbEconciencia.setSelectedItem(e.getIdEnfermo().getEstadoConciencia());
+       RegistroEnfermoContactoPedido.cmbEstadoCivil.setSelectedItem(e.getIdEnfermo().getEstadoCivil());
+       RegistroEnfermoContactoPedido.txtIdEnf.setText(""+e.getIdEnfermo().getIdEnfermo());
+       RegistroEnfermoContactoPedido.txtIdCont.setText(""+ e.getIdEnfermo().getIdContacto().getIdContacto());
+       RegistroEnfermoContactoPedido.txtIdPedido.setText(""+ e.getIdPedido());
+       
+       RegistroEnfermoContactoPedido.btnGuardar.setEnabled(false);
+       RegistroEnfermoContactoPedido.btnModificar.setEnabled(true);
+       
+       
+       
+       
+       
+        
+        
+        
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -120,7 +190,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
 
             //le otorgo un modelo a la tabla
             DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("Guardia N°");
+            modelo.addColumn("código N°");
             modelo.addColumn("Nombre E");
             modelo.addColumn("Apellido E");
             
@@ -133,7 +203,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
                 modelo.addRow(pedido);
                 Pedido getG = (Pedido) guardian.get(i);
 
-                modelo.setValueAt(getG.getIdGuardia().getFecha(), i, 0);
+                modelo.setValueAt(getG.getIdPedido(), i, 0);
                 modelo.setValueAt(getG.getIdEnfermo().getNombre(), i, 1);
                 modelo.setValueAt(getG.getIdEnfermo().getApellido(), i, 2);
                
@@ -144,4 +214,18 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
  }
+   public void ControlaInstancia(JInternalFrame inter) {
+
+        for (JInternalFrame frame : escritorio.getAllFrames()) {
+            if (frame.getClass().equals(inter.getClass())) {
+                frame.toFront(); // Si está abierto, tráelo al frente
+                return;
+            }
+        }
+
+        // Si no está abierto, crea una nueva instancia 
+        escritorio.add(inter);
+        inter.setVisible(true);
+        inter.setLocation(190, 10);
+    }
 }
