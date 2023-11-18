@@ -33,7 +33,7 @@ public class LoginPanel extends JPanel {
 
     public LoginPanel() {
         //Agregamos la imagen e instanciamos en el constructor
-        backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/Paneles/IMG.png")).getImage();
+        backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/Paneles/IMG.jpg")).getImage();
         init();
     }
         @Override
