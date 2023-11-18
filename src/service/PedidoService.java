@@ -11,6 +11,7 @@ import entidades.Pedido;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import vista.RegistroEnfermoContactoPedido;
 
 /**
  *
@@ -25,6 +26,7 @@ public class PedidoService {
             GuardiaService gs = new GuardiaService();
             dao.guardarPedido(new Pedido(fechaPedido, gs.buscarGuardiaPorID(idGuardia), es.buscarEnfermoPorID(idEnfermo)));
             JOptionPane.showMessageDialog(null, "Se registro correctamente el pedido");
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al crear el pedido");
         }
@@ -75,6 +77,7 @@ public class PedidoService {
             }
             dao.modificarPedido(new Pedido(id, fechaPedido, gs.buscarGuardiaPorID(idGuardia), es.buscarEnfermoPorID(idEnfermo)));
             JOptionPane.showMessageDialog(null, "Se modifico con exito el pedido");
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Se produjo un error al intentar modificar el pedido");
         }
@@ -98,5 +101,21 @@ public class PedidoService {
             JOptionPane.showMessageDialog(null, "Se produjo un error al obtener el pedido entre dos fechas");
         }
         return null;
+    }
+
+    private void limpiar() {
+        RegistroEnfermoContactoPedido.txtApellidoC.setText("");
+        RegistroEnfermoContactoPedido.txtApellidoE.setText("");
+        RegistroEnfermoContactoPedido.txtDescripcion.setText("");
+        RegistroEnfermoContactoPedido.txtDomicilio.setText("");
+        RegistroEnfermoContactoPedido.txtEdadE.setText("");
+        RegistroEnfermoContactoPedido.txtNombreC.setText("");
+        RegistroEnfermoContactoPedido.txtNombreE.setText("");
+        RegistroEnfermoContactoPedido.txtParentesco.setText("");
+        RegistroEnfermoContactoPedido.txtSanatorio.setText("");
+        RegistroEnfermoContactoPedido.txtTelefono.setText("");
+        RegistroEnfermoContactoPedido.cmbEstadoCivil.setSelectedIndex(0);
+        RegistroEnfermoContactoPedido.cmbEconciencia.setSelectedIndex(0);
+        
     }
 }

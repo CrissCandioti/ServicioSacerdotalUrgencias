@@ -29,6 +29,8 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         txtIdCont.setVisible(false);
         txtIdEnf.setVisible(false);
 
+        btnModificar.setEnabled(false);
+
     }
 
     /**
@@ -71,8 +73,10 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         txtIdCont = new javax.swing.JTextField();
         lblFecha = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        txtIdPedido = new javax.swing.JTextField();
 
         setBorder(null);
         setClosable(true);
@@ -304,14 +308,14 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         jLabel14.setText("PEDIDO : ");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
-        jButton2.setText("GUARDAR PEDIDO");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        btnGuardar.setText("GUARDAR PEDIDO");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, -1, -1));
 
         jButton3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton3.setText("SALIR");
@@ -322,6 +326,16 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 500, -1, -1));
 
+        btnModificar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 180, -1));
+        getContentPane().add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -329,7 +343,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEconcienciaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         EnfermoService es = new EnfermoService();
         ContactoService cs = new ContactoService();
@@ -360,8 +374,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
             }
             cs.crearContacto(apellido, nombre, telefono, parentesco);
             System.out.println("Contacto creado");
-            
-            
+
             //vamos a crear un enfermo.
             String apellidoe = txtApellidoE.getText();
             String nombree = txtNombreE.getText();
@@ -408,7 +421,6 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
             int idGuardia = gs.buscarGuardiaPorfecha(fecha).getIdGuardia();
             int idEnfermo = es.buscarEnfermoPorNombreApellido(apellidoe, nombree).getIdEnfermo();
 
-            
             ps.crearPedido(fecha, idGuardia, idEnfermo);
 
             JOptionPane.showMessageDialog(this, "Pedido Guardado!!");
@@ -416,18 +428,99 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        EnfermoService es = new EnfermoService();
+        ContactoService cs = new ContactoService();
+        PedidoService ps = new PedidoService();
+        
+        int idPedido = Integer.parseInt(txtIdPedido.getText());
+        int idEnfermo = Integer.parseInt(txtIdEnf.getText());
+        int idContacto = Integer.parseInt(txtIdCont.getText());
+        
+        //Modificamos el enfermo
+        String apellidoe = txtApellidoE.getText();
+        String nombree = txtNombreE.getText();
+        int edad = Integer.parseInt(txtEdadE.getText());
+        String estadoCivil = cmbEstadoCivil.getSelectedItem().toString();
+        String estadoConciencia = cmbEconciencia.getSelectedItem().toString();
+        String domicilio = txtDomicilio.getText();
+        String sanatorio = txtSanatorio.getText();
+        String descripcion = txtDescripcion.getText();
+
+        if (apellidoe.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+            return;
+        }
+        if (nombree.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+            return;
+        }
+        if (estadoCivil.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda del estado civil no puede estar vacia");
+            return;
+        }
+        if (estadoConciencia.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda sobre el estado de conciencia no puede estar vacia");
+            return;
+        }
+        if (domicilio.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda del domicilio no puede estar vacia");
+            return;
+        }
+        if (sanatorio.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La celda del sanatorio no puede estar vacia");
+            return;
+        }
+        if (descripcion.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese la descripcion del enfermo");
+            return;
+        }
+        es.modificarEnfermo(idEnfermo, apellidoe, nombree, edad, estadoCivil, estadoConciencia, domicilio, sanatorio, descripcion, idContacto);
+        
+        //modificamos el Contacto
+        String apellido = txtApellidoC.getText();
+            String nombre = txtNombreC.getText();
+            String telefono = txtTelefono.getText();
+            String parentesco = txtParentesco.getText();
+            if (apellido.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del apellido no puede estar vacia");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del nombre no puede estar vacia");
+                return;
+            }
+            if (telefono.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del telefono no puede estar vacia");
+                return;
+            }
+            if (parentesco.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La celda del parentesco no puede estar vacia");
+                return;
+            }
+            cs.modificarContacto(idContacto, apellido, nombre, telefono, parentesco);
+            
+        //modificamos el pedido
+         LocalDate fecha = LocalDate.parse(lblFecha.getText());
+            int idGuardia = ps.buscarPedidoPorID(idPedido).getIdGuardia().getIdGuardia();
+            
+            ps.modificarPedido(idPedido, fecha, idGuardia, idEnfermo);
+            JOptionPane.showMessageDialog(rootPane, "Pedido Modificado");
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelContacto;
-    private javax.swing.JComboBox<String> cmbEconciencia;
-    private javax.swing.JComboBox<String> cmbEstadoCivil;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JButton btnGuardar;
+    public static javax.swing.JButton btnModificar;
+    public static javax.swing.JComboBox<String> cmbEconciencia;
+    public static javax.swing.JComboBox<String> cmbEstadoCivil;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -445,17 +538,18 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JPanel panelEnfermo;
-    private javax.swing.JTextField txtApellidoC;
-    private javax.swing.JTextField txtApellidoE;
-    private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtEdadE;
-    private javax.swing.JTextField txtIdCont;
-    private javax.swing.JTextField txtIdEnf;
-    private javax.swing.JTextField txtNombreC;
-    private javax.swing.JTextField txtNombreE;
-    private javax.swing.JTextField txtParentesco;
-    private javax.swing.JTextField txtSanatorio;
-    private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JTextField txtApellidoC;
+    public static javax.swing.JTextField txtApellidoE;
+    public static javax.swing.JTextArea txtDescripcion;
+    public static javax.swing.JTextField txtDomicilio;
+    public static javax.swing.JTextField txtEdadE;
+    public static javax.swing.JTextField txtIdCont;
+    public static javax.swing.JTextField txtIdEnf;
+    public static javax.swing.JTextField txtIdPedido;
+    public static javax.swing.JTextField txtNombreC;
+    public static javax.swing.JTextField txtNombreE;
+    public static javax.swing.JTextField txtParentesco;
+    public static javax.swing.JTextField txtSanatorio;
+    public static javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
