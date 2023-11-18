@@ -1,4 +1,4 @@
-package vista.InicioSecion.Paneles;
+package vista.InicioSecion;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import entidades.Guardian;
@@ -33,7 +33,7 @@ public class LoginPanel extends JPanel {
 
     public LoginPanel() {
         //Agregamos la imagen e instanciamos en el constructor
-        backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/Paneles/IMG.jpg")).getImage();
+        backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/IMG.jpg")).getImage();
         init();
     }
         @Override

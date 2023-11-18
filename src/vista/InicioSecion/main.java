@@ -8,12 +8,8 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Font;
-import javax.management.Notification;
 import javax.swing.UIManager;
-import raven.popup.GlassPanePopup;
 import raven.toast.Notifications;
-import vista.InicioSecion.Manager.FormsManager;
-import vista.InicioSecion.Paneles.LoginPanel;
 
 public class main extends javax.swing.JFrame {
 
@@ -23,8 +19,6 @@ public class main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         //Instanciamos el Panel para que sea lo primero que se muestre
         setContentPane(new LoginPanel());
-        //Utilizamos nuestro manager 
-        FormsManager.getInstance().inicioLogin(this);
         //Para las notificaciones
         Notifications.getInstance().setJFrame(this);
     }
@@ -62,7 +56,7 @@ public class main extends javax.swing.JFrame {
          * que su funcionamiento sea el correcto. Y en package agregamos el
          * paquete donde se ubica este file propertis
          */
-        FlatLaf.registerCustomDefaultsSource("vista.InicioSecion.Paneles");
+        FlatLaf.registerCustomDefaultsSource("vista.InicioSecion");
         /**
          * Esta propiedad se utiliza para especificar la fuente predeterminada
          * que se utilizará en la interfaz de usuario de tu aplicación.
