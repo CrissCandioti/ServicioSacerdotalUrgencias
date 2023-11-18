@@ -2,8 +2,11 @@ package vista.InicioSecion.Paneles;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import entidades.Guardian;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,15 +25,24 @@ import vista.Principal;
  */
 public class LoginPanel extends JPanel {
 
+    private Image backgroundImage;//Para agregar una imagen al JPanel
     private GuardianService service = new GuardianService();
     private JTextField JTextFieldUsuario;
     private JButton JButtonEntrar;
     private JButton JButtonSalir;
 
     public LoginPanel() {
+        //Agregamos la imagen e instanciamos en el constructor
+        backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/Paneles/IMG.png")).getImage();
         init();
     }
+        @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
+        // Dibujar la imagen de fondo
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
     private void init() {
         try {
             setLayout(new MigLayout("fill,insets 20", "[center]", "[center]"));
@@ -41,7 +53,7 @@ public class LoginPanel extends JPanel {
             panel.putClientProperty(FlatClientProperties.STYLE, ""
                     + "arc:20;");
             JTextFieldUsuario.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Ingrese su numero de documento");
-            JLabel JLabel1 = new JLabel("Bienvenido al Servicio Sacerdotal");
+            JLabel JLabel1 = new JLabel("Bienvenido Guardian");
             JLabel1.putClientProperty(FlatClientProperties.STYLE, "" + "font:bold +10");
             JLabel JLabel2 = new JLabel("Por favor inicie secion para continuar");
             JLabel2.putClientProperty(FlatClientProperties.STYLE, "");
