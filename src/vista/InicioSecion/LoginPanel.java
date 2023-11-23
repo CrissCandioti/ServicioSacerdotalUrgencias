@@ -36,13 +36,15 @@ public class LoginPanel extends JPanel {
         backgroundImage = new ImageIcon(getClass().getResource("/vista/InicioSecion/IMG.jpg")).getImage();
         init();
     }
-        @Override
+
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         // Dibujar la imagen de fondo
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
+
     private void init() {
         try {
             setLayout(new MigLayout("fill,insets 20", "[center]", "[center]"));
@@ -73,12 +75,26 @@ public class LoginPanel extends JPanel {
                     } else {
                         //Este es el codigo para traer un nuevo jframe y cerrar el anterior
                         //Aqui va la instancia del nuevo jframe que se quiere traer
-                        Principal p = new Principal();
-                        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
-                        frame.dispose();
-                        p.setVisible(true);
-                        p.setLocationRelativeTo(null);
-                        Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());
+                        System.out.println(aux.getNivel());
+                        if (aux.getNivel() == 1) {
+                            
+                            Principal p = new Principal();
+                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
+                            frame.dispose();
+
+                            p.jMenuAdmin.setEnabled(false);
+                            p.setVisible(true);
+                            p.setLocationRelativeTo(null);
+                            Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());
+                        }else{
+                            Principal p = new Principal();
+                            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
+                            frame.dispose();
+                             p.setVisible(true);
+                            p.setLocationRelativeTo(null);
+                            Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());
+                        }
+
                     }
                 }
             });

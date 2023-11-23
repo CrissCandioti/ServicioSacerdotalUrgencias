@@ -23,11 +23,12 @@ public class Guardian {
     private String estadoCivil;
     private String rol;
     private boolean estado;
+    private int nivel;
 
     public Guardian() {
     }
 
-    public Guardian(int idGuardian, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public Guardian(int idGuardian, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado,int nivel) {
         this.idGuardian = idGuardian;
         this.dni = dni;
         this.apellido = apellido;
@@ -38,9 +39,10 @@ public class Guardian {
         this.estadoCivil = estadoCivil;
         this.rol = rol;
         this.estado = estado;
+        this.nivel= nivel;
     }
 
-    public Guardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public Guardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado,int nivel) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -50,6 +52,7 @@ public class Guardian {
         this.estadoCivil = estadoCivil;
         this.rol = rol;
         this.estado = estado;
+        this.nivel = nivel;
     }
 
 
@@ -135,6 +138,15 @@ public class Guardian {
         this.estado = estado;
     }
 
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    
     @Override
     public String toString() {
         return  apellido + ", " + nombre ;

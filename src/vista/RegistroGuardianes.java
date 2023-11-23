@@ -43,6 +43,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,9 +69,12 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnInhabilitar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel13 = new javax.swing.JLabel();
+        cmbNivel = new javax.swing.JComboBox<>();
+
+        jLabel12.setText("jLabel12");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
@@ -106,11 +110,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel5.setText("Rol :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 103, 37));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 103, 37));
 
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel6.setText("Estado civil :");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 150, 37));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 150, 37));
 
         jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
         jLabel7.setText("Fecha Nac.:");
@@ -143,7 +147,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         getContentPane().add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, -1, -1));
 
         cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "casado", "soltero", "viudo", "separado" }));
-        getContentPane().add(cbxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 242, 32));
+        getContentPane().add(cbxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 242, 32));
 
         cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Vocal", "Telefonista", "Chofer", "Acompañante" }));
         cbxRol.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +155,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 cbxRolActionPerformed(evt);
             }
         });
-        getContentPane().add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, 242, 32));
+        getContentPane().add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 242, 32));
 
         DateChooser.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(DateChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 242, -1));
@@ -219,14 +223,17 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 520, -1, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logito.png"))); // NOI18N
-        jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 390, 320));
-
         jLabel11.setFont(new java.awt.Font("sansserif", 2, 24)); // NOI18N
         jLabel11.setText("Registro de Guardianes");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 52, 790, 10));
+
+        jLabel13.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
+        jLabel13.setText("Nivel :");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 103, 37));
+
+        cmbNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1 Operador", "2 Administrador" }));
+        getContentPane().add(cmbNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 466, 240, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,6 +254,10 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
             String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
             String rol = cbxRol.getSelectedItem().toString();
             boolean estado = rbActivo.isSelected();
+            
+            int nivel = cmbNivel.getSelectedIndex();
+           
+            System.out.println(nivel);
 
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
@@ -289,7 +300,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                 return;
             }
 
-            gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+            gs.crearGuardian(dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado,nivel);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -359,7 +370,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
             String estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
             String rol = cbxRol.getSelectedItem().toString();
             boolean estado = rbActivo.isSelected();
-
+             int nivel = cmbNivel.getSelectedIndex();
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "La celda del dni no puede estar vacia");
                 return;
@@ -401,7 +412,7 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
                  return;
             }
             
-            gs.modificarGuardian(id, dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado);
+            gs.modificarGuardian(id, dni, apellido, nombre, direccion, telefono, LocalDate.parse(fechaNac), estadoCivil, rol, estado,nivel);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "error");
         }
@@ -468,9 +479,11 @@ public class RegistroGuardianes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> cbxEstadoCivil;
     public static javax.swing.JComboBox<String> cbxRol;
+    private javax.swing.JComboBox<String> cmbNivel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -276,6 +276,11 @@ public class Guardia extends javax.swing.JInternalFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(rootPane, "Error");
         }
+        
+        Principal.jMenuAdmin.setEnabled(true);
+           Principal.jMenuLlamados.setEnabled(true);
+            Principal.jMenuConsultas.setEnabled(true);
+            Principal.jMenu2.setEnabled(true);
         this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -6,7 +6,6 @@
 package vista;
 
 import java.time.LocalDate;
-import static java.time.temporal.TemporalQueries.localDate;
 import javax.swing.JOptionPane;
 import service.ContactoService;
 import service.EnfermoService;
@@ -28,6 +27,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
         setLocation(190, 40);
         txtIdCont.setVisible(false);
         txtIdEnf.setVisible(false);
+        txtIdPedido.setVisible(false);
 
         btnModificar.setEnabled(false);
 
@@ -512,6 +512,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
             
             ps.modificarPedido(idPedido, fecha, idGuardia, idEnfermo);
             JOptionPane.showMessageDialog(rootPane, "Pedido Modificado");
+            this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
 

@@ -28,6 +28,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
     public PedidosDelDia() {
         initComponents();
         llenarTabla();
+        btnModificar.setEnabled(false);
     }
 
     /**
@@ -190,7 +191,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
 
             //le otorgo un modelo a la tabla
             DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("código N°");
+            modelo.addColumn("Pedido N°");
             modelo.addColumn("Nombre E");
             modelo.addColumn("Apellido E");
             

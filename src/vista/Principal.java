@@ -34,6 +34,16 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jMenu1, "la Guardia " + fecha +"  ya esta Abierta!");
 
         }
+        if (gd.mostrarEstado().getEstado().equals("cerrado")) {
+            jMenuAdmin.setEnabled(false);
+            jMenuLlamados.setEnabled(false);
+            jMenuConsultas.setEnabled(false);
+            jMenu2.setEnabled(false);
+                   
+        }
+        
+        
+        
 
     }
 
@@ -286,17 +296,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnPedido;
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenuAdmin;
+    public static javax.swing.JMenu jMenu2;
+    public static javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuConsultas;
+    public static javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuEnfermos;
     private javax.swing.JMenuItem jMenuGuardianes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenu jMenuLlamados;
+    public static javax.swing.JMenu jMenuLlamados;
     private javax.swing.JMenuItem jMenuPedidos;
     private javax.swing.JMenuItem jMenuSacerdotes;
     private javax.swing.JPopupMenu jPopupMenu;
@@ -306,7 +316,7 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // metodo para controlar que el internalFrame no se instancie dos veces y que cuando se lo precise traerlo al frente.
-    public void ControlaInstancia(JInternalFrame inter) {
+    public final void ControlaInstancia(JInternalFrame inter) {
 
         for (JInternalFrame frame : escritorio.getAllFrames()) {
             if (frame.getClass().equals(inter.getClass())) {

@@ -27,7 +27,7 @@ public class GuardianService {
      * El metodo "crearGuardian" recibe toda la informacion establecida en la
      * vistas para completar el registro del guardian
      */
-    public void crearGuardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public void crearGuardian(String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado,int nivel) {
         /**
          * Dentro de un bloque try-catch el metodo procede a analizar estos
          * datos con las restricciones
@@ -156,7 +156,7 @@ public class GuardianService {
              * argumentos el guardian instanciado y la variable entero con el
              * dato correcto del estado para registrar en la base de datos
              */
-            dao.guardarGuardian(new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
+            dao.guardarGuardian(new Guardian(dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado,nivel), index);
             /**
              * Por ultimo se muestra un mensaje completando el registro
              */
@@ -240,7 +240,7 @@ public class GuardianService {
      * metodo buscarGuardianPorID, la cual no servira para verificar si se
      * encuentra ese alumno a modificar.
      */
-    public void modificarGuardian(int id, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado) {
+    public void modificarGuardian(int id, String dni, String apellido, String nombre, String direccion, String telefono, LocalDate fechaNacimiento, String estadoCivil, String rol, boolean estado,int nivel) {
         try {
             GuardianDAO dao = new GuardianDAO();
             if (dao.buscarGuardianPorID(id) == null) {
@@ -319,7 +319,7 @@ public class GuardianService {
             } else if (estado == false) {
                 index = 0;
             }
-            dao.modificarGuardian(new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado), index);
+            dao.modificarGuardian(new Guardian(id, dni, apellido, nombre, direccion, telefono, fechaNacimiento, estadoCivil, rol, estado,nivel), index);
             JOptionPane.showMessageDialog(null, "Modificamos correctamente al Guardian");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar modificar el Guardian");
