@@ -75,14 +75,16 @@ public class LoginPanel extends JPanel {
                     } else {
                         //Este es el codigo para traer un nuevo jframe y cerrar el anterior
                         //Aqui va la instancia del nuevo jframe que se quiere traer
-                        System.out.println(aux.getNivel());
+//                        System.out.println(aux.getNivel());
                         if (aux.getNivel() == 1) {
                             
                             Principal p = new Principal();
+                            
                             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
                             frame.dispose();
 
                             p.jMenuAdmin.setEnabled(false);
+                            p.menuListadoGuardianes.setEnabled(false);
                             p.setVisible(true);
                             p.setLocationRelativeTo(null);
                             Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());

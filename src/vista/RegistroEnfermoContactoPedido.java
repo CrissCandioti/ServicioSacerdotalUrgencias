@@ -80,7 +80,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(1200, 900));
+        setPreferredSize(new java.awt.Dimension(1069, 580));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelEnfermo.setBorder(javax.swing.BorderFactory.createTitledBorder("Enfermo"));
@@ -324,7 +324,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 500, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, -1, -1));
 
         btnModificar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         btnModificar.setText("MODIFICAR");

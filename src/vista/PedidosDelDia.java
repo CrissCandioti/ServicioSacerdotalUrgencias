@@ -161,15 +161,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
        
        RegistroEnfermoContactoPedido.btnGuardar.setEnabled(false);
        RegistroEnfermoContactoPedido.btnModificar.setEnabled(true);
-       
-       
-       
-       
-       
-        
-        
-        
-        
+             
     }//GEN-LAST:event_btnModificarActionPerformed
 
 

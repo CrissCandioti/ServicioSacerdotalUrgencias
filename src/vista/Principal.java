@@ -25,13 +25,13 @@ public class Principal extends javax.swing.JFrame {
 
         GuardiaDAO gd = new GuardiaDAO();
         if (gd.mostrarEstado().getEstado().equals("cerrado")) {
-            
+
             Guardia g = new Guardia();
             ControlaInstancia(g);
-        } else {    
+        } else {
             String fecha = gd.mostrarEstado().getFecha().toString();
-            
-            JOptionPane.showMessageDialog(jMenu1, "la Guardia " + fecha +"  ya esta Abierta!");
+
+            JOptionPane.showMessageDialog(jMenu1, "la Guardia " + fecha + "  ya esta Abierta!");
 
         }
         if (gd.mostrarEstado().getEstado().equals("cerrado")) {
@@ -39,11 +39,8 @@ public class Principal extends javax.swing.JFrame {
             jMenuLlamados.setEnabled(false);
             jMenuConsultas.setEnabled(false);
             jMenu2.setEnabled(false);
-                   
+
         }
-        
-        
-        
 
     }
 
@@ -69,11 +66,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuSacerdotes = new javax.swing.JMenuItem();
         jMenuLlamados = new javax.swing.JMenu();
         jMenuPedidos = new javax.swing.JMenuItem();
-        jMenuEnfermos = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
         menuListadoSacerdotes = new javax.swing.JMenuItem();
         menuListadoGuardianes = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -162,9 +159,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuLlamados.add(jMenuPedidos);
 
-        jMenuEnfermos.setText("Enfermos");
-        jMenuLlamados.add(jMenuEnfermos);
-
         jMenuBar1.add(jMenuLlamados);
 
         jMenuConsultas.setText("Consultas");
@@ -192,6 +186,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenuConsultas.add(jMenuItem4);
+
+        jMenuItem5.setText("Historico de Pedidos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuItem5);
 
         jMenuBar1.add(jMenuConsultas);
 
@@ -226,23 +228,26 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGuardianesActionPerformed
-        // TODO add your handling code here:
+
+        cerrarFrames();
         RegistroGuardianes r = new RegistroGuardianes();
         ControlaInstancia(r);
     }//GEN-LAST:event_jMenuGuardianesActionPerformed
 
     private void jMenuSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSacerdotesActionPerformed
-
+        cerrarFrames();
         RegistroSacerdotes s = new RegistroSacerdotes();
         ControlaInstancia(s);
     }//GEN-LAST:event_jMenuSacerdotesActionPerformed
 
     private void menuListadoSacerdotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoSacerdotesActionPerformed
+        cerrarFrames();
         ConsultaSacerdotes consulta = new ConsultaSacerdotes();
         ControlaInstancia(consulta);
     }//GEN-LAST:event_menuListadoSacerdotesActionPerformed
 
     private void menuListadoGuardianesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListadoGuardianesActionPerformed
+        cerrarFrames();
         ConsultaGuardianes cs = new ConsultaGuardianes();
         ControlaInstancia(cs);
 
@@ -254,21 +259,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_escritorioMouseClicked
 
     private void jMenuPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPedidosActionPerformed
+        cerrarFrames();
         RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
         ControlaInstancia(registro);
     }//GEN-LAST:event_jMenuPedidosActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       
-       int confirm = JOptionPane.showConfirmDialog(
+        cerrarFrames();
+        int confirm = JOptionPane.showConfirmDialog(
                 this,
                 "¿Estás seguro de que quieres cerrar la aplicación?",
                 "Confirmar Cierre",
                 JOptionPane.YES_NO_OPTION
-               
         );
         GuardiaDAO gd = new GuardiaDAO();
-   
+
         int id = gd.mostrarEstado().getIdGuardia();
         gd.modificarEstado(id);
         JOptionPane.showMessageDialog(jMenu1, "Guardia cerrada");
@@ -277,19 +282,28 @@ public class Principal extends javax.swing.JFrame {
 
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        cerrarFrames();
         PedidosDelDia pd = new PedidosDelDia();
         ControlaInstancia(pd);
-        
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
-       RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
+        cerrarFrames();
+        RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
         ControlaInstancia(registro);
     }//GEN-LAST:event_btnPedidoActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       cerrarFrames();
+        HistoricoPedidos hp = new HistoricoPedidos();
+        ControlaInstancia(hp);
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,18 +314,18 @@ public class Principal extends javax.swing.JFrame {
     public static javax.swing.JMenu jMenuAdmin;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JMenu jMenuConsultas;
-    private javax.swing.JMenuItem jMenuEnfermos;
     private javax.swing.JMenuItem jMenuGuardianes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     public static javax.swing.JMenu jMenuLlamados;
     private javax.swing.JMenuItem jMenuPedidos;
     private javax.swing.JMenuItem jMenuSacerdotes;
     private javax.swing.JPopupMenu jPopupMenu;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JMenuItem menuListadoGuardianes;
+    public static javax.swing.JMenuItem menuListadoGuardianes;
     private javax.swing.JMenuItem menuListadoSacerdotes;
     // End of variables declaration//GEN-END:variables
 
@@ -329,5 +343,11 @@ public class Principal extends javax.swing.JFrame {
         escritorio.add(inter);
         inter.setVisible(true);
         inter.setLocation(190, 10);
+    }
+
+    void cerrarFrames() {
+        for (JInternalFrame frame : escritorio.getAllFrames()) {
+            frame.dispose();
+        }
     }
 }
