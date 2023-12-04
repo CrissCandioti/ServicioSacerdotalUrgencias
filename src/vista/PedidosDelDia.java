@@ -149,6 +149,7 @@ public class PedidosDelDia extends javax.swing.JInternalFrame {
        RegistroEnfermoContactoPedido.txtEdadE.setText(""+e.getIdEnfermo().getEdad());
        RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
        RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
+       RegistroEnfermoContactoPedido.txtDescripcion.setText(e.getIdEnfermo().getDescripcion());
        RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
        RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
        RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());

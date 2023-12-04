@@ -4,8 +4,13 @@
  */
 package vista;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.toedter.calendar.JTextFieldDateEditor;
+import cristian.table.TableGradientCell;
 import entidades.Pedido;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JInternalFrame;
@@ -21,16 +26,30 @@ import static vista.Principal.escritorio;
  * @author Cristian
  */
 public class HistoricoPedidos extends javax.swing.JInternalFrame {
-
+ 
     /**
      * Creates new form PedidosMes
      */
     public HistoricoPedidos() {
         initComponents();
+        
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jdate1.getDateEditor();
         editor.setEditable(false);
         JTextFieldDateEditor editor2 = (JTextFieldDateEditor) jdate2.getDateEditor();
         editor2.setEditable(false);
+        
+        
+        jTableHistorico.setDefaultRenderer(Object.class, new TableGradientCell(new Color(67, 59, 240),new Color(102, 17, 182)));
+//        jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
+//                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
+        jTableHistorico.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
+                + "hoverBackground:null;"
+                + "pressedBackground:null;"
+                + "separatorColor:$TableHeader.background");
+//        jTableHistorico.putClientProperty(FlatClientProperties.STYLE, ""
+//                + "border:3,0,3,0,$Table.background,10,10");
+        scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
+                + "hoverTrackColor:null");
     }
 
     /**
@@ -50,12 +69,13 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jdate2 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scroll = new javax.swing.JScrollPane();
         jTableHistorico = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
 
         setClosable(true);
+        setMaximizable(true);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setText("Histórico de Pedidos");
@@ -78,18 +98,25 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        jTableHistorico.setBackground(new java.awt.Color(153, 153, 153));
+        jTableHistorico.setForeground(new java.awt.Color(255, 255, 255));
         jTableHistorico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Pedido No", "Fecha", "Nombre", "Enfermo"
             }
-        ));
-        jScrollPane1.setViewportView(jTableHistorico);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scroll.setViewportView(jTableHistorico);
 
         btnModificar.setText("MODIFICAR");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +129,7 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+            .addComponent(scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,10 +138,10 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificar)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         jButtonBuscar.setText("BUSCAR");
@@ -208,6 +235,7 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
        RegistroEnfermoContactoPedido.txtEdadE.setText(""+e.getIdEnfermo().getEdad());
        RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
        RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
+       RegistroEnfermoContactoPedido.txtDescripcion.setText(e.getIdEnfermo().getDescripcion());
        RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
        RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
        RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());
@@ -232,11 +260,11 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableHistorico;
     private com.toedter.calendar.JDateChooser jdate1;
     private com.toedter.calendar.JDateChooser jdate2;
+    private javax.swing.JScrollPane scroll;
     // End of variables declaration//GEN-END:variables
 
     public void llenarTabla() {
