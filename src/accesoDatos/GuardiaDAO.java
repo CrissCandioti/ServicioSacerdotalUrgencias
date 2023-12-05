@@ -139,13 +139,13 @@ public final class GuardiaDAO extends DAO {
             return aux;
 
         } catch (Exception e) {
-            
-        }
-        finally{
+
+        } finally {
             desconectarBaseDatos();
         }
         return null;
     }
+
     public void modificarEstado(int id) {
         try {
             String sql = "UPDATE `guardia` SET `estado`='cerrado' WHERE idGuardia = " + id;
@@ -155,11 +155,36 @@ public final class GuardiaDAO extends DAO {
         }
     }
 
-}
+    public ArrayList<Integer> buscarSacerdotePorNombreYApellido(String nombre, String apellido) {
+        try {
+            String sql = "SELECT  guardia.idSacerdote FROM `guardia` INNER JOIN sacerdote ON guardia.idSacerdote = sacerdote.idSacerdote WHERE sacerdote.nombre LIKE '" + nombre + "%' AND sacerdote.apellido LIKE '" + apellido + "%'";
+            consultarBaseDatos(sql);
+            ArrayList<Integer> listaRetornar = new ArrayList<>();
+            while (resultado.next()) {
+                listaRetornar.add(resultado.getInt(1));
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo buscarSacerdotePorNombreYApellido en la clase SacerdoteDAO: " + e);
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
-/**
- * Crear un inner join para traer todas las guardias la cual estuvo el sacerdote
- * Tambien crear un inner join para traer las guardias que estuvieron los
- * guardianes Se puede crear un metodo que te retorne la guardia del dia para
- * guardar el pedido.
- */
+    public ArrayList<Integer> guardiasDeLosGuardianes(int id) {
+        try {
+            String sql = "SELECT  guardia.idGuardia FROM `guardia` WHERE guardia.idVocal = " + id + " OR guardia.idTelefonista = " + id + " OR guardia.idChofer = " + id + " OR guardia.idAcompañante = " + id + " ";
+            consultarBaseDatos(sql);
+            ArrayList<Integer> listaRetornar = new ArrayList<>();
+            while (resultado.next()) {
+                listaRetornar.add(resultado.getInt(1));
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            System.out.println("Error en el metodo guardiasDeLosGuardianes() en la clase GuardiaDAO: " + e);
+        }
+        return null;
+    }
+
+}
