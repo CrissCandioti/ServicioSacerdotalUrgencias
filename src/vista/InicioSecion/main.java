@@ -9,6 +9,7 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.Font;
 import javax.swing.UIManager;
+import pdf.pdfGuardia;
 import raven.toast.Notifications;
 
 public class main extends javax.swing.JFrame {
@@ -44,7 +45,7 @@ public class main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
+    public static void main(String args[]) {       
 //Instalamos una dependencia para su uso
         FlatRobotoFont.install();
         /**
@@ -64,6 +65,8 @@ public class main extends javax.swing.JFrame {
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         //Instalamos las opciones de FlatLaf que queremos utilizar en la vista
         FlatMacLightLaf.setup();
+        pdfGuardia aux = new pdfGuardia();
+        aux.pdfPorDietaID(1);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new main().setVisible(true);
