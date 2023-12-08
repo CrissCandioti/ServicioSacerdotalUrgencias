@@ -26,26 +26,25 @@ import static vista.Principal.escritorio;
  * @author Cristian
  */
 public class HistoricoPedidos extends javax.swing.JInternalFrame {
- 
+
     /**
      * Creates new form PedidosMes
      */
     public HistoricoPedidos() {
         initComponents();
-        
+
         JTextFieldDateEditor editor = (JTextFieldDateEditor) jdate1.getDateEditor();
         editor.setEditable(false);
         JTextFieldDateEditor editor2 = (JTextFieldDateEditor) jdate2.getDateEditor();
         editor2.setEditable(false);
-        
-        
-        jTableHistorico.setDefaultRenderer(Object.class, new TableGradientCell(new Color(67, 59, 240),new Color(102, 17, 182)));
+
+        jTableHistorico.setDefaultRenderer(Object.class, new TableGradientCell(new Color(67, 59, 240), new Color(102, 17, 182)));
 //        jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
-        jTableHistorico.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
-                + "hoverBackground:null;"
-                + "pressedBackground:null;"
-                + "separatorColor:$TableHeader.background");
+////                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
+//        jTableHistorico.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
+//                + "hoverBackground:null;"
+//                + "pressedBackground:null");
+//                + "separatorColor:$TableHeader.background");
 //        jTableHistorico.putClientProperty(FlatClientProperties.STYLE, ""
 //                + "border:3,0,3,0,$Table.background,10,10");
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
@@ -61,6 +60,7 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -72,7 +72,12 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
         scroll = new javax.swing.JScrollPane();
         jTableHistorico = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
+        lblCantidadPedidos = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
+        rbEnfermos = new javax.swing.JRadioButton();
+        rbSacerdotes = new javax.swing.JRadioButton();
+        rbGuardianes = new javax.swing.JRadioButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -125,6 +130,12 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        lblCantidadPedidos.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblCantidadPedidos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel5.setText("Pedidos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,14 +144,21 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCantidadPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnModificar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCantidadPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38))
         );
 
@@ -150,6 +168,15 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
                 jButtonBuscarActionPerformed(evt);
             }
         });
+
+        buttonGroup1.add(rbEnfermos);
+        rbEnfermos.setText("Buscar Enfermos");
+
+        buttonGroup1.add(rbSacerdotes);
+        rbSacerdotes.setText("Buscar Sacerdotes");
+
+        buttonGroup1.add(rbGuardianes);
+        rbGuardianes.setText("Buscar Guardianes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,18 +195,25 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(rbEnfermos)
+                                                    .addComponent(rbSacerdotes)
+                                                    .addComponent(rbGuardianes))
+                                                .addGap(58, 58, 58)
+                                                .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,8 +230,16 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
                     .addComponent(jdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(rbEnfermos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbSacerdotes))
                     .addComponent(jButtonBuscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbGuardianes)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -207,12 +249,21 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        if (jdate1.getDate()==null || jdate2.getDate() == null) {
+        if (jdate1.getDate() == null || jdate2.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar las fechas.");
             return;
-        } else {
-            llenarTabla();
         }
+        if (rbEnfermos.isSelected()) {
+            llenarTablaEnfermos();
+        }
+        if (rbSacerdotes.isSelected()) {
+            llenarTablaSacerdotes();
+        }
+        if (rbGuardianes.isSelected()) {
+            llenarTablaGuardianes();
+        }
+
+
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jdate2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdate2MouseClicked
@@ -220,54 +271,60 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jdate2MouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       DefaultTableModel modelo = (DefaultTableModel) jTableHistorico.getModel();
-        int id =  (int) modelo.getValueAt(jTableHistorico.getSelectedRow(), 0);
-        
+        DefaultTableModel modelo = (DefaultTableModel) jTableHistorico.getModel();
+        int id = (int) modelo.getValueAt(jTableHistorico.getSelectedRow(), 0);
+
 //        EnfermoService es = new EnfermoService();
 //        Enfermo e =es.buscarEnfermoPorID(id);
-            PedidoService pe = new PedidoService();
-            Pedido e= pe.buscarPedidoPorID(id);
-        
+        PedidoService pe = new PedidoService();
+        Pedido e = pe.buscarPedidoPorID(id);
+
         RegistroEnfermoContactoPedido p = new RegistroEnfermoContactoPedido();
         ControlaInstancia(p);
-       RegistroEnfermoContactoPedido.txtApellidoE.setText(e.getIdEnfermo().getApellido());
-       RegistroEnfermoContactoPedido.txtNombreE.setText(e.getIdEnfermo().getNombre());
-       RegistroEnfermoContactoPedido.txtEdadE.setText(""+e.getIdEnfermo().getEdad());
-       RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
-       RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
-       RegistroEnfermoContactoPedido.txtDescripcion.setText(e.getIdEnfermo().getDescripcion());
-       RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
-       RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
-       RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());
-       RegistroEnfermoContactoPedido.txtTelefono.setText(e.getIdEnfermo().getIdContacto().getTelefono());
-       RegistroEnfermoContactoPedido.cmbEconciencia.setSelectedItem(e.getIdEnfermo().getEstadoConciencia());
-       RegistroEnfermoContactoPedido.cmbEstadoCivil.setSelectedItem(e.getIdEnfermo().getEstadoCivil());
-       RegistroEnfermoContactoPedido.txtIdEnf.setText(""+e.getIdEnfermo().getIdEnfermo());
-       RegistroEnfermoContactoPedido.txtIdCont.setText(""+ e.getIdEnfermo().getIdContacto().getIdContacto());
-       RegistroEnfermoContactoPedido.txtIdPedido.setText(""+ e.getIdPedido());
-       
-       RegistroEnfermoContactoPedido.btnGuardar.setEnabled(false);
-       RegistroEnfermoContactoPedido.btnModificar.setEnabled(true);
-       
+        RegistroEnfermoContactoPedido.txtApellidoE.setText(e.getIdEnfermo().getApellido());
+        RegistroEnfermoContactoPedido.txtNombreE.setText(e.getIdEnfermo().getNombre());
+        RegistroEnfermoContactoPedido.txtEdadE.setText("" + e.getIdEnfermo().getEdad());
+        RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
+        RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
+        RegistroEnfermoContactoPedido.txtDescripcion.setText(e.getIdEnfermo().getDescripcion());
+        RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
+        RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
+        RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());
+        RegistroEnfermoContactoPedido.txtTelefono.setText(e.getIdEnfermo().getIdContacto().getTelefono());
+        RegistroEnfermoContactoPedido.cmbEconciencia.setSelectedItem(e.getIdEnfermo().getEstadoConciencia());
+        RegistroEnfermoContactoPedido.cmbEstadoCivil.setSelectedItem(e.getIdEnfermo().getEstadoCivil());
+        RegistroEnfermoContactoPedido.txtIdEnf.setText("" + e.getIdEnfermo().getIdEnfermo());
+        RegistroEnfermoContactoPedido.txtIdCont.setText("" + e.getIdEnfermo().getIdContacto().getIdContacto());
+        RegistroEnfermoContactoPedido.txtIdPedido.setText("" + e.getIdPedido());
+
+        RegistroEnfermoContactoPedido.btnGuardar.setEnabled(false);
+        RegistroEnfermoContactoPedido.btnModificar.setEnabled(true);
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableHistorico;
     private com.toedter.calendar.JDateChooser jdate1;
     private com.toedter.calendar.JDateChooser jdate2;
+    private javax.swing.JLabel lblCantidadPedidos;
+    private javax.swing.JRadioButton rbEnfermos;
+    private javax.swing.JRadioButton rbGuardianes;
+    private javax.swing.JRadioButton rbSacerdotes;
     private javax.swing.JScrollPane scroll;
     // End of variables declaration//GEN-END:variables
 
-    public void llenarTabla() {
+    public void llenarTablaEnfermos() {
 
         try {
             GuardianService gs = new GuardianService();
@@ -277,7 +334,7 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
             String fecha2 = ((JTextField) jdate2.getDateEditor().getUiComponent()).getText();
 
             ArrayList guardian = pd.obtenerPedidoEntreDosFechas(LocalDate.parse(fecha1), LocalDate.parse(fecha2));
-
+            lblCantidadPedidos.setText("" + guardian.size());
             //le otorgo un modelo a la tabla
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Pedido N°");
@@ -306,7 +363,8 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "error");
         }
     }
-     public void ControlaInstancia(JInternalFrame inter) {
+
+    public void ControlaInstancia(JInternalFrame inter) {
 
         for (JInternalFrame frame : escritorio.getAllFrames()) {
             if (frame.getClass().equals(inter.getClass())) {
@@ -319,6 +377,92 @@ public class HistoricoPedidos extends javax.swing.JInternalFrame {
         escritorio.add(inter);
         inter.setVisible(true);
         inter.setLocation(190, 10);
+    }
+
+    private void llenarTablaSacerdotes() {
+        try {
+            GuardianService gs = new GuardianService();
+            PedidoService pd = new PedidoService();
+
+            String fecha1 = ((JTextField) jdate1.getDateEditor().getUiComponent()).getText();
+            String fecha2 = ((JTextField) jdate2.getDateEditor().getUiComponent()).getText();
+
+            ArrayList guardian = pd.obtenerPedidoEntreDosFechas(LocalDate.parse(fecha1), LocalDate.parse(fecha2));
+            lblCantidadPedidos.setText("" + guardian.size());
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Pedido N°");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Nombre Sacerdote");
+            modelo.addColumn("Apellido Sacerdote");
+
+            jTableHistorico.setModel(modelo);
+
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object pedido[] = null;
+
+            for (int i = 0; i < guardian.size(); i++) {
+                modelo.addRow(pedido);
+                Pedido getG = (Pedido) guardian.get(i);
+
+                modelo.setValueAt(getG.getIdPedido(), i, 0);
+                modelo.setValueAt(getG.getFechaPedido().toString(), i, 1);
+                modelo.setValueAt(getG.getIdGuardia().getIdSacerdote().getNombre(), i, 2);
+                modelo.setValueAt(getG.getIdGuardia().getIdSacerdote().getApellido(), i, 3);
+
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No tenemos registros de Guardianes en la base de datos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error");
+        }
+
+    }
+
+    private void llenarTablaGuardianes() {
+        try {
+            GuardianService gs = new GuardianService();
+            PedidoService pd = new PedidoService();
+
+            String fecha1 = ((JTextField) jdate1.getDateEditor().getUiComponent()).getText();
+            String fecha2 = ((JTextField) jdate2.getDateEditor().getUiComponent()).getText();
+
+            ArrayList guardian = pd.obtenerPedidoEntreDosFechas(LocalDate.parse(fecha1), LocalDate.parse(fecha2));
+            lblCantidadPedidos.setText("" + guardian.size());
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Pedido N°");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Vocal");
+            modelo.addColumn("Telefonista");
+            modelo.addColumn("Chofer");
+            modelo.addColumn("Acompañante");
+
+            jTableHistorico.setModel(modelo);
+
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object pedido[] = null;
+            
+            
+
+            for (int i = 0; i < guardian.size(); i++) {
+                modelo.addRow(pedido);
+                Pedido getG = (Pedido) guardian.get(i);
+
+                modelo.setValueAt(getG.getIdPedido(), i, 0);
+                modelo.setValueAt(getG.getFechaPedido().toString(), i, 1);
+                modelo.setValueAt( getG.getIdGuardia().getIdVocal().getNombre() +", "+ getG.getIdGuardia().getIdVocal().getApellido(), i, 2);
+                modelo.setValueAt(getG.getIdGuardia().getIdTelefonista().getNombre() +", "+ getG.getIdGuardia().getIdTelefonista().getApellido(), i, 3);
+                modelo.setValueAt(getG.getIdGuardia().getIdChofer().getNombre() +","+getG.getIdGuardia().getIdChofer().getApellido(), i, 4);
+                modelo.setValueAt(getG.getIdGuardia().getIdAcompañante().getNombre()+", "+getG.getIdGuardia().getIdAcompañante().getApellido(), i, 5);
+
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No tenemos registros de Guardianes en la base de datos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error");
+        }
+
     }
 
 }

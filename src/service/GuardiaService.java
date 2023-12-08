@@ -73,22 +73,31 @@ public class GuardiaService {
         }
     }
 
-    public ArrayList<Integer> buscarSacerdotePorNombreYApellido(String nombre, String apellido) {
-        try {
-            GuardiaDAO dao = new GuardiaDAO();
-            return dao.buscarSacerdotePorNombreYApellido(nombre, apellido);
-        } catch (Exception e) {
-            System.out.println("Error en el metodo buscarSacerdotePorNombreYApellido de la clase SacerdoteService: " + e);
-        }
-        return null;
-    }
+//    public ArrayList<Integer> buscarSacerdotePorNombreYApellido(String nombre, String apellido) {
+//        try {
+//            GuardiaDAO dao = new GuardiaDAO();
+//            return dao.buscarSacerdotePorNombreYApellido(nombre, apellido);
+//        } catch (Exception e) {
+//            System.out.println("Error en el metodo buscarSacerdotePorNombreYApellido de la clase SacerdoteService: " + e);
+//        }
+//        return null;
+//    }
 
-    public ArrayList<Integer> guardiasDeLosGuardianes(int id) {
-        try {
-            GuardiaDAO dao = new GuardiaDAO();
-            return dao.guardiasDeLosGuardianes(id);
+//    public ArrayList<Integer> guardiasDeLosGuardianes(int id) {
+//        try {
+//            GuardiaDAO dao = new GuardiaDAO();
+//            return dao.guardiasDeLosGuardianes(id);
+//        } catch (Exception e) {
+//            System.out.println("Error en el metodo guardiasDeLosGuardianes() de la clase GuardiaService: " + e);
+//        }
+//        return null;
+//    }
+    public ArrayList<Guardia> pedidoPorSacerdotes(int id,LocalDate fecha1, LocalDate fecha2){
+         try {
+             GuardiaDAO gd = new GuardiaDAO();
+            return gd.listaGuardiasDeSacerdotes(id,fecha1,fecha2);
         } catch (Exception e) {
-            System.out.println("Error en el metodo guardiasDeLosGuardianes() de la clase GuardiaService: " + e);
+            JOptionPane.showMessageDialog(null, "Error al intentar retornar la lista de los Sacerdotes");
         }
         return null;
     }

@@ -77,7 +77,9 @@ public class Contacto {
 
     @Override
     public String toString() {
-        return "Contacto{" + "idContacto=" + idContacto + ", apellido=" + apellido + ", nombre=" + nombre + ", telefono=" + telefono + ", parentesco=" + parentesco + '}';
+        return  apellido + ", " + nombre + 
+                ", telefono=" + telefono + 
+                ", parentesco=" + parentesco;
     }
 
 }

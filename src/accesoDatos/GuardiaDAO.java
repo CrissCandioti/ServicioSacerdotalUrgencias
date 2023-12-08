@@ -107,6 +107,44 @@ public final class GuardiaDAO extends DAO {
         }
         return null;
     }
+    
+    public ArrayList<Guardia> listaGuardiasDeSacerdotes(int id,LocalDate fecha1,LocalDate fecha2){
+        
+        
+        
+           try {
+            String sql = "SELECT * FROM guardia WHERE idSacerdote = "+id+" AND fecha BETWEEN '" + fecha1 + "' AND '" + fecha2 + "'";
+            consultarBaseDatos(sql);
+             GuardianService gs = new GuardianService();
+            SacerdoteService ss = new SacerdoteService();
+            ArrayList<Guardia> listaRetornar = new ArrayList<>();
+            Guardia aux = null;
+            while (resultado.next()) {
+                 java.sql.Date fechaSQL = resultado.getDate(2);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                Integer idVocalIndex = resultado.getInt(3);
+                Integer idTelefonistaIndex = resultado.getInt(4);
+                Integer idChoferIndex = resultado.getInt(5);
+                Integer idAcompañanteIndex = resultado.getInt(6);
+                Integer idSacerdoteIndex = resultado.getInt(7);
+                aux = new Guardia(resultado.getInt(1), 
+                        localDate, 
+                        gs.buscarGuardianPorID(idVocalIndex), 
+                        gs.buscarGuardianPorID(idTelefonistaIndex),
+                        gs.buscarGuardianPorID(idChoferIndex), 
+                        gs.buscarGuardianPorID(idAcompañanteIndex),
+                        ss.buscarSacerdotePorID(idSacerdoteIndex),
+                        resultado.getString(8));
+                listaRetornar.add(aux);
+            }
+            return listaRetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al buscar la lista de los guardianes en la base de datos");
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
     public void modificarGuardia(Guardia aux) {
         try {
@@ -174,7 +212,7 @@ public final class GuardiaDAO extends DAO {
 
     public ArrayList<Integer> guardiasDeLosGuardianes(int id) {
         try {
-            String sql = "SELECT  guardia.idGuardia FROM `guardia` WHERE guardia.idVocal = " + id + " OR guardia.idTelefonista = " + id + " OR guardia.idChofer = " + id + " OR guardia.idAcompañante = " + id + " ";
+            String sql = "SELECT  guardia.idGuardia, guardia.fecha FROM `guardia` WHERE guardia.idVocal = " + id + " OR guardia.idTelefonista = " + id + " OR guardia.idChofer = " + id + " OR guardia.idAcompañante = " + id + " ";
             consultarBaseDatos(sql);
             ArrayList<Integer> listaRetornar = new ArrayList<>();
             while (resultado.next()) {

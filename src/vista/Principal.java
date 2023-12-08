@@ -6,8 +6,10 @@
 package vista;
 
 import accesoDatos.GuardiaDAO;
+import java.util.ArrayList;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import service.SacerdoteService;
 
 /**
  *
@@ -41,7 +43,12 @@ public class Principal extends javax.swing.JFrame {
             jMenu2.setEnabled(false);
 
         }
-
+        
+//          SacerdoteService ss = new SacerdoteService();
+//        ArrayList guardia = ss.guardiaPorSacerdotes(5);
+//        for (Object object : guardia) {
+//            System.out.println(object);
+//        }
     }
 
     /**
@@ -331,7 +338,7 @@ public class Principal extends javax.swing.JFrame {
 
     // metodo para controlar que el internalFrame no se instancie dos veces y que cuando se lo precise traerlo al frente.
     public final void ControlaInstancia(JInternalFrame inter) {
-
+        cerrarFrames();
         for (JInternalFrame frame : escritorio.getAllFrames()) {
             if (frame.getClass().equals(inter.getClass())) {
                 frame.toFront(); // Si está abierto, tráelo al frente

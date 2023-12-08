@@ -6,9 +6,12 @@
 package vista;
 
 import entidades.Sacerdote;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import service.GuardiaService;
 import service.SacerdoteService;
 
 /**
@@ -22,10 +25,13 @@ public class ConsultaSacerdotes extends javax.swing.JInternalFrame {
      */
     public ConsultaSacerdotes() {
         initComponents();
-        setLocation(190,40);
-        
-        
-        
+        setLocation(190, 40);
+
+        llenarTablaSacerdote();
+        jPanel2.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+
     }
 
     /**
@@ -40,14 +46,92 @@ public class ConsultaSacerdotes extends javax.swing.JInternalFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaSacerdotes = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla2 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        date1 = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        date2 = new com.toedter.calendar.JDateChooser();
 
         setBorder(null);
         setClosable(true);
         setIconifiable(true);
         setTitle("Consulta Sacerdotes");
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         jLabel1.setText("Lista de Sacerdotes");
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        tablaSacerdotes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaSacerdotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaSacerdotesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaSacerdotes);
+
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla2);
+
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jLabel4.setText("*Seleccione un Sacerdote");
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel3.setText("Guardias");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        jLabel5.setText("*Seleccione el rango de fechas");
+
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel6.setText("Fecha 1");
+
+        date1.setDateFormatString("yyyy-MM-dd");
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setText("Fecha 2");
+
+        date2.setDateFormatString("yyyy-MM-dd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,33 +140,177 @@ public class ConsultaSacerdotes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jLabel1))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                        .addGap(223, 223, 223)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(date2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel1)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(date2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addComponent(date1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tablaSacerdotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSacerdotesMouseClicked
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaSacerdotes.getModel();
+        int id = (int) modelo.getValueAt(tablaSacerdotes.getSelectedRow(), 0);
+        String fecha1 = ((JTextField) date1.getDateEditor().getUiComponent()).getText();
+        String fecha2 = ((JTextField) date2.getDateEditor().getUiComponent()).getText();
+
+        if (date1.getDate() == null || date2.getDate() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione las fechas");
+        } else {
+            llenarTablaGuardiaSacerdote(id, LocalDate.parse(fecha1),LocalDate.parse(fecha2));
+             jPanel2.setVisible(true);
+        jLabel2.setVisible(true);
+        jLabel3.setVisible(true);
+        }
+       
+
+    }//GEN-LAST:event_tablaSacerdotesMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        date1.setDate(null);
+        date2.setDate(null);
+         jPanel2.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser date1;
+    private com.toedter.calendar.JDateChooser date2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tabla2;
+    private javax.swing.JTable tablaSacerdotes;
     // End of variables declaration//GEN-END:variables
 
-  
-    
+    void llenarTablaSacerdote() {
+
+        try {
+
+            SacerdoteService ss = new SacerdoteService();
+            ArrayList sacerdotes = ss.listaSacerdotes();
+
+            //le otorgo un modelo a la tabla
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("código");
+            modelo.addColumn("Nombree y Apellido");
+            modelo.addColumn("Telefono");
+            tablaSacerdotes.setModel(modelo);
+            //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
+            Object pedido[] = null;
+
+            for (int i = 0; i < sacerdotes.size(); i++) {
+                modelo.addRow(pedido);
+                Sacerdote getG = (Sacerdote) sacerdotes.get(i);
+
+                modelo.setValueAt(getG.getIdSacerdote(), i, 0);
+                modelo.setValueAt(getG.getNombre() + ", " + getG.getApellido(), i, 1);
+                modelo.setValueAt(getG.getTelefono(), i, 2);
+
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No tenemos registros de Guardianes en la base de datos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error" + ex.getMessage());
+        }
+    }
+
+    void llenarTablaGuardiaSacerdote(int id, LocalDate fecha1, LocalDate fecha2) {
+        try {
+            GuardiaService gs = new GuardiaService();
+
+            ArrayList<entidades.Guardia> pedidoSacerdote = gs.pedidoPorSacerdotes(id, fecha1, fecha2);
+            jLabel2.setText("" + pedidoSacerdote.size());
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Guardia N°");
+            modelo.addColumn("Fecha");
+            modelo.addColumn("Nombre y Apellido");
+
+            tabla2.setModel(modelo);
+
+            Object pedido[] = null;
+            for (int i = 0; i < pedidoSacerdote.size(); i++) {
+                modelo.addRow(pedido); // Add the row to the table model
+                entidades.Guardia getG = (entidades.Guardia) pedidoSacerdote.get(i);
+
+                modelo.setValueAt(getG.getIdGuardia(), i, 0);
+                modelo.setValueAt(getG.getFecha(), i, 1);
+                modelo.setValueAt(getG.getIdSacerdote().getNombre() + ", " + getG.getIdSacerdote().getApellido(), i, 2);
+
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No tenemos registros de Guardianes en la base de datos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+    }
+
 }

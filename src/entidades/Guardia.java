@@ -46,6 +46,8 @@ public class Guardia {
         this.estado = estado;
     }
 
+  
+
     public String getEstado() {
         return estado;
     }
