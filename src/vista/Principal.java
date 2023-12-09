@@ -46,11 +46,8 @@ public class Principal extends javax.swing.JFrame {
 
         }
         
-//          SacerdoteService ss = new SacerdoteService();
-//        ArrayList guardia = ss.guardiaPorSacerdotes(5);
-//        for (Object object : guardia) {
-//            System.out.println(object);
-//        }
+        
+        
     }
 
     /**
@@ -110,7 +107,6 @@ public class Principal extends javax.swing.JFrame {
 
         jButton1.setText("Imprimir Guardia");
         jButton1.setHideActionText(true);
-        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -145,7 +141,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(226, 226, 226))
+                .addGap(125, 125, 125))
         );
 
         jMenuAdmin.setText("Administracion");
