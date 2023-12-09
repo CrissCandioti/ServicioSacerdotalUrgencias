@@ -80,7 +80,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(1069, 580));
+        setPreferredSize(new java.awt.Dimension(1098, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelEnfermo.setBorder(javax.swing.BorderFactory.createTitledBorder("Enfermo"));
@@ -315,7 +315,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, -1, -1));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 530, -1, -1));
 
         jButton3.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton3.setText("SALIR");
@@ -333,7 +333,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 180, -1));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 180, -1));
         getContentPane().add(txtIdPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 90, -1));
 
         pack();

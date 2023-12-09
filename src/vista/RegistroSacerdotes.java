@@ -30,7 +30,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) datechooser.getDateEditor();
         editor.setEditable(false);
         btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
+       
         btnInhabilitar.setEnabled(false);
         txtId.setVisible(false);
     }
@@ -61,7 +61,6 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         txtId = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         btnInhabilitar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
@@ -158,15 +157,6 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnInhabilitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
 
-        btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 24)); // NOI18N
-        btnEliminar.setText("ELIMINAR");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 137, -1));
-
         jButton1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +203,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Ingrese un documento a buscar");
             } else {
                 
-                btnEliminar.setEnabled(true);
+               
                 btnModificar.setEnabled(true);
                 btnInhabilitar.setEnabled(true);
                 btnGuardar.setEnabled(false);
@@ -248,6 +238,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
+            
             int id = Integer.parseInt(txtId.getText());
             
             String dni = txtDni.getText();
@@ -259,8 +250,10 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
             
             SacerdoteService ss = new SacerdoteService();
             ss.modificarSacerdote(id, dni, apellido, nombre, telefono, LocalDate.parse(fechaNac), estado);
+            this.dispose();
             
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -279,21 +272,6 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnInhabilitarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        try {
-            if (JOptionPane.showConfirmDialog(null, "ESTA SEGURO DE ELIMINAR SACERDOTE?", "SALIR", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
-                int id = Integer.parseInt(txtId.getText());
-                
-                SacerdoteService ss = new SacerdoteService();
-                ss.eliminarSacerdote(id);
-                limpiarCampos();
-            }
-            
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
         
@@ -304,7 +282,7 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
         limpiarCampos();
         btnGuardar.setEnabled(true);
         btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
+       
         btnInhabilitar.setEnabled(false);
     }//GEN-LAST:event_formMouseClicked
 
@@ -315,12 +293,11 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnInhabilitar;
-    private javax.swing.JButton btnModificar;
+    public static javax.swing.JButton btnGuardar;
+    public static javax.swing.JButton btnInhabilitar;
+    public static javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
-    private com.toedter.calendar.JDateChooser datechooser;
+    public static com.toedter.calendar.JDateChooser datechooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -329,12 +306,12 @@ public class RegistroSacerdotes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton rbActivo;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JRadioButton rbActivo;
+    public static javax.swing.JTextField txtApellido;
+    public static javax.swing.JTextField txtDni;
+    public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {

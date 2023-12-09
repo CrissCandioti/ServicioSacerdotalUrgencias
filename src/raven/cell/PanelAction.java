@@ -24,28 +24,26 @@ public class PanelAction extends javax.swing.JPanel {
     /**
      * Creates new form PanelAction
      */
-    public PanelAction() {
+       public PanelAction() {
         initComponents();
     }
-
-    public void initEvent(TableActionEvent event, int row) {
-
-        //metodo que se ejecuta cuando hago click en edit(imagen del lápiz)
-        cmdEdit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent es) {
-                modificar();
-            }
-        });
-        //método que se ejecuta cuando hago click en view(imagen del ojo)
-        cmdView.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ver();
-            }
-        });
-
-    }
+    
+     public void initEvent(TableActionEvent event, int row){
+         cmdEdit.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 event.onEdit(row);
+             }
+         });
+          cmdView.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 event.onView(row);
+             }
+         });
+          
+         
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,59 +91,6 @@ public class PanelAction extends javax.swing.JPanel {
     private raven.cell.ActionButton cmdView;
     // End of variables declaration//GEN-END:variables
 
-    public void ControlaInstancia(JInternalFrame inter) {
 
-        for (JInternalFrame frame : escritorio.getAllFrames()) {
-            if (frame.getClass().equals(inter.getClass())) {
-                frame.toFront(); // Si está abierto, tráelo al frente
-                return;
-            }
-        }
 
-        // Si no está abierto, crea una nueva instancia 
-        escritorio.add(inter);
-        inter.setVisible(true);
-        inter.setLocation(190, 10);
-    }
-
-    public void modificar() {
-        DefaultTableModel modelo = (DefaultTableModel) vista.PedidosDelDia.tablaPedidos.getModel();
-        int id = (int) modelo.getValueAt(vista.PedidosDelDia.tablaPedidos.getSelectedRow(), 0);
-
-        PedidoService pe = new PedidoService();
-        Pedido e = pe.buscarPedidoPorID(id);
-
-        RegistroEnfermoContactoPedido p = new RegistroEnfermoContactoPedido();
-        ControlaInstancia(p);
-        RegistroEnfermoContactoPedido.txtApellidoE.setText(e.getIdEnfermo().getApellido());
-        RegistroEnfermoContactoPedido.txtNombreE.setText(e.getIdEnfermo().getNombre());
-        RegistroEnfermoContactoPedido.txtEdadE.setText("" + e.getIdEnfermo().getEdad());
-        RegistroEnfermoContactoPedido.txtDomicilio.setText(e.getIdEnfermo().getDomicilio());
-        RegistroEnfermoContactoPedido.txtSanatorio.setText(e.getIdEnfermo().getSanatorio());
-        RegistroEnfermoContactoPedido.txtDescripcion.setText(e.getIdEnfermo().getDescripcion());
-        RegistroEnfermoContactoPedido.txtApellidoC.setText(e.getIdEnfermo().getIdContacto().getApellido());
-        RegistroEnfermoContactoPedido.txtNombreC.setText(e.getIdEnfermo().getIdContacto().getNombre());
-        RegistroEnfermoContactoPedido.txtParentesco.setText(e.getIdEnfermo().getIdContacto().getParentesco());
-        RegistroEnfermoContactoPedido.txtTelefono.setText(e.getIdEnfermo().getIdContacto().getTelefono());
-        RegistroEnfermoContactoPedido.cmbEconciencia.setSelectedItem(e.getIdEnfermo().getEstadoConciencia());
-        RegistroEnfermoContactoPedido.cmbEstadoCivil.setSelectedItem(e.getIdEnfermo().getEstadoCivil());
-        RegistroEnfermoContactoPedido.txtIdEnf.setText("" + e.getIdEnfermo().getIdEnfermo());
-        RegistroEnfermoContactoPedido.txtIdCont.setText("" + e.getIdEnfermo().getIdContacto().getIdContacto());
-        RegistroEnfermoContactoPedido.txtIdPedido.setText("" + e.getIdPedido());
-
-        RegistroEnfermoContactoPedido.btnGuardar.setEnabled(false);
-        RegistroEnfermoContactoPedido.btnModificar.setEnabled(true);
-
-    }
-    
-    public void ver(){
-         DefaultTableModel modelo = (DefaultTableModel) vista.PedidosDelDia.tablaPedidos.getModel();
-        String nombre =  modelo.getValueAt(vista.PedidosDelDia.tablaPedidos.getSelectedRow(), 1).toString();
-        String apellido =  modelo.getValueAt(vista.PedidosDelDia.tablaPedidos.getSelectedRow(), 2).toString();
-        
-        EnfermoService es = new EnfermoService();
-        String mensaje = es.buscarEnfermoPorNombreApellido(apellido, nombre).toString();
-        
-       JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
 }

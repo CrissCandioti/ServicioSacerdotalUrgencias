@@ -30,7 +30,7 @@ import service.SacerdoteService;
  */
 public final class pdfGuardia extends DAO {
 
-    public void pdfPorDietaID(int id) {
+    public void pdfPorGuardia(int id) {
         try {
             String sql = "SELECT * FROM `guardia` WHERE idGuardia = " + id;
             consultarBaseDatos(sql);
@@ -73,17 +73,17 @@ public final class pdfGuardia extends DAO {
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
             parrafo.add("Servicio Sacerdotal © \n\n");
-            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.setFont(FontFactory.getFont("Tahoma", 24, Font.BOLD, BaseColor.DARK_GRAY));
 
             Paragraph texto = new Paragraph();
             texto.setAlignment(Paragraph.ALIGN_LEFT);
 
+            Chunk SACERDOTE = new Chunk("SACERDOTE:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk FECHA = new Chunk("FECHA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk VOCAL = new Chunk("VOCAL:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk TELEFONISTA = new Chunk("TELEFONISTA:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk CHOFER = new Chunk("CHOFER:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
             Chunk ACOMPAÑANTE = new Chunk("ACOMPAÑANTE:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
-            Chunk SACERDOTE = new Chunk("SACERDOTE:", FontFactory.getFont("Tahoma", 10, Font.BOLD | Font.UNDERLINE, BaseColor.DARK_GRAY));
 
             Guardia aux = null;
             while (resultado.next()) {
@@ -103,20 +103,21 @@ public final class pdfGuardia extends DAO {
                 texto.add(FECHA);
                 texto.add(" " + aux.getFecha() + "\n\n");
 
+                texto.add(SACERDOTE);
+                texto.add(" " + aux.getIdSacerdote().getNombre() + ", " + aux.getIdSacerdote().getApellido() + "\n\n");
+             
                 texto.add(VOCAL);
-                texto.add(" " + aux.getIdVocal().getNombre() + " " + aux.getIdVocal().getApellido() + "\n\n");
+                texto.add(" " + aux.getIdVocal().getNombre() + ", " + aux.getIdVocal().getApellido() + "\n\n");
 
                 texto.add(TELEFONISTA);
-                texto.add(" " + aux.getIdTelefonista().getNombre() + " " + aux.getIdTelefonista().getApellido() + "\n\n");
+                texto.add(" " + aux.getIdTelefonista().getNombre() + ", " + aux.getIdTelefonista().getApellido() + "\n\n");
 
                 texto.add(CHOFER);
-                texto.add(" " + aux.getIdChofer().getNombre() + " " + aux.getIdChofer().getApellido() + "\n\n");
+                texto.add(" " + aux.getIdChofer().getNombre() + ", " + aux.getIdChofer().getApellido() + "\n\n");
 
                 texto.add(ACOMPAÑANTE);
-                texto.add(" " + aux.getIdAcompañante().getNombre() + " " + aux.getIdAcompañante().getApellido() + "\n\n");
+                texto.add(" " + aux.getIdAcompañante().getNombre() + ", " + aux.getIdAcompañante().getApellido() + "\n\n");
 
-                texto.add(SACERDOTE);
-                texto.add(" " + aux.getIdSacerdote().getNombre() + " " + aux.getIdSacerdote().getApellido() + "\n\n");
 
             }
 

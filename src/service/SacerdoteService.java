@@ -10,8 +10,10 @@ import accesoDatos.SacerdoteDAO;
 import entidades.Guardia;
 import entidades.Sacerdote;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import vista.RegistroSacerdotes;
 
 /**
  *
@@ -109,6 +111,15 @@ public class SacerdoteService {
         try {
             SacerdoteDAO dao = new SacerdoteDAO();
             return dao.buscarSacerdotePorDNI(dni);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar buscar al Sacerdote por DNI");
+        }
+        return null;
+    }
+      public Sacerdote buscarSacerdotePorNombreyApellido(String nombre, String apellido) {
+        try {
+            SacerdoteDAO dao = new SacerdoteDAO();
+            return dao.buscarSacerdotePorNombreYapellido(nombre, apellido);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al intentar buscar al Sacerdote por DNI");
         }
@@ -216,8 +227,24 @@ public class SacerdoteService {
             }
             dao.modificarSacerdote(new Sacerdote(ID, dni, apellido, nombre, telefono, fechaNacimiento, estado), index);
             JOptionPane.showMessageDialog(null, "Se modifico correctamente el Sacerdote");
+            limpiarCampos();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo modificar correctamente al Sacerdote");
         }
+    }
+
+    private void limpiarCampos() {
+        RegistroSacerdotes.txtApellido.setText("");
+        RegistroSacerdotes.txtDni.setText("");
+        RegistroSacerdotes.txtNombre.setText("");
+        RegistroSacerdotes.txtTelefono.setText("");
+        
+       
+        RegistroSacerdotes.datechooser.setDate(null);
+       
+        RegistroSacerdotes.rbActivo.setSelected(false);
+        RegistroSacerdotes.btnGuardar.setEnabled(true);
+        RegistroSacerdotes.btnInhabilitar.setEnabled(false);
+        RegistroSacerdotes.btnModificar.setEnabled(false);
     }
 }

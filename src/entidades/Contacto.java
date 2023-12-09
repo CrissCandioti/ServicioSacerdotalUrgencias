@@ -77,9 +77,9 @@ public class Contacto {
 
     @Override
     public String toString() {
-        return  apellido + ", " + nombre + 
-                ", telefono=" + telefono + 
-                ", parentesco=" + parentesco;
+        return  apellido + ", " + nombre + "\n"
+                + " telefono: " + telefono + "\n"
+                + " parentesco: " + parentesco;
     }
 
 }

@@ -101,7 +101,13 @@ public class Sacerdote {
 
     @Override
     public String toString() {
-        return + idSacerdote + ", " + dni + "," + apellido + "," + nombre ;
+        return   "id: " + idSacerdote + "\n"
+                + "-" + apellido + "," + nombre +"\n"
+                + " dni: =" + dni +  "\n"
+                + " telefono: " + telefono + "\n"
+                + " fechaNacimiento: " + fechaNacimiento + "\n"
+                + " estado: " + estado ;
     }
+
 
 }

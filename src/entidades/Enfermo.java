@@ -132,13 +132,14 @@ public class Enfermo {
 
     @Override
     public String toString() {
-        return   apellido + ", " + nombre + ", " 
-                + edad + "años , " 
-                + estadoCivil + ", " 
-                + estadoConciencia + ", " 
-                + domicilio + ", " 
-                + descripcion +
-                ", idContacto=" + idContacto + '}';
+        return   apellido + ", " + nombre + ", \n" 
+                + edad + "años , \n"
+                + estadoCivil + ",\n" 
+                + estadoConciencia + " \n "
+                + "Domiciilio: " + domicilio + " \n"
+                + " Descripcion: "+ descripcion +",\n"
+                + "\n"
+                + " Contacto = " + idContacto ;
     }
 
 }

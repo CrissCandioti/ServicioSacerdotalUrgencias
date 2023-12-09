@@ -49,6 +49,30 @@ public final class SacerdoteDAO extends DAO {
         }
         return null;
     }
+    public Sacerdote buscarSacerdotePorNombreYapellido(String nombre, String apellido) {
+        try {
+            String sql ="SELECT * FROM sacerdote WHERE apellido= '" + apellido +"' AND nombre = '"+ nombre+"'";
+            consultarBaseDatos(sql);
+            Sacerdote aux = null;
+            boolean estado = false;
+            while (resultado.next()) {
+                if (resultado.getInt(7) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(7) == 1) {
+                    estado = true;
+                }
+                java.sql.Date fechaSQL = resultado.getDate(6);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                aux = new Sacerdote(resultado.getInt(1), resultado.getString(2), apellido, nombre, resultado.getString(5), localDate, estado);
+            }
+            return aux;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al intentar buscar el Sacerdote en la base de datos" );
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+    }
 
     public Sacerdote buscarSacerdotePorDNI(String dni) {
         try {
