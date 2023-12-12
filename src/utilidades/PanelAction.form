@@ -23,10 +23,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="cmdEdit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="cmdView" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="cmdEdit" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,17 +44,17 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="raven.cell.ActionButton" name="cmdEdit">
+    <Component class="utilidades.ActionButton" name="cmdEdit">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/raven/cell/editar(icono).png"/>
+          <Image iconType="3" name="/utilidades/editar(icono).png"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="raven.cell.ActionButton" name="cmdView">
+    <Component class="utilidades.ActionButton" name="cmdView">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/raven/cell/ver(icono).png"/>
+          <Image iconType="3" name="/utilidades/ver(icono).png"/>
         </Property>
       </Properties>
     </Component>
