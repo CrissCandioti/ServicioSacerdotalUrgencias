@@ -11,6 +11,7 @@ import raven.drawer.component.menu.MenuEvent;
 import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import raven.swing.AvatarIcon;
+import vista.ConsultaGuardianes;
 import vista.ConsultaSacerdotes;
 import vista.HistoricoPedidos;
 import vista.PedidosDelDia;
@@ -49,7 +50,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
             {"~CONSULTAS~"},
             {"Historico Pedidos"},
             {"Sacerdotes"},
-            {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},};
+            {"Guardianes"},};
         String icons[] = {
             "dashboard.svg",
             "email.svg",
@@ -104,6 +105,12 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             cerrarFrames();
                             ConsultaSacerdotes cs = new ConsultaSacerdotes();
                             ControlaInstancia(cs);
+                            Drawer.getInstance().closeDrawer();
+                        }
+                        if (index ==8) {
+                            cerrarFrames();
+                            ConsultaGuardianes cg=new ConsultaGuardianes();
+                            ControlaInstancia(cg);
                             Drawer.getInstance().closeDrawer();
                         }
                         System.out.println("Menu Selected " + index + " , " + subIndex);

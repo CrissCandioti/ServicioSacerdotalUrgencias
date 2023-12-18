@@ -22,7 +22,7 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
      */
     public ConsultaGuardianes() {
         initComponents();
-        this.setLocation(190,40);
+        this.setLocation(190, 40);
         llenarTabla();
     }
 
@@ -139,9 +139,9 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
- public void llenarTabla() {
+    public void llenarTabla() {
 
-        try {           
+        try {
             GuardianService gs = new GuardianService();
 
             ArrayList guardian = gs.listaGuardianes();
@@ -162,7 +162,7 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
 
             //creo un vector para guardar los datos del array y que luego el modelo de la tabla pueda agregarlo a la tabla.
             Object guard[] = null;
-            
+
             for (int i = 0; i < guardian.size(); i++) {
                 modelo.addRow(guard);
                 Guardian getG = (Guardian) guardian.get(i);
@@ -176,12 +176,16 @@ public class ConsultaGuardianes extends javax.swing.JInternalFrame {
                 modelo.setValueAt(getG.getFechaNacimiento(), i, 6);
                 modelo.setValueAt(getG.getEstadoCivil(), i, 7);
                 modelo.setValueAt(getG.getRol(), i, 8);
-                modelo.setValueAt(getG.isEstado(), i, 9);
+                if (getG.isEstado()) {
+                    modelo.setValueAt("Activo", i, 9);
+                } else {
+                    modelo.setValueAt("Inactivo", i, 9);
+                }
             }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No tenemos registros de Guardianes en la base de datos");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
- }
+    }
 }
