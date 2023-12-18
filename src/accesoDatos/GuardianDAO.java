@@ -134,6 +134,33 @@ public final class GuardianDAO extends DAO {
         }
         return null;
     }
+     public Iterable<Guardian> listaGuardianesActivos() {
+          try {
+            String sql = "SELECT `idGuardian`, `dni`, `apellido`, `nombre`, `direccion`, `telefono`, `fechaNacimiento`, `estadoCivil`, `rol`, `estado`,`nivel` FROM `guardian` WHERE `estado`=1 ORDER BY idGuardian ASC ";
+            consultarBaseDatos(sql);
+            ArrayList<Guardian> listaARetornar = new ArrayList<>();
+            Guardian aux = null;
+            boolean estado = false;
+            while (resultado.next()) {
+                if (resultado.getInt(10) == 0) {
+                    estado = false;
+                } else if (resultado.getInt(10) == 1) {
+                    estado = true;
+                }
+                java.sql.Date fechaSQL = resultado.getDate(7);
+                LocalDate localDate = fechaSQL.toLocalDate();
+                aux = new Guardian(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6), localDate, resultado.getString(8), resultado.getString(9), estado,resultado.getInt(10));
+                listaARetornar.add(aux);
+            }
+            return listaARetornar;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Se produjo un error al mostrar la lista de Guardianes de la base de datos" + e.getMessage());
+        } finally {
+            desconectarBaseDatos();
+        }
+        return null;
+         
+         }
 
     public void modificarGuardian(Guardian aux, int index) {
         try {
@@ -152,4 +179,6 @@ public final class GuardianDAO extends DAO {
             JOptionPane.showMessageDialog(null, "Se produjo un error al intentar elimnar el guardian de la base de datos");
         }
     }
+
+   
 }

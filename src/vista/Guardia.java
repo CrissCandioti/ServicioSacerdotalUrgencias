@@ -322,7 +322,7 @@ public class Guardia extends javax.swing.JInternalFrame {
         GuardianService g = new GuardianService();
 
         try {
-            for (Guardian o : g.listaGuardianes()) {
+            for (Guardian o : g.listaGuardianesActivos()) {
                 cmbChofer.addItem(o);
                 cmbTelefonista.addItem(o);
                 cmbAcompañante.addItem(o);
@@ -341,7 +341,7 @@ public class Guardia extends javax.swing.JInternalFrame {
         SacerdoteService ss = new SacerdoteService();
 
         try {
-            for (Sacerdote s : ss.listaSacerdotes()) {
+            for (Sacerdote s : ss.listaSacerdotesActivos()) {
                 cmbSacerdote.addItem(s);
 
             }

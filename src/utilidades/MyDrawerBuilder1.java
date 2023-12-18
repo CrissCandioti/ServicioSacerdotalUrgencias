@@ -11,7 +11,6 @@ import raven.drawer.component.menu.MenuEvent;
 import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import raven.swing.AvatarIcon;
-import vista.ConsultaSacerdotes;
 import vista.HistoricoPedidos;
 import vista.PedidosDelDia;
 import static vista.Principal.escritorio;
@@ -23,7 +22,7 @@ import vista.RegistroSacerdotes;
  *
  * @author Cristian
  */
-public class MyDrawerBuilder extends SimpleDrawerBuilder {
+public class MyDrawerBuilder1 extends SimpleDrawerBuilder {
 
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
@@ -43,13 +42,14 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
             {"Registrar pedidos"},
             {"Ver pedidos"},
             {"Calendar"},
-            {"~ADMNISTRACION~"},
-            {"Registrar Sacerdote"},
-            {"Registrar Guardian"},
-            {"~CONSULTAS~"},
-            {"Historico Pedidos"},
-            {"Sacerdotes"},
-            {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},};
+//            {"~ADMNISTRACION~"},
+//            {"Registrar Sacerdote"},
+//            {"Registrar Guardian"},
+//            {"~CONSULTAS~"},
+//            {"Pedidos"},
+//            {"Sacerdotes"},
+//            {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing", "Timeline"},
+        };
         String icons[] = {
             "dashboard.svg",
             "email.svg",
@@ -82,30 +82,24 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             Drawer.getInstance().closeDrawer();
 
                         }
-                        if (index == 4) {
-                            cerrarFrames();
-                            RegistroSacerdotes s = new RegistroSacerdotes();
-                            ControlaInstancia(s);
-                            Drawer.getInstance().closeDrawer();
-                        }
-                        if (index == 5) {
-                            cerrarFrames();
-                            RegistroGuardianes r = new RegistroGuardianes();
-                            ControlaInstancia(r);
-                            Drawer.getInstance().closeDrawer();
-                        }
-                        if (index == 6) {
-                            cerrarFrames();
-                            HistoricoPedidos hp = new HistoricoPedidos();
-                            ControlaInstancia(hp);
-                            Drawer.getInstance().closeDrawer();
-                        }
-                        if (index == 7) {
-                            cerrarFrames();
-                            ConsultaSacerdotes cs = new ConsultaSacerdotes();
-                            ControlaInstancia(cs);
-                            Drawer.getInstance().closeDrawer();
-                        }
+//                        if (index == 4) {
+//                            cerrarFrames();
+//                            RegistroSacerdotes s = new RegistroSacerdotes();
+//                            ControlaInstancia(s);
+//                            Drawer.getInstance().closeDrawer();
+//                        }
+//                        if (index == 5) {
+//                            cerrarFrames();
+//                            RegistroGuardianes r = new RegistroGuardianes();
+//                            ControlaInstancia(r);
+//                            Drawer.getInstance().closeDrawer();
+//                        }
+//                        if (index == 6) {
+//                            cerrarFrames();
+//                            HistoricoPedidos hp = new HistoricoPedidos();
+//                            ControlaInstancia(hp);
+//                            Drawer.getInstance().closeDrawer();
+//                        }
                         System.out.println("Menu Selected " + index + " , " + subIndex);
                     }
                 })

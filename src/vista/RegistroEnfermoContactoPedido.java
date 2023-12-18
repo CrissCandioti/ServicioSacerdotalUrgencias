@@ -174,7 +174,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelEnfermoLayout.createSequentialGroup()
                         .addGroup(panelEnfermoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -220,7 +220,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 .addGap(271, 271, 271))
         );
 
-        getContentPane().add(panelEnfermo, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 38, 1058, 250));
+        getContentPane().add(panelEnfermo, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 38, 1040, 250));
 
         PanelContacto.setBorder(javax.swing.BorderFactory.createTitledBorder("Contacto"));
 
@@ -272,7 +272,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                             .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtIdCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         PanelContactoLayout.setVerticalGroup(
             PanelContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +299,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        getContentPane().add(PanelContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        getContentPane().add(PanelContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 290, 840, -1));
 
         lblFecha.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1212, 14, 235, 33));
@@ -324,7 +324,7 @@ public class RegistroEnfermoContactoPedido extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 570, -1, -1));
 
         btnModificar.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         btnModificar.setText("MODIFICAR");

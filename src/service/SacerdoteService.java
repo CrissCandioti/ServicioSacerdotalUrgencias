@@ -126,7 +126,16 @@ public class SacerdoteService {
         return null;
     }
 
-    public ArrayList<Sacerdote> listaSacerdotes() {
+    public ArrayList<Sacerdote> listaSacerdotesActivos() {
+        try {
+            SacerdoteDAO dao = new SacerdoteDAO();
+            return dao.listaSacerdotesActivos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar retornar la lista de los Sacerdotes");
+        }
+        return null;
+    }
+      public ArrayList listaSacerdotes() {
         try {
             SacerdoteDAO dao = new SacerdoteDAO();
             return dao.listaSacerdotes();
@@ -247,4 +256,6 @@ public class SacerdoteService {
         RegistroSacerdotes.btnInhabilitar.setEnabled(false);
         RegistroSacerdotes.btnModificar.setEnabled(false);
     }
+
+  
 }

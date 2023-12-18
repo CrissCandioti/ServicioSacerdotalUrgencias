@@ -233,6 +233,16 @@ public class GuardianService {
         }
         return null;
     }
+      public Iterable<Guardian> listaGuardianesActivos() {
+        try {
+            GuardianDAO dao = new GuardianDAO();
+            return dao.listaGuardianesActivos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar mostrar la lista de Guardianes");
+        }
+        return null;
+    }
+    
 
     /*
      * Este metodo fue creado para recibir todos los datos necesarios de las
@@ -356,4 +366,6 @@ public class GuardianService {
         RegistroGuardianes.cbxRol.getSelectedIndex();
         
     }
+
+  
 }

@@ -83,8 +83,9 @@ public class LoginPanel extends JPanel {
                             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
                             frame.dispose();
 
-                            p.jMenuAdmin.setEnabled(false);
-                            p.menuListadoGuardianes.setEnabled(false);
+                            Principal.jMenuAdmin.setEnabled(false);
+                            Principal.menuListadoGuardianes.setEnabled(false);
+                            Principal.btnMenu.setVisible(false);
                             p.setVisible(true);
                             p.setLocationRelativeTo(null);
                             Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());
@@ -93,7 +94,10 @@ public class LoginPanel extends JPanel {
                             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(LoginPanel.this);
                             frame.dispose();
                              p.setVisible(true);
+                             
                             p.setLocationRelativeTo(null);
+                            Principal.btnMenu2.setVisible(false);
+                                   
                             Notifications.getInstance().show(Notifications.Type.SUCCESS, "Bienvenido " + aux.getNombre() + " " + aux.getApellido());
                         }
 

@@ -13,8 +13,10 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import pdf.pdfGuardia;
 import raven.drawer.Drawer;
+import raven.drawer.component.DrawerBuilder;
 import raven.popup.GlassPanePopup;
 import utilidades.MyDrawerBuilder;
+import utilidades.MyDrawerBuilder1;
 
 /**
  *
@@ -32,7 +34,7 @@ public class Principal extends javax.swing.JFrame {
         MyDrawerBuilder drawerBuilder = new MyDrawerBuilder();
         Drawer.getInstance().setDrawerBuilder(drawerBuilder);
         
-        
+      
         
         initComponents();
 
@@ -68,9 +70,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         escritorio = new javax.swing.JDesktopPane();
         jSeparator2 = new javax.swing.JSeparator();
-        btnPedido = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
+        btnMenu2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAdmin = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -101,16 +103,6 @@ public class Principal extends javax.swing.JFrame {
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        btnPedido.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        btnPedido.setText("NUEVO PEDIDO");
-        btnPedido.setContentAreaFilled(false);
-        btnPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPedidoActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Imprimir Guardia");
         jButton1.setHideActionText(true);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,17 +111,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Menu");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        btnMenu2.setText("Menu");
+        btnMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenu2ActionPerformed(evt);
             }
         });
 
         escritorio.setLayer(jSeparator2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(btnPedido, javax.swing.JLayeredPane.PALETTE_LAYER);
         escritorio.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(btnMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(btnMenu2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -138,16 +137,15 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(escritorioLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(escritorioLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(19, 19, 19)
+                        .addComponent(btnMenu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMenu2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1108, 1108, 1108))
         );
@@ -157,10 +155,10 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButton2)
-                .addGap(38, 38, 38)
-                .addComponent(btnPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMenu)
+                    .addComponent(btnMenu2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(125, 125, 125))
@@ -336,12 +334,6 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void btnPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoActionPerformed
-        cerrarFrames();
-        RegistroEnfermoContactoPedido registro = new RegistroEnfermoContactoPedido();
-        ControlaInstancia(registro);
-    }//GEN-LAST:event_btnPedidoActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
        cerrarFrames();
         HistoricoPedidos hp = new HistoricoPedidos();
@@ -356,16 +348,22 @@ public class Principal extends javax.swing.JFrame {
         pdf.pdfPorGuardia(idGuardia);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         Drawer.getInstance().showDrawer();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu2ActionPerformed
+         MyDrawerBuilder1 drawerBuilder2 = new MyDrawerBuilder1();
+        Drawer.getInstance().setDrawerBuilder(drawerBuilder2);
+        Drawer.getInstance().showDrawer();
+    }//GEN-LAST:event_btnMenu2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPedido;
+    public static javax.swing.JButton btnMenu;
+    public static javax.swing.JButton btnMenu2;
     public static javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     public static javax.swing.JMenu jMenu2;
     public static javax.swing.JMenu jMenuAdmin;
